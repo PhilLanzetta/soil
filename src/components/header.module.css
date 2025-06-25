@@ -1,0 +1,39 @@
+header {
+  margin: 0 10px;
+  position: relative;
+  z-index: 20;
+}
+
+.headerLogo {
+  margin-top: 40px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.overlay {
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  z-index: 10;
+  backdrop-filter: blur(10px);
+}
+
+.menuBtn {
+  font-weight: 700;
+  font-size: 36px;
+}
+
+.menuBtn span {
+  font-weight: 300;
+  display: inline-block;
+}
+
+.menuOpen {
+  transform: rotate(45deg);
+  transform-origin: center;
+  transition: all 400ms;
+}
+
+.menuClosed {
+  transition: all 400ms;
+}

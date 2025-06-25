@@ -1,0 +1,84 @@
+.primaryText {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.secondaryInfoContainer {
+  font-weight: bold;
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+  margin-bottom: 100px;
+}
+
+.secondaryInfoLeft {
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.secondaryInfoRight {
+  width: 60%;
+}
+
+.mediaRow {
+  display: grid;
+  gap: 20px;
+}
+
+.mediaRow figure {
+  margin-bottom: 30px;
+}
+
+.mediaRow figcaption {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.galleryContainer {
+  margin-bottom: 200px;
+}
+
+.secondaryMediaRow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.secondaryMediaRow figure {
+  margin-bottom: 30px;
+}
+
+.secondaryMediaRow figcaption {
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.secondarySectionHeading {
+  display: flex;
+  font-weight: bold;
+  gap: 20px;
+  margin-bottom: 100px;
+}
+
+.secondaryHeading {
+  width: 25%;
+}
+
+.secondaryText {
+  width: 75%;
+}
+
+.threeColumn {
+  column-count: 3;
+  width: 75%;
+}
+
+.tertiarySectionHeading {
+  display: flex;
+  font-weight: bold;
+  gap: 20px;
+  margin-bottom: 200px;
+}

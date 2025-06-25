@@ -1,0 +1,17 @@
+.footerContainer {
+  font-weight: bold;
+  margin: 15px;
+  display: flex;
+}
+
+.footerColumn {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+}
+
+.locationContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
