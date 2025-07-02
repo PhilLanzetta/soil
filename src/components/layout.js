@@ -11,12 +11,12 @@ import Header from "./header"
 import "./layout.css"
 import "./global.css"
 
-const Layout = ({ children }) => {
+const Layout = ({ children, location }) => {
   return (
     <>
-      <Header/>
-        <main>{children}</main>
-        <Footer />
+      <Header />
+      <main>{children}</main>
+      <Footer location={location} />
     </>
   )
 }
