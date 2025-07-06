@@ -53,5 +53,11 @@ module.exports = {
         enableTags: true,
       },
     },
+    {
+      resolve: `gatsby-plugin-layout`,
+      options: {
+        component: require.resolve(`./src/components/layout`),
+      },
+    },
   ],
 }

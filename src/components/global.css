@@ -23,6 +23,7 @@ button {
   color: inherit;
   font-size: inherit;
   font-family: inherit;
+  font-weight: inherit;
   transition: all 400ms;
 }
 
@@ -34,6 +35,10 @@ button:hover {
 html {
   font-family: "Inter", sans-serif;
   font-size: 16px;
+}
+
+main {
+  margin-top: calc(1rem + 45px);
 }
 
 h1 {

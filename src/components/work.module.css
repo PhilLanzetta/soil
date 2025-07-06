@@ -1,0 +1,106 @@
+.extraPadding {
+  padding: 100px 0px;
+}
+
+.workPage {
+  padding: 15px;
+  font-weight: bold;
+}
+
+.filterBtn {
+  font-size: 2rem;
+}
+
+.optionsContainer {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.viewContainer {
+  display: flex;
+  gap: 20px;
+}
+
+.viewBtn {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.viewBtn span {
+  position: relative;
+}
+
+.activeView::after {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  width: 100%;
+  height: 3px;
+  background: #000;
+  left: 0;
+}
+
+.optionsContainer {
+  position: relative;
+}
+
+.filterOptionsContainer {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  overflow-y: hidden;
+  background: #fff;
+  width: 100%;
+  padding: 20px 0;
+  display: flex;
+  gap: 10%;
+}
+
+.filterOptionsContainer div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.filterOptionsContainer div p {
+  margin-bottom: 10px;
+}
+
+.filterOptionsContainer div button {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  margin-bottom: 2px;
+}
+
+.option {
+  position: relative;
+}
+
+.selected::after {
+  content: "";
+  width: 100%;
+  height: 2px;
+  background: #000;
+  left: 0;
+  bottom: -2px;
+  position: absolute;
+}
+
+.filterContainer {
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+}
+
+.currentFilters {
+  display: flex;
+  gap: 10px;
+}
+
+.currentFilters button {
+ display: flex;
+ align-items: flex-end;
+}
