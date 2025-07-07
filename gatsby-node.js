@@ -23,19 +23,39 @@ exports.createPages = async ({ actions, graphql }) => {
             }
           }
         }
+        allContentfulObjective {
+          edges {
+            node {
+              slug
+            }
+          }
+        }
       }
     `
   )
 
   const projects = result.data.allContentfulProject.edges
 
+  const objectives = result.data.allContentfulObjective.edges
+
   projects.forEach(({ node }) => {
     const projectSlug = node.slug
     createPage({
-      path: `/project/${projectSlug}`,
+      path: `/work/${projectSlug}`,
       component: path.resolve(`./src/templates/singleProject.js`),
       context: {
         slug: projectSlug,
+      },
+    })
+  })
+
+  objectives.forEach(({ node }) => {
+    const objectiveSlug = node.slug
+    createPage({
+      path: `/objective/${objectiveSlug}`,
+      component: path.resolve(`./src/templates/objective.js`),
+      context: {
+        slug: objectiveSlug,
       },
     })
   })

@@ -1,0 +1,13 @@
+.description {
+  font-size: 2rem;
+}
+
+.categoryContainer {
+  margin-top: 100px;
+}
+
+.itemsContainer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}

@@ -35,14 +35,21 @@ button:hover {
 html {
   font-family: "Inter", sans-serif;
   font-size: 16px;
+  font-weight: bold;
 }
 
 main {
-  margin-top: calc(1rem + 45px);
+  padding-top: calc(1rem + 45px);
+  min-height: 100vh;
 }
 
 h1 {
   font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: 2rem;
   margin-bottom: 1rem;
 }
 
@@ -56,4 +63,8 @@ ul {
 
 .margined-section {
   margin: 15px;
+}
+
+.extra-padding {
+  padding: 100px 0px;
 }

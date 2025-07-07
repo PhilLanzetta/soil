@@ -3,6 +3,7 @@ import * as styles from "../components/work.module.css"
 import { AnimatePresence, motion } from "motion/react"
 import { GrFormClose } from "react-icons/gr"
 import { graphql } from "gatsby"
+import ProjectGrid from "../components/projectGrid"
 
 const Work = ({ data, location }) => {
   const allProjects = data.allContentfulProject.nodes
@@ -176,7 +177,7 @@ const Work = ({ data, location }) => {
 
   return (
     <div className={styles.workPage}>
-      <div className={styles.extraPadding}>
+      <div className="extra-padding">
         <h1>Work</h1>
       </div>
       <div className={styles.optionsContainer}>
@@ -453,6 +454,19 @@ const Work = ({ data, location }) => {
           )}
         </AnimatePresence>
       </div>
+      <AnimatePresence>
+        {view === "grid" && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.7 }}
+            key={projects.length}
+          >
+            <ProjectGrid projects={projects}></ProjectGrid>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }
@@ -468,8 +482,16 @@ export const query = graphql`
         tileMedia {
           image {
             description
-            gatsbyImageData
+            gatsbyImageData(layout: FULL_WIDTH)
           }
+        }
+        city
+        country
+        title
+        objectives {
+          id
+          slug
+          title
         }
       }
     }

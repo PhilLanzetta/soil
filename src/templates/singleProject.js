@@ -1,7 +1,6 @@
 import React from "react"
-import { graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
-import Layout from "../components/layout"
 import * as styles from "../components/singleProject.module.css"
 
 const SingleProject = ({ data }) => {
@@ -21,9 +20,10 @@ const SingleProject = ({ data }) => {
     typology,
     team,
     collaborators,
+    objectives,
   } = data.contentfulProject
   return (
-    <Layout>
+    <>
       {bannerMedia && (
         <GatsbyImage
           image={bannerMedia.image.gatsbyImageData}
@@ -39,6 +39,18 @@ const SingleProject = ({ data }) => {
               __html: primaryText.childMarkdownRemark.html,
             }}
           ></div>
+        )}
+        {objectives && (
+          <div className={styles.tagContainer}>
+            {objectives.map(objective => (
+              <Link
+                to={`/objective/${objective.slug}`}
+                className={styles.tagBtn}
+              >
+                {objective.title}
+              </Link>
+            ))}
+          </div>
         )}
       </div>
       {banner2Media && (
@@ -172,7 +184,7 @@ const SingleProject = ({ data }) => {
           </div>
         )}
       </div>
-    </Layout>
+    </>
   )
 }
 
@@ -200,6 +212,11 @@ export const query = graphql`
       country
       size
       id
+      objectives {
+        id
+        slug
+        title
+      }
       mediaGallery {
         id
         media {
