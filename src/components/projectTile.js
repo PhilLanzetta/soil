@@ -7,10 +7,14 @@ const ProjectTile = ({ project }) => {
   return (
     <div className={styles.projectTile}>
       <Link to={`/work/${project.slug}`}>
-        <GatsbyImage
-          image={project.tileMedia?.image?.gatsbyImageData}
-          alt={project.tileMedia?.image?.description}
-        ></GatsbyImage>
+        <div className={styles.tileImageContainer}>
+          <GatsbyImage
+            image={project.tileMedia?.image?.gatsbyImageData}
+            alt={project.tileMedia?.image?.description}
+            className={styles.tileImage}
+            imgStyle={{ objectFit: "cover" }}
+          ></GatsbyImage>
+        </div>
         <div className={styles.projectInfo}>
           {project.title && `${project.title}, `}
           {project.city && `${project.city}, `}

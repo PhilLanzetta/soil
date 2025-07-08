@@ -462,7 +462,9 @@ const Work = ({ data, location }) => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.7 }}
             key={projects.length}
+            className={styles.gridContainer}
           >
+            {filterOpen && <div className={styles.filterOverlay}></div>}
             <ProjectGrid projects={projects}></ProjectGrid>
           </motion.div>
         )}
