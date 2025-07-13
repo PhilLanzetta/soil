@@ -1,7 +1,8 @@
-import React from "react"
+import React, { useState } from "react"
 import { graphql, Link } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
 import * as styles from "../components/singleProject.module.css"
+import VideoPlayer from "../components/videoPlayer"
 
 const SingleProject = ({ data }) => {
   const {
@@ -10,8 +11,10 @@ const SingleProject = ({ data }) => {
     banner2Media,
     primaryText,
     city,
+    country,
     client,
-    size,
+    squareFeet,
+    squareMeters,
     mediaGallery,
     secondarySections,
     secondaryText,
@@ -22,16 +25,35 @@ const SingleProject = ({ data }) => {
     collaborators,
     objectives,
   } = data.contentfulProject
+  const [activeVideo, setActiveVideo] = useState()
+
   return (
     <>
       {bannerMedia && (
-        <GatsbyImage
-          image={bannerMedia.image.gatsbyImageData}
-          alt={bannerMedia.image.description}
-        ></GatsbyImage>
+        <div className={styles.bannerOneMedia}>
+          {bannerMedia.imageId && (
+            <GatsbyImage
+              image={bannerMedia.image.gatsbyImageData}
+              alt={bannerMedia.image.description}
+              className={styles.bannerOneImage}
+            ></GatsbyImage>
+          )}
+          {bannerMedia.videoId && (
+            <VideoPlayer
+              video={bannerMedia}
+              activeVideo={activeVideo}
+              setActiveVideo={setActiveVideo}
+              banner={true}
+            ></VideoPlayer>
+          )}
+        </div>
       )}
       <div className="margined-section">
-        <h1>{title}</h1>
+        <h1 className={styles.projectTitle}>
+          <span>{title}</span>
+          {city && <span>{city}</span>}
+          {country && <span>{country}</span>}
+        </h1>
         {primaryText && (
           <div
             className={styles.primaryText}
@@ -83,11 +105,17 @@ const SingleProject = ({ data }) => {
                 {typology.join(", ")}
               </div>
             )}
-            {size && (
+            {(squareMeters || squareFeet) && (
               <div>
                 Area:
                 <br />
-                {size}
+                {squareMeters && (
+                  <span>
+                    {squareMeters} m<sup>2</sup>
+                  </span>
+                )}
+                {squareMeters && squareFeet && <span> / </span>}
+                {squareFeet && <span>{squareFeet} sf</span>}
               </div>
             )}
             {status && (
@@ -200,17 +228,29 @@ export const query = graphql`
         }
       }
       bannerMedia {
-        caption
-        id
-        image {
-          gatsbyImageData(layout: FULL_WIDTH)
-          description
+        ... on ContentfulImageWrapper {
+          imageId: id
+          caption
+          image {
+            description
+            gatsbyImageData(layout: FULL_WIDTH)
+          }
+        }
+        ... on ContentfulVideoWrapper {
+          videoId: id
+          aspectRatio
+          posterImage {
+            description
+            gatsbyImageData(layout: FULL_WIDTH)
+          }
+          videoLink
         }
       }
       city
       client
       country
-      size
+      squareFeet
+      squareMeters
       id
       objectives {
         id

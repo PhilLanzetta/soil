@@ -39,11 +39,9 @@ export const query = graphql`
       }
       project {
         id
-        tileMedia {
-          image {
-            description
-            gatsbyImageData
-          }
+        tileImage {
+          description
+          gatsbyImageData
         }
         title
         country
@@ -53,7 +51,7 @@ export const query = graphql`
           slug
           title
         }
-          slug
+        slug
       }
     }
   }

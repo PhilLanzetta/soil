@@ -475,17 +475,15 @@ const Work = ({ data, location }) => {
 
 export const query = graphql`
   query {
-    allContentfulProject {
+    allContentfulProject(sort: { year: DESC }) {
       nodes {
         slug
         region
         typology
         status
-        tileMedia {
-          image {
-            description
-            gatsbyImageData(layout: FULL_WIDTH)
-          }
+        tileImage {
+          description
+          gatsbyImageData(layout: FULL_WIDTH)
         }
         city
         country
