@@ -125,7 +125,11 @@ const VideoPlayer = ({
 
   const muteHandler = () => {
     //Mutes the video player
-    setVideoState({ ...videoState, muted: !videoState.muted })
+    setVideoState({
+      ...videoState,
+      muted: !videoState.muted,
+      volume: volume === 1 ? 0 : 1,
+    })
   }
 
   const onSeekMouseDownHandler = e => {
@@ -215,13 +219,7 @@ const VideoPlayer = ({
         </AnimatePresence>
         {!isMobile && (
           <button
-            className={
-              banner
-                ? muted
-                  ? styles.bannerMuted
-                  : styles.bannerSound
-                : styles.overlay
-            }
+            className={styles.overlay}
             onMouseMove={isMobile ? null : banner ? null : mouseMoveHandler}
             onClick={banner ? muteHandler : playPauseHandler}
             aria-label={banner ? "mute or unmute" : "play or pause"}

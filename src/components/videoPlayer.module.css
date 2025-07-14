@@ -19,6 +19,16 @@
   left: 0;
 }
 
+.bannerMuted {
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 50000;
+  cursor: none;
+}
+
+.bannerSound {
+  background: rgba(255, 255, 255, 0.5);
+  z-index: 50000;
+}
 
 .overlay {
   z-index: 10000;
