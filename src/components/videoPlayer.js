@@ -10,6 +10,7 @@ import useWindowSize from "../utils/useWindowSize"
 import * as styles from "./videoPlayer.module.css"
 import { AnimatePresence, motion } from "framer-motion"
 import play from "../images/play.svg"
+import useOnScreen from "../utils/useOnScreen"
 
 let count = 0
 
@@ -24,11 +25,12 @@ const VideoPlayer = ({
   const controlRef = useRef(null)
   const fullScreenRef = useRef(null)
   const elementRef = useRef(null)
+  const isOnScreen = useOnScreen(elementRef)
 
   const [videoState, setVideoState] = useState({
     playing: banner ? true : false,
-    muted: true,
-    volume: 0,
+    muted: banner ? true : false,
+    volume: banner ? 0 : 1,
     playbackRate: 1.0,
     played: 0,
     playsinline: true,
@@ -157,6 +159,16 @@ const VideoPlayer = ({
     }
   }, [activeVideo, videoId])
 
+  useEffect(() => {
+    if (isOnScreen && hasPlayed) {
+      setVideoState(prevVideoState => ({ ...prevVideoState, playing: true }))
+    } else if (isOnScreen && banner) {
+      setVideoState(prevVideoState => ({ ...prevVideoState, playing: true }))
+    } else {
+      setVideoState(prevVideoState => ({ ...prevVideoState, playing: false }))
+    }
+  }, [isOnScreen, isMobile])
+
   return (
     <div className={styles.videoPlayerContainer}>
       <div
@@ -203,10 +215,16 @@ const VideoPlayer = ({
         </AnimatePresence>
         {!isMobile && (
           <button
-            className={styles.overlay}
+            className={
+              banner
+                ? muted
+                  ? styles.bannerMuted
+                  : styles.bannerSound
+                : styles.overlay
+            }
             onMouseMove={isMobile ? null : banner ? null : mouseMoveHandler}
-            onClick={playPauseHandler}
-            aria-label="play or pause"
+            onClick={banner ? muteHandler : playPauseHandler}
+            aria-label={banner ? "mute or unmute" : "play or pause"}
           ></button>
         )}
         <ReactPlayer

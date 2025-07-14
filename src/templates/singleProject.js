@@ -146,15 +146,32 @@ const SingleProject = ({ data }) => {
                 }}
               >
                 {mediaRow.media &&
-                  mediaRow.media.map(item => (
-                    <figure>
-                      <GatsbyImage
-                        image={item.image.gatsbyImageData}
-                        alt={item.image.description}
-                      ></GatsbyImage>
-                      <figcaption>{item.caption}</figcaption>
-                    </figure>
-                  ))}
+                  mediaRow.media.map(item => {
+                    if (item.imageId) {
+                      return (
+                        <figure>
+                          <GatsbyImage
+                            image={item.image.gatsbyImageData}
+                            alt={item.image.description}
+                          ></GatsbyImage>
+                          <figcaption>{item.caption}</figcaption>
+                        </figure>
+                      )
+                    } else if (item.videoId) {
+                      return (
+                        <figure>
+                          <VideoPlayer
+                            video={item}
+                            activeVideo={activeVideo}
+                            setActiveVideo={setActiveVideo}
+                          ></VideoPlayer>
+                          <figcaption>{item.caption}</figcaption>
+                        </figure>
+                      )
+                    } else {
+                      return <div>Unknown Content</div>
+                    }
+                  })}
               </div>
             ))}
           </div>
@@ -260,10 +277,23 @@ export const query = graphql`
       mediaGallery {
         id
         media {
-          caption
-          image {
-            gatsbyImageData(layout: FULL_WIDTH)
-            description
+          ... on ContentfulImageWrapper {
+            imageId: id
+            caption
+            image {
+              description
+              gatsbyImageData(layout: FULL_WIDTH)
+            }
+          }
+          ... on ContentfulVideoWrapper {
+            videoId: id
+            aspectRatio
+            posterImage {
+              description
+              gatsbyImageData(layout: FULL_WIDTH)
+            }
+            videoLink
+            caption
           }
         }
       }
@@ -284,11 +314,23 @@ export const query = graphql`
         media {
           id
           media {
-            caption
-            id
-            image {
-              description
-              gatsbyImageData(layout: FULL_WIDTH)
+            ... on ContentfulImageWrapper {
+              imageId: id
+              caption
+              image {
+                description
+                gatsbyImageData(layout: FULL_WIDTH)
+              }
+            }
+            ... on ContentfulVideoWrapper {
+              videoId: id
+              aspectRatio
+              posterImage {
+                description
+                gatsbyImageData(layout: FULL_WIDTH)
+              }
+              videoLink
+              caption
             }
           }
         }
