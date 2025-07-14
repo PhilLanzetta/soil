@@ -3,6 +3,14 @@
   width: 100%;
 }
 
+.bannerVideoContainerMuted * {
+  cursor: url(../images/sound.svg), auto !important;
+}
+
+.bannerVideoContainerSound * {
+  cursor: url(../images/noSound.svg), auto !important;
+}
+
 .videoPlayer {
   position: relative;
   width: 100%;

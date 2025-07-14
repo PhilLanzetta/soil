@@ -174,7 +174,15 @@ const VideoPlayer = ({
   }, [isOnScreen, isMobile])
 
   return (
-    <div className={styles.videoPlayerContainer}>
+    <div
+      className={`${styles.videoPlayerContainer} ${
+        banner
+          ? muted
+            ? styles.bannerVideoContainerMuted
+            : styles.bannerVideoContainerSound
+          : ""
+      }`}
+    >
       <div
         className={styles.videoPlayer}
         style={{
