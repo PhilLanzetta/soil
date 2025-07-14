@@ -24,6 +24,7 @@ const SingleProject = ({ data }) => {
     team,
     collaborators,
     objectives,
+    related,
   } = data.contentfulProject
   const [activeVideo, setActiveVideo] = useState()
 
@@ -91,11 +92,12 @@ const SingleProject = ({ data }) => {
                 {client}
               </div>
             )}
-            {city && (
-              <div>
+            {(city || country) && (
+              <div className={styles.locationContainer}>
                 Location:
                 <br />
-                {city}, {state}
+                {city && <span>{city}</span>}
+                {country && <span>{country}</span>}
               </div>
             )}
             {typology && (
@@ -228,6 +230,42 @@ const SingleProject = ({ data }) => {
             </ul>
           </div>
         )}
+        {related && (
+          <div className={styles.tertiarySectionHeading}>
+            <p className={styles.secondaryHeading}>Related</p>
+            <ul className={styles.threeColumnList}>
+              {related.map(relatedProject => (
+                <div key={relatedProject.id} className={styles.relatedProject}>
+                  <Link
+                    key={relatedProject.id}
+                    to={`/work/${relatedProject.slug}`}
+                  >
+                    <h2 className={styles.relatedHeading}>
+                      {relatedProject.title}
+                    </h2>
+                    <div className={styles.locationContainer}>
+                      {city && <span>{city}</span>}
+                      {country && <span>{country}</span>}
+                    </div>
+                  </Link>
+                  {relatedProject.objectives && (
+                    <div className={styles.relatedTagContainer}>
+                      {relatedProject.objectives.map(objective => (
+                        <Link
+                          key={objective.id}
+                          to={`/objective/${objective.slug}`}
+                          className={styles.tagBtn}
+                        >
+                          {objective.title}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     </>
   )
@@ -346,6 +384,18 @@ export const query = graphql`
       typology
       team
       collaborators
+      related {
+        city
+        id
+        objectives {
+          id
+          slug
+          title
+        }
+        slug
+        title
+        country
+      }
     }
   }
 `

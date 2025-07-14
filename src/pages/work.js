@@ -79,7 +79,7 @@ const Work = ({ data, location }) => {
     return [
       ...array,
       regionFilter
-        .map(term => array.filter(item => item.geographicRegion === term))
+        .map(term => array.filter(item => item.region === term))
         .reduce((a, b) => a.concat(b), []),
     ]
   }
@@ -174,6 +174,18 @@ const Work = ({ data, location }) => {
     }
     setProjects(result)
   }
+
+  useEffect(() => {
+    if (isDisabled) {
+      setProjects(allProjects)
+      window.history.pushState({}, "", url)
+    } else if (filterOpen) {
+      return
+    } else {
+      handleFilter()
+      updateURL()
+    }
+  }, [typologyFilter, regionFilter, statusFilter])
 
   return (
     <div className={styles.workPage}>
