@@ -30,6 +30,13 @@ exports.createPages = async ({ actions, graphql }) => {
             }
           }
         }
+        allContentfulWritingEntry {
+          edges {
+            node {
+              slug
+            }
+          }
+        }
       }
     `
   )
@@ -37,6 +44,8 @@ exports.createPages = async ({ actions, graphql }) => {
   const projects = result.data.allContentfulProject.edges
 
   const objectives = result.data.allContentfulObjective.edges
+
+  const writing = result.data.allContentfulWritingEntry.edges
 
   projects.forEach(({ node }) => {
     const projectSlug = node.slug
@@ -53,9 +62,20 @@ exports.createPages = async ({ actions, graphql }) => {
     const objectiveSlug = node.slug
     createPage({
       path: `/objective/${objectiveSlug}`,
-      component: path.resolve(`./src/templates/objective.js`),
+      component: path.resolve(`./src/templates/singleObjective.js`),
       context: {
         slug: objectiveSlug,
+      },
+    })
+  })
+
+  writing.forEach(({ node }) => {
+    const writingSlug = node.slug
+    createPage({
+      path: `/writing/${writingSlug}`,
+      component: path.resolve(`./src/templates/singleWriting.js`),
+      context: {
+        slug: writingSlug,
       },
     })
   })

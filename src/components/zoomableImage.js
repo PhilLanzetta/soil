@@ -56,8 +56,8 @@ const ZoomableImage = ({ image }) => {
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <path d="M1 31L31 1" stroke="black" />
-                <path d="M1 1L31 31" stroke="black" />
+                <path d="M1 31L31 1" stroke="black" strokeWidth={3} />
+                <path d="M1 1L31 31" stroke="black" strokeWidth={3} />
               </svg>
             </button>
             <TransformWrapper initialScale={1} centerOnInit={true}>
@@ -93,13 +93,20 @@ const ZoomableImage = ({ image }) => {
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
                       >
-                        <circle cx="17.5" cy="17.5" r="16.5" stroke="black" />
+                        <circle
+                          cx="17.5"
+                          cy="17.5"
+                          r="16.5"
+                          stroke="black"
+                          strokeWidth={3}
+                        />
                         <line
                           x1="7"
                           y1="17.5"
                           x2="28"
                           y2="17.5"
                           stroke="black"
+                          strokeWidth={3}
                         />
                       </svg>
                     </button>
@@ -113,13 +120,20 @@ const ZoomableImage = ({ image }) => {
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
                       >
-                        <circle cx="17.5" cy="17.5" r="16.5" stroke="black" />
+                        <circle
+                          cx="17.5"
+                          cy="17.5"
+                          r="16.5"
+                          stroke="black"
+                          strokeWidth={3}
+                        />
                         <line
                           x1="17.5"
                           y1="7"
                           x2="17.5"
                           y2="28"
                           stroke="black"
+                          strokeWidth={3}
                         />
                         <line
                           x1="7"
@@ -127,6 +141,7 @@ const ZoomableImage = ({ image }) => {
                           x2="28"
                           y2="17.5"
                           stroke="black"
+                          strokeWidth={3}
                         />
                       </svg>
                     </button>
