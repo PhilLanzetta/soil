@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { graphql, Link } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
 import * as styles from "../components/singleProject.module.css"
 import VideoPlayer from "../components/videoPlayer"
 import { motion } from "motion/react"
-import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch"
+import ZoomableImage from "../components/zoomableImage"
 
 const SingleProject = ({ data }) => {
   const {
@@ -28,22 +28,6 @@ const SingleProject = ({ data }) => {
     related,
   } = data.contentfulProject
   const [activeVideo, setActiveVideo] = useState()
-  const [popUp, setPopUp] = useState(-1)
-
-  useEffect(() => {
-    if (popUp >= 0) {
-      const scrollY = window.scrollY
-      const body = document.body
-      body.style.position = "fixed"
-      body.style.top = `-${scrollY}px`
-    } else {
-      const body = document.body
-      const scrollY = body.style.top
-      body.style.position = ""
-      body.style.top = ""
-      window.scrollTo(0, parseInt(scrollY || "0") * -1)
-    }
-  }, [popUp])
 
   return (
     <>
@@ -271,133 +255,11 @@ const SingleProject = ({ data }) => {
                     <div key={mediaRow.id} className={styles.secondaryMediaRow}>
                       {mediaRow.media &&
                         mediaRow.media.map((item, index) => (
-                          <motion.figure
-                            initial={{ opacity: 0 }}
-                            transition={{ duration: 1 }}
-                            whileInView={{ opacity: 1 }}
-                            viewport={{ once: true }}
-                          >
-                            <button
-                              className={styles.enlargeBtn}
-                              onClick={() => setPopUp(index)}
-                            >
-                              <GatsbyImage
-                                image={item.image.gatsbyImageData}
-                                alt={item.image.description}
-                              ></GatsbyImage>
-                            </button>
-                            <figcaption>{item.caption}</figcaption>
-                          </motion.figure>
+                          <ZoomableImage
+                            key={index}
+                            image={item}
+                          ></ZoomableImage>
                         ))}
-                      {popUp >= 0 && (
-                        <div className={styles.imagePopUpContainer}>
-                          <button
-                            className={styles.closePopUp}
-                            onClick={() => setPopUp(-1)}
-                          >
-                            <svg
-                              viewBox="0 0 32 32"
-                              fill="none"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path d="M1 31L31 1" stroke="black" />
-                              <path d="M1 1L31 31" stroke="black" />
-                            </svg>
-                          </button>
-                          <TransformWrapper
-                            initialScale={1}
-                            centerOnInit={true}
-                          >
-                            {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
-                              <>
-                                <TransformComponent
-                                  wrapperStyle={{
-                                    position: "relative",
-                                    height: "100vh",
-                                    width: "100vw",
-                                  }}
-                                >
-                                  <GatsbyImage
-                                    image={
-                                      mediaRow.media[popUp].image
-                                        ?.gatsbyImageData
-                                    }
-                                    alt={
-                                      mediaRow.media[popUp].image?.description
-                                    }
-                                    className={styles.popUpImageImg}
-                                    style={{
-                                      height: "80vh",
-                                      width: `${
-                                        (mediaRow.media[popUp].image?.width *
-                                          80) /
-                                        mediaRow.media[popUp].image?.height
-                                      }vh`,
-                                    }}
-                                  ></GatsbyImage>
-                                </TransformComponent>
-                                <div className={styles.popUpControls}>
-                                  <button
-                                    className={styles.popUpControlsBtn}
-                                    onClick={() => zoomOut()}
-                                  >
-                                    <svg
-                                      viewBox="0 0 35 35"
-                                      fill="none"
-                                      xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                      <circle
-                                        cx="17.5"
-                                        cy="17.5"
-                                        r="16.5"
-                                        stroke="black"
-                                      />
-                                      <line
-                                        x1="7"
-                                        y1="17.5"
-                                        x2="28"
-                                        y2="17.5"
-                                        stroke="black"
-                                      />
-                                    </svg>
-                                  </button>
-                                  <button
-                                    className={styles.popUpControlsBtn}
-                                    onClick={() => zoomIn()}
-                                  >
-                                    <svg
-                                      viewBox="0 0 35 35"
-                                      fill="none"
-                                      xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                      <circle
-                                        cx="17.5"
-                                        cy="17.5"
-                                        r="16.5"
-                                        stroke="black"
-                                      />
-                                      <line
-                                        x1="17.5"
-                                        y1="7"
-                                        x2="17.5"
-                                        y2="28"
-                                        stroke="black"
-                                      />
-                                      <line
-                                        x1="7"
-                                        y1="17.5"
-                                        x2="28"
-                                        y2="17.5"
-                                        stroke="black"
-                                      />
-                                    </svg>
-                                  </button>
-                                </div>
-                              </>
-                            )}
-                          </TransformWrapper>
-                        </div>
-                      )}
                     </div>
                   ))}
                 </div>
