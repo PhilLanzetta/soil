@@ -125,30 +125,38 @@ const IndexPage = ({ data }) => {
       >
         Photo Grid
       </motion.div>
-      <motion.div
-        initial={{ opacity: 0 }}
-        transition={{ duration: 1 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        className="margined-section"
-      >
-        <h2>Objectives</h2>
+      <div className="margined-section">
+        <motion.h2
+          initial={{ opacity: 0 }}
+          transition={{ duration: 1 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+        >
+          Objectives
+        </motion.h2>
         <div className={styles.objectivesContainer}>
           {objectives.map(objective => (
-            <Link
-              to={`/objective/${objective.slug}`}
-              className={styles.objectiveLink}
+            <motion.div
+              initial={{ opacity: 0 }}
+              transition={{ duration: 1 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
             >
-              <div className={styles.objectiveOverlay}>{objective.title}</div>
-              <GatsbyImage
-                image={objective.image?.gatsbyImageData}
-                alt={objective.image?.description}
-                className={styles.objectiveImage}
-              ></GatsbyImage>
-            </Link>
+              <Link
+                to={`/objective/${objective.slug}`}
+                className={styles.objectiveLink}
+              >
+                <div className={styles.objectiveOverlay}>{objective.title}</div>
+                <GatsbyImage
+                  image={objective.image?.gatsbyImageData}
+                  alt={objective.image?.description}
+                  className={styles.objectiveImage}
+                ></GatsbyImage>
+              </Link>
+            </motion.div>
           ))}
         </div>
-      </motion.div>
+      </div>
     </div>
   )
 }

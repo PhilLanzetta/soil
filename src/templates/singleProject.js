@@ -1,8 +1,10 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { graphql, Link } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
 import * as styles from "../components/singleProject.module.css"
 import VideoPlayer from "../components/videoPlayer"
+import { motion } from "motion/react"
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch"
 
 const SingleProject = ({ data }) => {
   const {
@@ -18,7 +20,6 @@ const SingleProject = ({ data }) => {
     mediaGallery,
     secondarySections,
     secondaryText,
-    state,
     status,
     typology,
     team,
@@ -27,6 +28,22 @@ const SingleProject = ({ data }) => {
     related,
   } = data.contentfulProject
   const [activeVideo, setActiveVideo] = useState()
+  const [popUp, setPopUp] = useState(-1)
+
+  useEffect(() => {
+    if (popUp >= 0) {
+      const scrollY = window.scrollY
+      const body = document.body
+      body.style.position = "fixed"
+      body.style.top = `-${scrollY}px`
+    } else {
+      const body = document.body
+      const scrollY = body.style.top
+      body.style.position = ""
+      body.style.top = ""
+      window.scrollTo(0, parseInt(scrollY || "0") * -1)
+    }
+  }, [popUp])
 
   return (
     <>
@@ -45,46 +62,77 @@ const SingleProject = ({ data }) => {
               activeVideo={activeVideo}
               setActiveVideo={setActiveVideo}
               banner={true}
+              videoId={`${bannerMedia.videoId}-banner`}
             ></VideoPlayer>
           )}
         </div>
       )}
       <div className="margined-section">
-        <h1 className={styles.projectTitle}>
+        <motion.h1
+          initial={{ opacity: 0 }}
+          transition={{ duration: 1 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className={styles.projectTitle}
+        >
           <span>{title}</span>
           {city && <span>{city}</span>}
           {country && <span>{country}</span>}
-        </h1>
+        </motion.h1>
         {primaryText && (
-          <div
+          <motion.div
+            initial={{ opacity: 0 }}
+            transition={{ duration: 1 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
             className={styles.primaryText}
             dangerouslySetInnerHTML={{
               __html: primaryText.childMarkdownRemark.html,
             }}
-          ></div>
+          ></motion.div>
         )}
         {objectives && (
           <div className={styles.tagContainer}>
             {objectives.map(objective => (
-              <Link
-                to={`/objective/${objective.slug}`}
-                className={styles.tagBtn}
+              <motion.div
+                initial={{ opacity: 0 }}
+                transition={{ duration: 1 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
               >
-                {objective.title}
-              </Link>
+                <Link
+                  to={`/objective/${objective.slug}`}
+                  className={styles.tagBtn}
+                >
+                  {objective.title}
+                </Link>
+              </motion.div>
             ))}
           </div>
         )}
       </div>
       {banner2Media && (
-        <GatsbyImage
-          image={banner2Media.image.gatsbyImageData}
-          alt={banner2Media.image.description}
-        ></GatsbyImage>
+        <motion.div
+          initial={{ opacity: 0 }}
+          transition={{ duration: 1 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+        >
+          <GatsbyImage
+            image={banner2Media.image.gatsbyImageData}
+            alt={banner2Media.image.description}
+          ></GatsbyImage>
+        </motion.div>
       )}
       <div className="margined-section">
         <div className={styles.secondaryInfoContainer}>
-          <div className={styles.secondaryInfoLeft}>
+          <motion.div
+            initial={{ opacity: 0 }}
+            transition={{ duration: 1 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className={styles.secondaryInfoLeft}
+          >
             {client && (
               <div>
                 Client:
@@ -127,14 +175,18 @@ const SingleProject = ({ data }) => {
                 {status}
               </div>
             )}
-          </div>
+          </motion.div>
           {secondaryText && (
-            <div
+            <motion.div
+              initial={{ opacity: 0 }}
+              transition={{ duration: 1 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
               className={styles.secondaryInfoRight}
               dangerouslySetInnerHTML={{
                 __html: secondaryText.childMarkdownRemark.html,
               }}
-            ></div>
+            ></motion.div>
           )}
         </div>
         {mediaGallery && (
@@ -151,24 +203,35 @@ const SingleProject = ({ data }) => {
                   mediaRow.media.map(item => {
                     if (item.imageId) {
                       return (
-                        <figure>
+                        <motion.figure
+                          initial={{ opacity: 0 }}
+                          transition={{ duration: 1 }}
+                          whileInView={{ opacity: 1 }}
+                          viewport={{ once: true }}
+                        >
                           <GatsbyImage
                             image={item.image.gatsbyImageData}
                             alt={item.image.description}
                           ></GatsbyImage>
                           <figcaption>{item.caption}</figcaption>
-                        </figure>
+                        </motion.figure>
                       )
                     } else if (item.videoId) {
                       return (
-                        <figure>
+                        <motion.figure
+                          initial={{ opacity: 0 }}
+                          transition={{ duration: 1 }}
+                          whileInView={{ opacity: 1 }}
+                          viewport={{ once: true }}
+                        >
                           <VideoPlayer
                             video={item}
                             activeVideo={activeVideo}
                             setActiveVideo={setActiveVideo}
+                            videoId={item.videoId}
                           ></VideoPlayer>
                           <figcaption>{item.caption}</figcaption>
-                        </figure>
+                        </motion.figure>
                       )
                     } else {
                       return <div>Unknown Content</div>
@@ -182,28 +245,159 @@ const SingleProject = ({ data }) => {
           secondarySections.map(section => (
             <div key={section.id} className={styles.secondarySection}>
               <div className={styles.secondarySectionHeading}>
-                <p className={styles.secondaryHeading}>{section.heading}</p>
-                <div
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  transition={{ duration: 1 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  className={styles.secondaryHeading}
+                >
+                  {section.heading}
+                </motion.p>
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  transition={{ duration: 1 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
                   dangerouslySetInnerHTML={{
                     __html: section.text.childMarkdownRemark.html,
                   }}
                   className={styles.secondaryText}
-                ></div>
+                ></motion.div>
               </div>
               {section.media && (
                 <div className={styles.galleryContainer}>
                   {section.media.map(mediaRow => (
                     <div key={mediaRow.id} className={styles.secondaryMediaRow}>
                       {mediaRow.media &&
-                        mediaRow.media.map(item => (
-                          <figure>
-                            <GatsbyImage
-                              image={item.image.gatsbyImageData}
-                              alt={item.image.description}
-                            ></GatsbyImage>
+                        mediaRow.media.map((item, index) => (
+                          <motion.figure
+                            initial={{ opacity: 0 }}
+                            transition={{ duration: 1 }}
+                            whileInView={{ opacity: 1 }}
+                            viewport={{ once: true }}
+                          >
+                            <button
+                              className={styles.enlargeBtn}
+                              onClick={() => setPopUp(index)}
+                            >
+                              <GatsbyImage
+                                image={item.image.gatsbyImageData}
+                                alt={item.image.description}
+                              ></GatsbyImage>
+                            </button>
                             <figcaption>{item.caption}</figcaption>
-                          </figure>
+                          </motion.figure>
                         ))}
+                      {popUp >= 0 && (
+                        <div className={styles.imagePopUpContainer}>
+                          <button
+                            className={styles.closePopUp}
+                            onClick={() => setPopUp(-1)}
+                          >
+                            <svg
+                              viewBox="0 0 32 32"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path d="M1 31L31 1" stroke="black" />
+                              <path d="M1 1L31 31" stroke="black" />
+                            </svg>
+                          </button>
+                          <TransformWrapper
+                            initialScale={1}
+                            centerOnInit={true}
+                          >
+                            {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
+                              <>
+                                <TransformComponent
+                                  wrapperStyle={{
+                                    position: "relative",
+                                    height: "100vh",
+                                    width: "100vw",
+                                  }}
+                                >
+                                  <GatsbyImage
+                                    image={
+                                      mediaRow.media[popUp].image
+                                        ?.gatsbyImageData
+                                    }
+                                    alt={
+                                      mediaRow.media[popUp].image?.description
+                                    }
+                                    className={styles.popUpImageImg}
+                                    style={{
+                                      height: "80vh",
+                                      width: `${
+                                        (mediaRow.media[popUp].image?.width *
+                                          80) /
+                                        mediaRow.media[popUp].image?.height
+                                      }vh`,
+                                    }}
+                                  ></GatsbyImage>
+                                </TransformComponent>
+                                <div className={styles.popUpControls}>
+                                  <button
+                                    className={styles.popUpControlsBtn}
+                                    onClick={() => zoomOut()}
+                                  >
+                                    <svg
+                                      viewBox="0 0 35 35"
+                                      fill="none"
+                                      xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                      <circle
+                                        cx="17.5"
+                                        cy="17.5"
+                                        r="16.5"
+                                        stroke="black"
+                                      />
+                                      <line
+                                        x1="7"
+                                        y1="17.5"
+                                        x2="28"
+                                        y2="17.5"
+                                        stroke="black"
+                                      />
+                                    </svg>
+                                  </button>
+                                  <button
+                                    className={styles.popUpControlsBtn}
+                                    onClick={() => zoomIn()}
+                                  >
+                                    <svg
+                                      viewBox="0 0 35 35"
+                                      fill="none"
+                                      xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                      <circle
+                                        cx="17.5"
+                                        cy="17.5"
+                                        r="16.5"
+                                        stroke="black"
+                                      />
+                                      <line
+                                        x1="17.5"
+                                        y1="7"
+                                        x2="17.5"
+                                        y2="28"
+                                        stroke="black"
+                                      />
+                                      <line
+                                        x1="7"
+                                        y1="17.5"
+                                        x2="28"
+                                        y2="17.5"
+                                        stroke="black"
+                                      />
+                                    </svg>
+                                  </button>
+                                </div>
+                              </>
+                            )}
+                          </TransformWrapper>
+                        </div>
+                      )}
                     </div>
                   ))}
                 </div>
@@ -212,30 +406,77 @@ const SingleProject = ({ data }) => {
           ))}
         {team && (
           <div className={styles.tertiarySectionHeading}>
-            <p className={styles.secondaryHeading}>Team</p>
+            <motion.p
+              initial={{ opacity: 0 }}
+              transition={{ duration: 1 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              className={styles.secondaryHeading}
+            >
+              Team
+            </motion.p>
             <ul className={styles.threeColumn}>
               {team.map((member, index) => (
-                <li key={index}>{member}</li>
+                <motion.li
+                  initial={{ opacity: 0 }}
+                  transition={{ duration: 1 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  key={index}
+                >
+                  {member}
+                </motion.li>
               ))}
             </ul>
           </div>
         )}
         {collaborators && (
           <div className={styles.tertiarySectionHeading}>
-            <p className={styles.secondaryHeading}>Collaborators</p>
+            <motion.p
+              initial={{ opacity: 0 }}
+              transition={{ duration: 1 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              className={styles.secondaryHeading}
+            >
+              Collaborators
+            </motion.p>
             <ul className={styles.threeColumn}>
               {collaborators.map((member, index) => (
-                <li key={index}>{member}</li>
+                <motion.li
+                  initial={{ opacity: 0 }}
+                  transition={{ duration: 1 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  key={index}
+                >
+                  {member}
+                </motion.li>
               ))}
             </ul>
           </div>
         )}
         {related && (
           <div className={styles.tertiarySectionHeading}>
-            <p className={styles.secondaryHeading}>Related</p>
+            <motion.p
+              initial={{ opacity: 0 }}
+              transition={{ duration: 1 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              className={styles.secondaryHeading}
+            >
+              Related
+            </motion.p>
             <ul className={styles.threeColumnList}>
               {related.map(relatedProject => (
-                <div key={relatedProject.id} className={styles.relatedProject}>
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  transition={{ duration: 1 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  key={relatedProject.id}
+                  className={styles.relatedProject}
+                >
                   <Link
                     key={relatedProject.id}
                     to={`/work/${relatedProject.slug}`}
@@ -261,7 +502,7 @@ const SingleProject = ({ data }) => {
                       ))}
                     </div>
                   )}
-                </div>
+                </motion.div>
               ))}
             </ul>
           </div>
@@ -358,6 +599,8 @@ export const query = graphql`
               image {
                 description
                 gatsbyImageData(layout: FULL_WIDTH)
+                height
+                width
               }
             }
             ... on ContentfulVideoWrapper {

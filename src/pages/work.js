@@ -190,9 +190,22 @@ const Work = ({ data, location }) => {
   return (
     <div className={styles.workPage}>
       <div className="extra-padding">
-        <h1>Work</h1>
+        <motion.h1
+          initial={{ opacity: 0 }}
+          transition={{ duration: 1 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+        >
+          Work
+        </motion.h1>
       </div>
-      <div className={styles.optionsContainer}>
+      <motion.div
+        initial={{ opacity: 0 }}
+        transition={{ duration: 1 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        className={styles.optionsContainer}
+      >
         <div className={styles.filterContainer}>
           <button
             onClick={() => setFilterOpen(!filterOpen)}
@@ -465,7 +478,7 @@ const Work = ({ data, location }) => {
             </motion.div>
           )}
         </AnimatePresence>
-      </div>
+      </motion.div>
       <AnimatePresence>
         {view === "grid" && (
           <motion.div

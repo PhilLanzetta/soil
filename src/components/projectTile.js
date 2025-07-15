@@ -2,10 +2,17 @@ import React from "react"
 import { GatsbyImage } from "gatsby-plugin-image"
 import { Link } from "gatsby"
 import * as styles from "./projectGrid.module.css"
+import { motion } from "motion/react"
 
 const ProjectTile = ({ project }) => {
   return (
-    <div className={styles.projectTile}>
+    <motion.div
+      initial={{ opacity: 0 }}
+      transition={{ duration: 1 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      className={styles.projectTile}
+    >
       <Link to={`/work/${project.slug}`}>
         <div className={styles.tileImageContainer}>
           <GatsbyImage
@@ -29,7 +36,7 @@ const ProjectTile = ({ project }) => {
             </Link>
           ))}
       </div>
-    </div>
+    </motion.div>
   )
 }
 

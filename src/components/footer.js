@@ -6,6 +6,7 @@ import Cloudy from "../images/weather/cloudy.svg"
 import Night from "../images/weather/nighttime.svg"
 import Showers from "../images/weather/showers.svg"
 import Thunderstorm from "../images/weather/thunderstorm.svg"
+import { motion } from 'motion/react'
 
 const Footer = ({ location }) => {
   const API_KEY = process.env.GATSBY_WEATHER
@@ -131,7 +132,10 @@ const Footer = ({ location }) => {
 
   return (
     <footer>
-      <div className={styles.footerContainer}>
+      <motion.div initial={{ opacity: 0 }}
+                transition={{ duration: 1 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }} className={styles.footerContainer}>
         <div className={styles.footerColumn}>
           <div className={styles.locationContainer}>
             <div>
@@ -178,9 +182,12 @@ const Footer = ({ location }) => {
           <Link>Instagram</Link>
           <Link>LinkedIn</Link>
         </div>
-      </div>
+      </motion.div>
       {!isHome && (
-        <div className={styles.footerLogoContainer}>
+        <motion.div initial={{ opacity: 0 }}
+                transition={{ duration: 1 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }} className={styles.footerLogoContainer}>
           <svg
             viewBox="0 0 1698 82"
             fill="none"
@@ -292,7 +299,7 @@ const Footer = ({ location }) => {
               fill="black"
             />
           </svg>
-        </div>
+        </motion.div>
       )}
     </footer>
   )

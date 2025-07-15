@@ -29,15 +29,14 @@ const VideoPlayer = ({
 
   const [videoState, setVideoState] = useState({
     playing: banner ? true : false,
-    muted: banner ? true : false,
-    volume: banner ? 0 : 1,
+    muted: true,
+    volume: 0,
     playbackRate: 1.0,
     played: 0,
     playsinline: true,
     seeking: false,
   })
 
-  const [fullScreenState, setFullScreenState] = useState(false)
   const [hasPlayed, setHasPlayed] = useState(false)
   const [timeElapsed, setTimeElapsed] = useState(formatTime("00:00"))
 
@@ -144,51 +143,31 @@ const VideoPlayer = ({
   }
 
   const handleClickFullscreen = () => {
-    if (!fullScreenState && !isMobile && screenfull.isEnabled) {
+    if (!screenfull.isFullscreen && !isMobile && screenfull.isEnabled) {
       screenfull.request(document.getElementById(videoId))
-      setFullScreenState(true)
-    } else if (isMobile && !fullScreenState && screenfull.isEnabled) {
-      const videoDiv = document.getElementById(videoId)
-      screenfull.request(videoDiv.getElementsByTagName("iframe")[0])
-      setFullScreenState(true)
     } else {
       document.exitFullscreen()
-      setFullScreenState(false)
     }
   }
 
   useEffect(() => {
-    if (activeVideo !== videoId && videoPlayerRef.current) {
+    if (!isOnScreen && hasPlayed) {
       setVideoState(prevVideoState => ({ ...prevVideoState, playing: false }))
-    }
-  }, [activeVideo, videoId])
-
-  useEffect(() => {
-    if (isOnScreen && hasPlayed) {
-      setVideoState(prevVideoState => ({ ...prevVideoState, playing: true }))
-    } else if (isOnScreen && banner) {
+    } else if (isOnScreen) {
       setVideoState(prevVideoState => ({ ...prevVideoState, playing: true }))
     } else {
-      setVideoState(prevVideoState => ({ ...prevVideoState, playing: false }))
+      return
     }
-  }, [isOnScreen, isMobile])
+  }, [isOnScreen, hasPlayed])
 
   return (
-    <div
-      className={`${styles.videoPlayerContainer} ${
-        banner
-          ? muted
-            ? styles.bannerVideoContainerMuted
-            : styles.bannerVideoContainerSound
-          : ""
-      }`}
-    >
+    <div className={styles.videoPlayerContainer}>
       <div
         className={styles.videoPlayer}
         style={{
           aspectRatio: video.aspectRatio ? video.aspectRatio : "16 / 9",
         }}
-        id={video.videoId}
+        id={videoId}
         key={isMobile}
         ref={elementRef}
       >
@@ -227,10 +206,14 @@ const VideoPlayer = ({
         </AnimatePresence>
         {!isMobile && (
           <button
-            className={styles.overlay}
+            className={`${styles.overlay} ${
+              muted
+                ? styles.bannerVideoContainerMuted
+                : styles.bannerVideoContainerSound
+            }`}
             onMouseMove={isMobile ? null : banner ? null : mouseMoveHandler}
-            onClick={banner ? muteHandler : playPauseHandler}
-            aria-label={banner ? "mute or unmute" : "play or pause"}
+            onClick={muteHandler}
+            aria-label={"mute or unmute"}
           ></button>
         )}
         <ReactPlayer
@@ -292,7 +275,10 @@ const VideoPlayer = ({
             ref={fullScreenRef}
             onClick={handleClickFullscreen}
           >
-            <img src={fullScreenState ? small : full} alt="full screen"></img>
+            <img
+              src={screenfull.isFullscreen ? small : full}
+              alt="full screen"
+            ></img>
           </button>
         )}
       </div>

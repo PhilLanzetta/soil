@@ -3,11 +3,11 @@
   width: 100%;
 }
 
-.bannerVideoContainerMuted * {
+.bannerVideoContainerMuted {
   cursor: url(../images/sound.svg), auto !important;
 }
 
-.bannerVideoContainerSound * {
+.bannerVideoContainerSound {
   cursor: url(../images/noSound.svg), auto !important;
 }
 
@@ -17,25 +17,12 @@
 }
 
 .videoPlayerVideo,
-.overlay,
-.bannerMuted,
-.bannerSound {
+.overlay {
   position: absolute;
   height: 100%;
   width: 100%;
   top: 0;
   left: 0;
-}
-
-.bannerMuted {
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 50000;
-  cursor: none;
-}
-
-.bannerSound {
-  background: rgba(255, 255, 255, 0.5);
-  z-index: 50000;
 }
 
 .overlay {
@@ -45,6 +32,7 @@
 .videoPlayerVideo iframe {
   height: 100%;
   width: 100%;
+  cursor: none;
 }
 
 .coverImageContainer {
