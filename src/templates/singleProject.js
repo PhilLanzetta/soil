@@ -5,6 +5,7 @@ import * as styles from "../components/singleProject.module.css"
 import VideoPlayer from "../components/videoPlayer"
 import { motion } from "motion/react"
 import ZoomableImage from "../components/zoomableImage"
+import Seo from "../components/seo"
 
 const SingleProject = ({ data }) => {
   const {
@@ -494,5 +495,7 @@ export const query = graphql`
     }
   }
 `
+
+export const Head = ({ data }) => <Seo title={data.contentfulProject.title} />
 
 export default SingleProject

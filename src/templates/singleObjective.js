@@ -3,6 +3,7 @@ import { graphql } from "gatsby"
 import * as styles from "../components/objectives.module.css"
 import ProjectTile from "../components/projectTile"
 import { motion } from "motion/react"
+import Seo from "../components/seo"
 
 const Objective = ({ data }) => {
   const { title, description, project } = data.contentfulObjective
@@ -57,5 +58,6 @@ export const query = graphql`
     }
   }
 `
+export const Head = ({ data }) => <Seo title={data.contentfulObjective.title} />
 
 export default Objective

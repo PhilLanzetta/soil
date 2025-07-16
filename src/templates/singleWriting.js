@@ -5,6 +5,7 @@ import { GatsbyImage } from "gatsby-plugin-image"
 import VideoPlayer from "../components/videoPlayer"
 import { motion } from "motion/react"
 import ProjectTile from "../components/projectTile"
+import Seo from "../components/seo"
 
 const SingleWriting = ({ data }) => {
   const { title, author, content, relatedContent } = data.contentfulWritingEntry
@@ -158,5 +159,7 @@ export const query = graphql`
     }
   }
 `
+
+export const Head = ({ data }) => <Seo title={data.contentfulWritingEntry.title} />
 
 export default SingleWriting

@@ -14,10 +14,10 @@ require("dotenv").config({
 
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
-    siteUrl: `https://gatsbystarterdefaultsource.gatsbyjs.io/`,
+    title: `SO - IL`,
+    description: `SO – IL is an internationally recognized architecture and design firm based in New York. We create structures that establish new cultures, institutions, and relationships.`,
+    author: `@soil-placeholder`,
+    siteUrl: `https://so-il.org/`,
   },
   plugins: [
     `gatsby-plugin-image`,
@@ -34,8 +34,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
+        name: `SO-IL`,
+        short_name: `SO-IL`,
         start_url: `/`,
         background_color: `#663399`,
         // This will impact how browsers show your PWA/website

@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "motion/react"
 import { GrFormClose } from "react-icons/gr"
 import { graphql } from "gatsby"
 import ProjectGrid from "../components/projectGrid"
+import Seo from "../components/seo"
 
 const Work = ({ data, location }) => {
   const allProjects = data.allContentfulProject.nodes
@@ -522,5 +523,7 @@ export const query = graphql`
     }
   }
 `
+
+export const Head = () => <Seo title="Work" />
 
 export default Work
