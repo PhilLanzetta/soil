@@ -111,26 +111,21 @@ export const query = graphql`
       title
       author
       content {
-        ... on ContentfulMediaRow {
-          mediaRowId: id
-          media {
-            ... on ContentfulImageWrapper {
-              imageId: id
-              caption
-              image {
-                description
-                gatsbyImageData(layout: FULL_WIDTH)
-              }
-            }
-            ... on ContentfulVideoWrapper {
-              videoId: id
-              aspectRatio
-              posterImage {
-                description
-                gatsbyImageData(layout: FULL_WIDTH)
-              }
-              videoLink
-              caption
+        ... on ContentfulImageWrapper {
+          imageId: id
+          caption
+          image {
+            description
+            gatsbyImageData(layout: FULL_WIDTH)
+          }
+        }
+        ... on ContentfulTwoColumnImage {
+          twoImageId: id
+          images {
+            caption
+            image {
+              description
+              gatsbyImageData(layout: FULL_WIDTH)
             }
           }
         }

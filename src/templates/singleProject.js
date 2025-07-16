@@ -175,54 +175,63 @@ const SingleProject = ({ data }) => {
         </div>
         {mediaGallery && (
           <div className={styles.galleryContainer}>
-            {mediaGallery.map(mediaRow => (
-              <div
-                key={mediaRow.id}
-                className={styles.mediaRow}
-                style={{
-                  gridTemplateColumns: `repeat(${mediaRow.media.length}, 1fr)`,
-                }}
-              >
-                {mediaRow.media &&
-                  mediaRow.media.map(item => {
-                    if (item.imageId) {
-                      return (
-                        <motion.figure
-                          initial={{ opacity: 0 }}
-                          transition={{ duration: 1 }}
-                          whileInView={{ opacity: 1 }}
-                          viewport={{ once: true }}
-                        >
-                          <GatsbyImage
-                            image={item.image.gatsbyImageData}
-                            alt={item.image.description}
-                          ></GatsbyImage>
-                          <figcaption>{item.caption}</figcaption>
-                        </motion.figure>
-                      )
-                    } else if (item.videoId) {
-                      return (
-                        <motion.figure
-                          initial={{ opacity: 0 }}
-                          transition={{ duration: 1 }}
-                          whileInView={{ opacity: 1 }}
-                          viewport={{ once: true }}
-                        >
-                          <VideoPlayer
-                            video={item}
-                            activeVideo={activeVideo}
-                            setActiveVideo={setActiveVideo}
-                            videoId={item.videoId}
-                          ></VideoPlayer>
-                          <figcaption>{item.caption}</figcaption>
-                        </motion.figure>
-                      )
-                    } else {
-                      return <div>Unknown Content</div>
-                    }
-                  })}
-              </div>
-            ))}
+            {mediaGallery.map(item => {
+              if (item.imageId) {
+                return (
+                  <motion.figure
+                    initial={{ opacity: 0 }}
+                    transition={{ duration: 1 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                  >
+                    <GatsbyImage
+                      image={item.image.gatsbyImageData}
+                      alt={item.image.description}
+                    ></GatsbyImage>
+                    <figcaption>{item.caption}</figcaption>
+                  </motion.figure>
+                )
+              } else if (item.videoId) {
+                return (
+                  <motion.figure
+                    initial={{ opacity: 0 }}
+                    transition={{ duration: 1 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                  >
+                    <VideoPlayer
+                      video={item}
+                      activeVideo={activeVideo}
+                      setActiveVideo={setActiveVideo}
+                      videoId={item.videoId}
+                    ></VideoPlayer>
+                    <figcaption>{item.caption}</figcaption>
+                  </motion.figure>
+                )
+              } else if (item.twoImageId) {
+                return (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    transition={{ duration: 1 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    className={styles.twoColumnImageContainer}
+                  >
+                    {item.images.map((image, index) => (
+                      <figure key={index}>
+                        <GatsbyImage
+                          image={image.image.gatsbyImageData}
+                          alt={image.image.description}
+                        ></GatsbyImage>
+                        <figcaption>{image.caption}</figcaption>
+                      </figure>
+                    ))}
+                  </motion.div>
+                )
+              } else {
+                return <div>Unknown Content</div>
+              }
+            })}
           </div>
         )}
         {secondarySections &&
@@ -250,18 +259,8 @@ const SingleProject = ({ data }) => {
                 ></motion.div>
               </div>
               {section.media && (
-                <div className={styles.galleryContainer}>
-                  {section.media.map(mediaRow => (
-                    <div key={mediaRow.id} className={styles.secondaryMediaRow}>
-                      {mediaRow.media &&
-                        mediaRow.media.map((item, index) => (
-                          <ZoomableImage
-                            key={index}
-                            image={item}
-                          ></ZoomableImage>
-                        ))}
-                    </div>
-                  ))}
+                <div className={styles.secondaryGallery}>
+                  <ZoomableImage images={section.media}></ZoomableImage>
                 </div>
               )}
             </div>
@@ -416,26 +415,33 @@ export const query = graphql`
         title
       }
       mediaGallery {
-        id
-        media {
-          ... on ContentfulImageWrapper {
-            imageId: id
+        ... on ContentfulImageWrapper {
+          imageId: id
+          caption
+          image {
+            description
+            gatsbyImageData(layout: FULL_WIDTH)
+          }
+        }
+        ... on ContentfulTwoColumnImage {
+          twoImageId: id
+          images {
             caption
             image {
               description
               gatsbyImageData(layout: FULL_WIDTH)
             }
           }
-          ... on ContentfulVideoWrapper {
-            videoId: id
-            aspectRatio
-            posterImage {
-              description
-              gatsbyImageData(layout: FULL_WIDTH)
-            }
-            videoLink
-            caption
+        }
+        ... on ContentfulVideoWrapper {
+          videoId: id
+          aspectRatio
+          posterImage {
+            description
+            gatsbyImageData(layout: FULL_WIDTH)
           }
+          videoLink
+          caption
         }
       }
       primaryText {
@@ -453,28 +459,12 @@ export const query = graphql`
           }
         }
         media {
-          id
-          media {
-            ... on ContentfulImageWrapper {
-              imageId: id
-              caption
-              image {
-                description
-                gatsbyImageData(layout: FULL_WIDTH)
-                height
-                width
-              }
-            }
-            ... on ContentfulVideoWrapper {
-              videoId: id
-              aspectRatio
-              posterImage {
-                description
-                gatsbyImageData(layout: FULL_WIDTH)
-              }
-              videoLink
-              caption
-            }
+          caption
+          image {
+            description
+            gatsbyImageData
+            height
+            width
           }
         }
       }
