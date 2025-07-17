@@ -349,8 +349,8 @@ const SingleProject = ({ data }) => {
                       {relatedProject.title}
                     </h2>
                     <div className={styles.locationContainer}>
-                      {city && <span>{city}</span>}
-                      {country && <span>{country}</span>}
+                      {related.city && <span>{related.city}</span>}
+                      {related.country && <span>{related.country}</span>}
                     </div>
                   </Link>
                   {relatedProject.objectives && (
