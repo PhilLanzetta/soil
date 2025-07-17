@@ -248,16 +248,18 @@ const SingleProject = ({ data }) => {
                 >
                   {section.heading}
                 </motion.p>
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  transition={{ duration: 1 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                  dangerouslySetInnerHTML={{
-                    __html: section.text.childMarkdownRemark.html,
-                  }}
-                  className={styles.secondaryText}
-                ></motion.div>
+                {section.text && (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    transition={{ duration: 1 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    dangerouslySetInnerHTML={{
+                      __html: section.text.childMarkdownRemark.html,
+                    }}
+                    className={styles.secondaryText}
+                  ></motion.div>
+                )}
               </div>
               {section.media && (
                 <div className={styles.secondaryGallery}>
