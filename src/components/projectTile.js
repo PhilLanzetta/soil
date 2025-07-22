@@ -28,14 +28,14 @@ const ProjectTile = ({ project }) => {
           {project.country}
         </div>
       </Link>
-      <div className={styles.tagContainer}>
+      {/* <div className={styles.tagContainer}>
         {project.objectives &&
           project.objectives.map(objective => (
             <Link to={`/objective/${objective.slug}`} className={styles.tagBtn}>
               {objective.title}
             </Link>
           ))}
-      </div>
+      </div> */}
     </motion.div>
   )
 }

@@ -5,6 +5,10 @@
   gap: 10px;
 }
 
+.projectTile {
+  margin-bottom: 80px;
+}
+
 .projectInfo {
   margin-top: 10px;
   font-size: 2rem;
