@@ -23,8 +23,8 @@ const SingleProject = ({ data }) => {
     secondaryText,
     status,
     typology,
-    team,
-    collaborators,
+    teamText,
+    collaboratorsText,
     objectives,
     related,
   } = data.contentfulProject
@@ -103,10 +103,22 @@ const SingleProject = ({ data }) => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
         >
-          <GatsbyImage
-            image={banner2Media.image.gatsbyImageData}
-            alt={banner2Media.image.description}
-          ></GatsbyImage>
+          {banner2Media.imageId && (
+            <GatsbyImage
+              image={banner2Media.image.gatsbyImageData}
+              alt={banner2Media.image.description}
+              className={styles.bannerOneImage}
+            ></GatsbyImage>
+          )}
+          {banner2Media.videoId && (
+            <VideoPlayer
+              video={banner2Media}
+              activeVideo={activeVideo}
+              setActiveVideo={setActiveVideo}
+              banner={true}
+              videoId={`${banner2Media.videoId}-banner`}
+            ></VideoPlayer>
+          )}
         </motion.div>
       )}
       <div className="margined-section">
@@ -268,7 +280,7 @@ const SingleProject = ({ data }) => {
               )}
             </div>
           ))}
-        {team && (
+        {teamText && (
           <div className={styles.tertiarySectionHeading}>
             <motion.p
               initial={{ opacity: 0 }}
@@ -279,22 +291,22 @@ const SingleProject = ({ data }) => {
             >
               Team
             </motion.p>
-            <ul className={styles.threeColumn}>
-              {team.map((member, index) => (
-                <motion.li
-                  initial={{ opacity: 0 }}
-                  transition={{ duration: 1 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                  key={index}
-                >
-                  {member}
-                </motion.li>
-              ))}
-            </ul>
+            <motion.div
+              initial={{ opacity: 0 }}
+              transition={{ duration: 1 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              className={styles.threeColumn}
+              dangerouslySetInnerHTML={{
+                __html: teamText.childMarkdownRemark.html.replace(
+                  /\n/g,
+                  "<br />"
+                ),
+              }}
+            ></motion.div>
           </div>
         )}
-        {collaborators && (
+        {collaboratorsText && (
           <div className={styles.tertiarySectionHeading}>
             <motion.p
               initial={{ opacity: 0 }}
@@ -305,19 +317,19 @@ const SingleProject = ({ data }) => {
             >
               Collaborators
             </motion.p>
-            <ul className={styles.threeColumn}>
-              {collaborators.map((member, index) => (
-                <motion.li
-                  initial={{ opacity: 0 }}
-                  transition={{ duration: 1 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                  key={index}
-                >
-                  {member}
-                </motion.li>
-              ))}
-            </ul>
+            <motion.div
+              initial={{ opacity: 0 }}
+              transition={{ duration: 1 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              className={styles.threeColumn}
+              dangerouslySetInnerHTML={{
+                __html: collaboratorsText.childMarkdownRemark.html.replace(
+                  /\n/g,
+                  "<br />"
+                ),
+              }}
+            ></motion.div>
           </div>
         )}
         {related && (
@@ -384,11 +396,22 @@ export const query = graphql`
   query getSingleProject($slug: String) {
     contentfulProject(slug: { eq: $slug }) {
       banner2Media {
-        caption
-        id
-        image {
-          gatsbyImageData(layout: FULL_WIDTH)
-          description
+        ... on ContentfulImageWrapper {
+          imageId: id
+          caption
+          image {
+            description
+            gatsbyImageData(layout: FULL_WIDTH)
+          }
+        }
+        ... on ContentfulVideoWrapper {
+          videoId: id
+          aspectRatio
+          posterImage {
+            description
+            gatsbyImageData(layout: FULL_WIDTH)
+          }
+          videoLink
         }
       }
       bannerMedia {
@@ -484,8 +507,16 @@ export const query = graphql`
       status
       title
       typology
-      team
-      collaborators
+      teamText {
+        childMarkdownRemark {
+          html
+        }
+      }
+      collaboratorsText {
+        childMarkdownRemark {
+          html
+        }
+      }
       related {
         city
         id
