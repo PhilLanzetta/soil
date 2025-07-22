@@ -58,7 +58,7 @@ const Work = ({ data, location }) => {
     return [
       ...array,
       typologyFilter
-        .map(term => array.filter(item => item.typology.includes(term)))
+        .map(term => array.filter(item => item.typology?.includes(term)))
         .reduce((a, b) => a.concat(b), []),
     ]
   }
