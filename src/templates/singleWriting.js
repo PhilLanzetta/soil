@@ -14,73 +14,82 @@ const SingleWriting = ({ data }) => {
     <div className="margined-section">
       <h1 className={styles.title}>{title}</h1>
       <h2>{author}</h2>
-      {content &&
-        content.map((contentItem, index) => {
-          if (contentItem.mediaRowId) {
-            return (
-              <div
-                key={contentItem.mediaRowId}
-                className={styles.mediaRow}
-                style={{
-                  gridTemplateColumns: `repeat(${contentItem.media.length}, 1fr)`,
-                }}
-              >
-                {contentItem.media &&
-                  contentItem.media.map(item => {
-                    if (item.imageId) {
-                      return (
-                        <motion.figure
-                          initial={{ opacity: 0 }}
-                          transition={{ duration: 1 }}
-                          whileInView={{ opacity: 1 }}
-                          viewport={{ once: true }}
-                        >
-                          <GatsbyImage
-                            image={item.image.gatsbyImageData}
-                            alt={item.image.description}
-                          ></GatsbyImage>
-                          <figcaption>{item.caption}</figcaption>
-                        </motion.figure>
-                      )
-                    } else if (item.videoId) {
-                      return (
-                        <motion.figure
-                          initial={{ opacity: 0 }}
-                          transition={{ duration: 1 }}
-                          whileInView={{ opacity: 1 }}
-                          viewport={{ once: true }}
-                        >
-                          <VideoPlayer
-                            video={item}
-                            activeVideo={activeVideo}
-                            setActiveVideo={setActiveVideo}
-                            videoId={item.videoId}
-                          ></VideoPlayer>
-                          <figcaption>{item.caption}</figcaption>
-                        </motion.figure>
-                      )
-                    } else {
-                      return <div>Unknown Content</div>
-                    }
-                  })}
-              </div>
-            )
-          } else if (contentItem.textId) {
-            return (
-              <div
-                key={index}
-                className={`${styles.textModule} ${
-                  contentItem.margin === "Full Width" ? "" : styles.wideMargin
-                }`}
-                dangerouslySetInnerHTML={{
-                  __html: contentItem.text.childMarkdownRemark.html,
-                }}
-              ></div>
-            )
-          } else {
-            return <div key={index}>Unknown Content</div>
-          }
-        })}
+      {content && (
+        <div className={styles.contentContainer}>
+          {content.map((contentItem, index) => {
+            if (contentItem.imageId) {
+              return (
+                <motion.figure
+                  initial={{ opacity: 0 }}
+                  transition={{ duration: 1 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  key={contentItem.imageId}
+                >
+                  <GatsbyImage
+                    image={contentItem.image.gatsbyImageData}
+                    alt={contentItem.image.description}
+                  ></GatsbyImage>
+                  <figcaption>{contentItem.caption}</figcaption>
+                </motion.figure>
+              )
+            } else if (contentItem.videoId) {
+              return (
+                <motion.figure
+                  initial={{ opacity: 0 }}
+                  transition={{ duration: 1 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  key={contentItem.videoId}
+                >
+                  <VideoPlayer
+                    video={contentItem}
+                    activeVideo={activeVideo}
+                    setActiveVideo={setActiveVideo}
+                    videoId={contentItem.videoId}
+                  ></VideoPlayer>
+                  <figcaption>{contentItem.caption}</figcaption>
+                </motion.figure>
+              )
+            } else if (contentItem.twoImageId) {
+              return (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  transition={{ duration: 1 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  className={styles.twoColumnImageContainer}
+                  key={contentItem.twoImageId}
+                >
+                  {contentItem.images.map((image, index) => (
+                    <figure key={index}>
+                      <GatsbyImage
+                        image={image.image.gatsbyImageData}
+                        alt={image.image.description}
+                      ></GatsbyImage>
+                      <figcaption>{image.caption}</figcaption>
+                    </figure>
+                  ))}
+                </motion.div>
+              )
+            } else if (contentItem.textId) {
+              return (
+                <div
+                  key={index}
+                  className={`${styles.textModule} ${
+                    contentItem.margin === "Full Width" ? "" : styles.wideMargin
+                  }`}
+                  dangerouslySetInnerHTML={{
+                    __html: contentItem.text.childMarkdownRemark.html,
+                  }}
+                ></div>
+              )
+            } else {
+              return <div key={index}>Unknown Content</div>
+            }
+          })}
+        </div>
+      )}
       {relatedContent && (
         <div className={styles.tertiarySectionHeading}>
           <motion.p
@@ -160,6 +169,8 @@ export const query = graphql`
   }
 `
 
-export const Head = ({ data }) => <Seo title={data.contentfulWritingEntry.title} />
+export const Head = ({ data }) => (
+  <Seo title={data.contentfulWritingEntry.title} />
+)
 
 export default SingleWriting
