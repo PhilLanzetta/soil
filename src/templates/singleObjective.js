@@ -55,9 +55,14 @@ const Objective = ({ data }) => {
                       <p className={styles.tileText}>{entry.title}</p>
                     </div>
                   )}
-                  {entry.tileText && (
+                  {entry.tileTextLong && (
                     <div className={styles.tileTextContainer}>
-                      <p className={styles.tileText}>{entry.tileText}</p>
+                      <div
+                        className={styles.tileText}
+                        dangerouslySetInnerHTML={{
+                          __html: entry.tileTextLong.childMarkdownRemark.html,
+                        }}
+                      ></div>
                     </div>
                   )}
                 </Link>
@@ -135,7 +140,11 @@ export const query = graphql`
           description
           gatsbyImageData(layout: FULL_WIDTH)
         }
-        tileText
+        tileTextLong {
+          childMarkdownRemark {
+            html
+          }
+        }
         title
         objectives {
           id
