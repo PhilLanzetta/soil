@@ -35,6 +35,7 @@ module.exports = {
       options: {
         defaults: {
           quality: 100,
+          breakpoints: [750, 1080, 1366, 1920, 2560],
         },
       },
     },
