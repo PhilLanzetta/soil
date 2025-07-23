@@ -1,12 +1,11 @@
-.description {
-  font-size: 2rem;
+.title {
+  margin-bottom: 0;
+  padding-top: 100px;
+  padding-bottom: 0;
 }
 
-.categoryContainer {
-  margin-top: 100px;
-}
-
-.itemsContainer {
+.projectGrid {
+  margin-top: 20px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 10px;
@@ -47,6 +46,3 @@
   font-size: 0.8rem;
 }
 
-.paddingDiv {
-  margin-top: 100px;
-}

@@ -64,11 +64,15 @@
   grid-template-columns: repeat(4, 1fr);
   font-weight: bold;
   gap: 20px;
+}
+
+.tertiarySectionHeading {
   margin-bottom: 100px;
 }
 
 .secondaryText {
   grid-column: 2 / 5;
+  margin-bottom: 100px;
 }
 
 .threeColumn {
@@ -153,7 +157,7 @@
   left: 0;
   height: 100vh;
   width: 100vw;
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.5);
   z-index: 200000;
 }
 

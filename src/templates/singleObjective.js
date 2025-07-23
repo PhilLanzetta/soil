@@ -1,12 +1,15 @@
 import React from "react"
-import { graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
 import * as styles from "../components/objectives.module.css"
 import ProjectTile from "../components/projectTile"
 import { motion } from "motion/react"
 import Seo from "../components/seo"
+import { GatsbyImage } from "gatsby-plugin-image"
 
 const Objective = ({ data }) => {
-  const { title, description, project } = data.contentfulObjective
+  const { title, description, project, writing_entry } =
+    data.contentfulObjective
+  const objectives = data.allContentfulObjective.nodes
   return (
     <div className="margined-section">
       <h1 className="extra-padding">{title}</h1>
@@ -26,6 +29,76 @@ const Objective = ({ data }) => {
           </div>
         </div>
       )}
+      {writing_entry && writing_entry.length > 0 && (
+        <div className={styles.categoryContainer}>
+          <h2>Writing</h2>
+          <div className={styles.itemsContainer}>
+            {writing_entry.map(entry => (
+              <motion.div
+                key={entry.id}
+                initial={{ opacity: 0 }}
+                transition={{ duration: 1 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+              >
+                <Link to={`/writing/${entry.slug}`}>
+                  {entry.tileImage && (
+                    <div>
+                      <div className={styles.tileImageContainer}>
+                        <GatsbyImage
+                          image={entry.tileImage.gatsbyImageData}
+                          alt={entry.tileImage.description}
+                          className={styles.tileImage}
+                          imgStyle={{ objectFit: "cover" }}
+                        ></GatsbyImage>
+                      </div>
+                      <p className={styles.tileText}>{entry.title}</p>
+                    </div>
+                  )}
+                  {entry.tileText && (
+                    <div className={styles.tileTextContainer}>
+                      <p className={styles.tileText}>{entry.tileText}</p>
+                    </div>
+                  )}
+                </Link>
+                <div className={styles.tagContainer}>
+                  {entry.objectives &&
+                    entry.objectives.map(objective => (
+                      <Link
+                        to={`/objective/${objective.slug}`}
+                        className={styles.tagBtn}
+                        key={objective.id}
+                      >
+                        {objective.title}
+                      </Link>
+                    ))}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      )}
+      <div className={styles.categoryContainer}>
+        <h2>Objectives</h2>
+        <motion.div
+          initial={{ opacity: 0 }}
+          transition={{ duration: 1 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className={styles.tagContainer}
+        >
+          {objectives.map(objective => (
+            <Link
+              to={`/objective/${objective.slug}`}
+              className={styles.tagBtn}
+              key={objective.id}
+            >
+              {objective.title}
+            </Link>
+          ))}
+        </motion.div>
+      </div>
+      <div className={styles.paddingDiv}></div>
     </div>
   )
 }
@@ -54,6 +127,28 @@ export const query = graphql`
           title
         }
         slug
+      }
+      writing_entry {
+        id
+        slug
+        tileImage {
+          description
+          gatsbyImageData(layout: FULL_WIDTH)
+        }
+        tileText
+        title
+        objectives {
+          id
+          slug
+          title
+        }
+      }
+    }
+    allContentfulObjective {
+      nodes {
+        id
+        slug
+        title
       }
     }
   }
