@@ -326,7 +326,7 @@ const SingleProject = ({ data }) => {
               dangerouslySetInnerHTML={{
                 __html: collaboratorsText.childMarkdownRemark.html.replace(
                   /\n/g,
-                  "<br />"
+                  "</span><br /><span>"
                 ),
               }}
             ></motion.div>

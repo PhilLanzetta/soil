@@ -80,6 +80,11 @@
   grid-column: 2 / 5;
 }
 
+.threeColumn span {
+  display: inline-block;
+  break-inside: avoid;
+}
+
 .threeColumnList {
   grid-column: 2 / 5;
   display: flex;
@@ -198,7 +203,8 @@
   width: 30px;
 }
 
-.forwardBtn, .backBtn {
+.forwardBtn,
+.backBtn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
