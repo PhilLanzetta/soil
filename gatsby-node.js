@@ -37,6 +37,13 @@ exports.createPages = async ({ actions, graphql }) => {
             }
           }
         }
+        allContentfulNewsEntry(filter: { linkOutFromTile: { ne: true } }) {
+          edges {
+            node {
+              slug
+            }
+          }
+        }
       }
     `
   )
@@ -46,6 +53,8 @@ exports.createPages = async ({ actions, graphql }) => {
   const objectives = result.data.allContentfulObjective.edges
 
   const writing = result.data.allContentfulWritingEntry.edges
+
+  const news = result.data.allContentfulNewsEntry.edges
 
   projects.forEach(({ node }) => {
     const projectSlug = node.slug
@@ -76,6 +85,17 @@ exports.createPages = async ({ actions, graphql }) => {
       component: path.resolve(`./src/templates/singleWriting.js`),
       context: {
         slug: writingSlug,
+      },
+    })
+  })
+
+  news.forEach(({ node }) => {
+    const newsSlug = node.slug
+    createPage({
+      path: `/news/${newsSlug}`,
+      component: path.resolve(`./src/templates/singleNews.js`),
+      context: {
+        slug: newsSlug,
       },
     })
   })
