@@ -45,3 +45,17 @@
   text-transform: uppercase;
   font-size: 0.8rem;
 }
+
+.externalContainer {
+  position: relative;
+}
+
+.outLink {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  padding: 5px 10px;
+  background: #e4e4e4;
+  border-radius: 3px;
+  font-weight: 100;
+}

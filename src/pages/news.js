@@ -20,31 +20,65 @@ const News = ({ data }) => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
           >
-            <Link to={`/news/${entry.slug}`}>
-              {entry.tileImage && (
-                <div>
-                  <div className={styles.tileImageContainer}>
-                    <GatsbyImage
-                      image={entry.tileImage.gatsbyImageData}
-                      alt={entry.tileImage.description}
-                      className={styles.tileImage}
-                      imgStyle={{ objectFit: "cover" }}
-                    ></GatsbyImage>
+            {entry.linkOutFromTile ? (
+              <a
+                href={entry.externalLink}
+                target="_blank"
+                rel="noreferrer"
+                className={styles.externalContainer}
+              >
+                <div className={styles.outLink}> → </div>
+                {entry.tileImage && (
+                  <div>
+                    <div className={styles.tileImageContainer}>
+                      <GatsbyImage
+                        image={entry.tileImage.gatsbyImageData}
+                        alt={entry.tileImage.description}
+                        className={styles.tileImage}
+                        imgStyle={{ objectFit: "cover" }}
+                      ></GatsbyImage>
+                    </div>
+                    <p className={styles.tileText}>{entry.title}</p>
                   </div>
-                  <p className={styles.tileText}>{entry.title}</p>
-                </div>
-              )}
-              {entry.tileText && (
-                <div className={styles.tileTextContainer}>
-                  <div
-                    className={styles.tileText}
-                    dangerouslySetInnerHTML={{
-                      __html: entry.tileText.childMarkdownRemark.html,
-                    }}
-                  ></div>
-                </div>
-              )}
-            </Link>
+                )}
+                {entry.tileText && (
+                  <div className={styles.tileTextContainer}>
+                    <div
+                      className={styles.tileText}
+                      dangerouslySetInnerHTML={{
+                        __html: entry.tileText.childMarkdownRemark.html,
+                      }}
+                    ></div>
+                  </div>
+                )}
+              </a>
+            ) : (
+              <Link to={`/news/${entry.slug}`}>
+                {entry.tileImage && (
+                  <div>
+                    <div className={styles.tileImageContainer}>
+                      <GatsbyImage
+                        image={entry.tileImage.gatsbyImageData}
+                        alt={entry.tileImage.description}
+                        className={styles.tileImage}
+                        imgStyle={{ objectFit: "cover" }}
+                      ></GatsbyImage>
+                    </div>
+                    <p className={styles.tileText}>{entry.title}</p>
+                  </div>
+                )}
+                {entry.tileText && (
+                  <div className={styles.tileTextContainer}>
+                    <div
+                      className={styles.tileText}
+                      dangerouslySetInnerHTML={{
+                        __html: entry.tileText.childMarkdownRemark.html,
+                      }}
+                    ></div>
+                  </div>
+                )}
+              </Link>
+            )}
             <div className={styles.tagContainer}>
               {entry.objectives &&
                 entry.objectives.map(objective => (
@@ -80,6 +114,8 @@ export const query = graphql`
           }
         }
         title
+        linkOutFromTile
+        externalLink
         objectives {
           id
           slug
