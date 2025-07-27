@@ -44,6 +44,13 @@
   margin-bottom: 100px;
 }
 
+.studioText {
+  scroll-margin-top: 80px;
+  font-size: 2rem;
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
 .secondarySectionHeading {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -63,4 +70,24 @@
 .headshot {
   width: 75%;
   margin-bottom: 20px;
+}
+
+.twoColumnImageContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.galleryContainer figure {
+  margin-bottom: 30px;
+}
+
+.galleryContainer figcaption {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.galleryContainer {
+  margin-bottom: 200px;
 }

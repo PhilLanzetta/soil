@@ -14,6 +14,8 @@ const About = ({ data }) => {
     jingLiuBio,
     florianIdenburgBio,
     teamMembers,
+    studioText,
+    studioGallery,
   } = data.contentfulAboutPage
   const [activeVideo, setActiveVideo] = useState()
   return (
@@ -140,6 +142,80 @@ const About = ({ data }) => {
             </motion.div>
           ))}
       </div>
+      {studioText && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          transition={{ duration: 1 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          id="studio"
+          className={styles.studioText}
+          dangerouslySetInnerHTML={{
+            __html: studioText.childMarkdownRemark.html,
+          }}
+        ></motion.div>
+      )}
+      {studioGallery && (
+        <div className={styles.galleryContainer}>
+          {studioGallery.map(item => {
+            if (item.imageId) {
+              return (
+                <motion.figure
+                  initial={{ opacity: 0 }}
+                  transition={{ duration: 1 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                >
+                  <GatsbyImage
+                    image={item.image.gatsbyImageData}
+                    alt={item.image.description}
+                  ></GatsbyImage>
+                  <figcaption>{item.caption}</figcaption>
+                </motion.figure>
+              )
+            } else if (item.videoId) {
+              return (
+                <motion.figure
+                  initial={{ opacity: 0 }}
+                  transition={{ duration: 1 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                >
+                  <VideoPlayer
+                    video={item}
+                    activeVideo={activeVideo}
+                    setActiveVideo={setActiveVideo}
+                    videoId={item.videoId}
+                  ></VideoPlayer>
+                  <figcaption>{item.caption}</figcaption>
+                </motion.figure>
+              )
+            } else if (item.twoImageId) {
+              return (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  transition={{ duration: 1 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  className={styles.twoColumnImageContainer}
+                >
+                  {item.images.map((image, index) => (
+                    <figure key={index}>
+                      <GatsbyImage
+                        image={image.image.gatsbyImageData}
+                        alt={image.image.description}
+                      ></GatsbyImage>
+                      <figcaption>{image.caption}</figcaption>
+                    </figure>
+                  ))}
+                </motion.div>
+              )
+            } else {
+              return <div>Unknown Content</div>
+            }
+          })}
+        </div>
+      )}
     </div>
   )
 }
@@ -186,6 +262,31 @@ export const query = graphql`
         }
         name
         title
+      }
+      studioGallery {
+        ... on ContentfulImageWrapper {
+          imageId: id
+          caption
+          image {
+            description
+            gatsbyImageData(layout: FULL_WIDTH)
+          }
+        }
+        ... on ContentfulTwoColumnImage {
+          twoImageId: id
+          images {
+            caption
+            image {
+              description
+              gatsbyImageData(layout: FULL_WIDTH)
+            }
+          }
+        }
+      }
+      studioText {
+        childMarkdownRemark {
+          html
+        }
       }
     }
   }
