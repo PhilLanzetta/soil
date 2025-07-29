@@ -502,6 +502,7 @@ const Work = ({ data, location }) => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.7 }}
             key={projects.length}
+            className={styles.listContainer}
           >
             {filterOpen && <div className={styles.filterOverlay}></div>}
             <ProjectList

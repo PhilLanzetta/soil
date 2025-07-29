@@ -8,9 +8,47 @@ const News = ({ data }) => {
   const [newsEntries, setNewsEntries] = useState(
     data.allContentfulNewsEntry.nodes
   )
+  const [filter, setFilter] = useState("all")
+
+  function onlyUnique(value, index, array) {
+    return array.indexOf(value) === index
+  }
+
+  const categories = data.allContentfulNewsEntry.nodes
+    .map(entry => entry.category)
+    .flat()
+    .filter(onlyUnique)
+    .sort()
+
   return (
     <div className="margined-section">
       <h1 className={styles.title}>News</h1>
+      <div className={styles.filterContainer}>
+        <button
+          onClick={() => {
+            setFilter("all")
+            setNewsEntries(data.allContentfulNewsEntry.nodes)
+          }}
+          className={filter === "all" ? styles.active : ""}
+        >
+          All
+        </button>
+        {categories.map(category => (
+          <button
+            onClick={() => {
+              setNewsEntries(
+                data.allContentfulNewsEntry.nodes.filter(entry =>
+                  entry.category.includes(category)
+                )
+              )
+              setFilter(category)
+            }}
+            className={filter === category ? styles.active : ""}
+          >
+            {category}
+          </button>
+        ))}
+      </div>
       <div className={styles.projectGrid}>
         {newsEntries.map(entry => (
           <motion.div
@@ -116,6 +154,7 @@ export const query = graphql`
         title
         linkOutFromTile
         externalLink
+        category
         objectives {
           id
           slug
