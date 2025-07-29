@@ -1,6 +1,7 @@
 import React from "react"
 import * as styles from "../components/contact.module.css"
 import { motion } from "motion/react"
+import Seo from "../components/seo"
 
 const Contact = () => {
   return (
@@ -107,5 +108,7 @@ const Contact = () => {
     </div>
   )
 }
+
+export const Head = () => <Seo title="Contact" />
 
 export default Contact

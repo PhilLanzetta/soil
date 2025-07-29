@@ -4,6 +4,7 @@ import { GatsbyImage } from "gatsby-plugin-image"
 import * as styles from "../components/about.module.css"
 import VideoPlayer from "../components/videoPlayer"
 import { motion } from "motion/react"
+import Seo from "../components/seo"
 
 const About = ({ data }) => {
   const {
@@ -291,5 +292,7 @@ export const query = graphql`
     }
   }
 `
+
+export const Head = () => <Seo title="About" />
 
 export default About
