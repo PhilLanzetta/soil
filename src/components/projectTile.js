@@ -4,11 +4,12 @@ import { Link } from "gatsby"
 import * as styles from "./projectGrid.module.css"
 import { motion } from "motion/react"
 
-const ProjectTile = ({ project }) => {
+const ProjectTile = ({ project, index }) => {
+  const indexDelay = index % 4
   return (
     <motion.div
       initial={{ opacity: 0 }}
-      transition={{ duration: 1 }}
+      transition={{ duration: 0.7, delay: 0.1 * indexDelay }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
       className={styles.projectTile}

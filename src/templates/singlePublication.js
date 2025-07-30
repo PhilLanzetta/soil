@@ -105,12 +105,121 @@ const SinglePublication = ({ data }) => {
             Related
           </motion.p>
           <ul className={styles.threeColumnList}>
-            {relatedContent.map(relatedProject => (
-              <ProjectTile
-                key={relatedProject.id}
-                project={relatedProject}
-              ></ProjectTile>
-            ))}
+            {relatedContent.map((relatedItem, index) => {
+              if (relatedItem.projectId) {
+                return (
+                  <ProjectTile
+                    key={relatedItem.projectId}
+                    project={relatedItem}
+                  ></ProjectTile>
+                )
+              } else {
+                return (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0 }}
+                    transition={{ duration: 1 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                  >
+                    {relatedItem.linkOutFromTile ? (
+                      <a
+                        href={relatedItem.externalLink}
+                        target="_blank"
+                        rel="noreferrer"
+                        className={styles.externalContainer}
+                      >
+                        <div className={styles.outLink}> → </div>
+                        {relatedItem.tileImage && (
+                          <div>
+                            <div className={styles.tileImageContainer}>
+                              <GatsbyImage
+                                image={relatedItem.tileImage.gatsbyImageData}
+                                alt={relatedItem.tileImage.description}
+                                className={styles.tileImage}
+                                imgStyle={{ objectFit: "cover" }}
+                              ></GatsbyImage>
+                            </div>
+                            <p className={styles.tileText}>
+                              {relatedItem.title}
+                            </p>
+                          </div>
+                        )}
+                        {relatedItem.tileText && (
+                          <div className={styles.tileTextContainer}>
+                            <div
+                              className={styles.tileText}
+                              dangerouslySetInnerHTML={{
+                                __html:
+                                  relatedItem.tileText.childMarkdownRemark.html,
+                              }}
+                            ></div>
+                          </div>
+                        )}
+                      </a>
+                    ) : (
+                      <Link
+                        to={
+                          relatedItem.newsId
+                            ? `/news/${relatedItem.slug}`
+                            : `/writing/${relatedItem.slug}`
+                        }
+                      >
+                        {relatedItem.tileImage && (
+                          <div>
+                            <div className={styles.tileImageContainer}>
+                              <GatsbyImage
+                                image={relatedItem.tileImage.gatsbyImageData}
+                                alt={relatedItem.tileImage.description}
+                                className={styles.tileImage}
+                                imgStyle={{ objectFit: "cover" }}
+                              ></GatsbyImage>
+                            </div>
+                            <p className={styles.tileText}>
+                              {relatedItem.title}
+                            </p>
+                          </div>
+                        )}
+                        {relatedItem.tileText && (
+                          <div className={styles.tileTextContainer}>
+                            <div
+                              className={styles.tileText}
+                              dangerouslySetInnerHTML={{
+                                __html:
+                                  relatedItem.tileText.childMarkdownRemark.html,
+                              }}
+                            ></div>
+                          </div>
+                        )}
+                        {relatedItem.tileTextLong && (
+                          <div className={styles.tileTextContainer}>
+                            <div
+                              className={styles.tileText}
+                              dangerouslySetInnerHTML={{
+                                __html:
+                                  relatedItem.tileTextLong.childMarkdownRemark.html,
+                              }}
+                            ></div>
+                          </div>
+                        )}
+                      </Link>
+                    )}
+                    <div className={styles.tagContainer}>
+                      {relatedItem.objectives &&
+                        relatedItem.objectives.map(objective => (
+                          <Link
+                            to={`/objective/${objective.slug}`}
+                            className={styles.tagBtn}
+                            key={objective.id}
+                          >
+                            {objective.title}
+                          </Link>
+                        ))}
+                    </div>
+                  </motion.div>
+                )
+              }
+            })}
           </ul>
         </div>
       )}
@@ -149,6 +258,64 @@ export const query = graphql`
             }
           }
           margin
+        }
+      }
+      relatedContent {
+        ... on ContentfulNewsEntry {
+          newsId: id
+          tileImage {
+            description
+            gatsbyImageData(layout: FULL_WIDTH)
+          }
+          tileText {
+            childMarkdownRemark {
+              html
+            }
+          }
+          objectives {
+            id
+            slug
+            title
+          }
+          slug
+          title
+          linkOutFromTile
+          externalLink
+        }
+        ... on ContentfulWritingEntry {
+          writingId: id
+          tileImage {
+            description
+            gatsbyImageData(layout: FULL_WIDTH)
+          }
+          tileTextLong {
+            childMarkdownRemark {
+              html
+            }
+          }
+          objectives {
+            id
+            slug
+            title
+          }
+          slug
+          title
+        }
+        ... on ContentfulProject {
+          projectId: id
+          city
+          country
+          tileImage {
+            description
+            gatsbyImageData(layout: FULL_WIDTH)
+          }
+          objectives {
+            id
+            slug
+            title
+          }
+          slug
+          title
         }
       }
     }
