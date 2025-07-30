@@ -17,6 +17,13 @@ const About = ({ data }) => {
     teamMembers,
     studioText,
     studioGallery,
+    clients,
+    recognitionPreface,
+    awards,
+    collections,
+    careers,
+    jobs,
+    transparency,
   } = data.contentfulAboutPage
   const [activeVideo, setActiveVideo] = useState()
   return (
@@ -217,6 +224,156 @@ const About = ({ data }) => {
           })}
         </div>
       )}
+      {clients && (
+        <div className={styles.tertiarySectionHeading} id="clients">
+          <motion.p
+            initial={{ opacity: 0 }}
+            transition={{ duration: 1 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className={styles.secondaryHeading}
+          >
+            Clients
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0 }}
+            transition={{ duration: 1 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className={styles.threeColumn}
+            dangerouslySetInnerHTML={{
+              __html: clients.childMarkdownRemark.html.replace(/\n/g, "<br />"),
+            }}
+          ></motion.div>
+        </div>
+      )}
+      {recognitionPreface && (
+        <div className={styles.tertiarySectionHeading} id="recognition">
+          <motion.p
+            initial={{ opacity: 0 }}
+            transition={{ duration: 1 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className={styles.secondaryHeading}
+          >
+            Recognition
+          </motion.p>
+          <motion.p
+            initial={{ opacity: 0 }}
+            transition={{ duration: 1 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className={styles.awardsHeading}
+          >
+            Awards
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0 }}
+            transition={{ duration: 1 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className={styles.secondaryHeading}
+            dangerouslySetInnerHTML={{
+              __html: recognitionPreface.childMarkdownRemark.html,
+            }}
+          ></motion.div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            transition={{ duration: 1 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className={styles.threeColumnAward}
+            dangerouslySetInnerHTML={{
+              __html: awards.childMarkdownRemark.html,
+            }}
+          ></motion.div>
+          {collections && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              transition={{ duration: 1 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              className={styles.secondColumn}
+            >
+              <p>Collections</p>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: collections.childMarkdownRemark.html,
+                }}
+              ></div>
+            </motion.div>
+          )}
+        </div>
+      )}
+      {transparency && (
+        <div className={styles.tertiarySectionHeading} id="transparency">
+          <motion.p
+            initial={{ opacity: 0 }}
+            transition={{ duration: 1 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className={styles.secondaryHeading}
+          >
+            Transparency
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0 }}
+            transition={{ duration: 1 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className={styles.threeColumnSpan}
+            dangerouslySetInnerHTML={{
+              __html: transparency.childMarkdownRemark.html,
+            }}
+          ></motion.div>
+        </div>
+      )}
+      {careers && (
+        <div className={styles.tertiarySectionHeading} id="careers">
+          <motion.p
+            initial={{ opacity: 0 }}
+            transition={{ duration: 1 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className={styles.secondaryHeading}
+          >
+            Careers
+          </motion.p>
+          <div className={jobs ? styles.twoColumns : styles.threeColumnSpan}>
+            <motion.div
+              initial={{ opacity: 0 }}
+              transition={{ duration: 1 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              dangerouslySetInnerHTML={{
+                __html: careers.childMarkdownRemark.html,
+              }}
+            ></motion.div>
+            {jobs && (
+              <div>
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  transition={{ duration: 1 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                >
+                  Open Roles:
+                </motion.p>
+                {jobs.map(job => (
+                  <a
+                    href={job.pdfFile?.file.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={styles.jobLink}
+                  >
+                    {job.title}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   )
 }
@@ -285,6 +442,45 @@ export const query = graphql`
         }
       }
       studioText {
+        childMarkdownRemark {
+          html
+        }
+      }
+      careers {
+        childMarkdownRemark {
+          html
+        }
+      }
+      clients {
+        childMarkdownRemark {
+          html
+        }
+      }
+      collections {
+        childMarkdownRemark {
+          html
+        }
+      }
+      jobs {
+        id
+        title
+        pdfFile {
+          file {
+            url
+          }
+        }
+      }
+      transparency {
+        childMarkdownRemark {
+          html
+        }
+      }
+      recognitionPreface {
+        childMarkdownRemark {
+          html
+        }
+      }
+      awards {
         childMarkdownRemark {
           html
         }

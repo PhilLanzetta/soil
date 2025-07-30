@@ -91,3 +91,53 @@
 .galleryContainer {
   margin-bottom: 200px;
 }
+
+.tertiarySectionHeading {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  font-weight: bold;
+  gap: 20px;
+  scroll-margin-top: 80px;
+}
+
+.tertiarySectionHeading {
+  margin-bottom: 100px;
+}
+
+.threeColumn,
+.threeColumnAward {
+  column-count: 3;
+  grid-column: 2 / 5;
+}
+
+.threeColumnSpan,
+.twoColumns {
+  grid-column: 2 / 5;
+}
+
+.twoColumns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.threeColumnAward p {
+  break-inside: avoid;
+}
+
+.awardsHeading {
+  grid-column: 2 / 5;
+  margin-bottom: 10px;
+}
+
+.secondaryHeading {
+  margin-bottom: 10px;
+}
+
+.secondColumn {
+  grid-column: 2;
+}
+
+.jobLink {
+  font-size: 2rem;
+}
