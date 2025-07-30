@@ -73,18 +73,12 @@ const ZoomableImage = ({ images }) => {
                 className={styles.imagePopUpContainer}
               >
                 <button
-                  className={styles.closePopUp}
+                  className={styles.closeButton}
                   onClick={() => setPopUpOpen(false)}
                   aria-label="close"
                 >
-                  <svg
-                    viewBox="0 0 32 32"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M1 31L31 1" stroke="black" strokeWidth={3} />
-                    <path d="M1 1L31 31" stroke="black" strokeWidth={3} />
-                  </svg>
+                  <span></span>
+                  <span></span>
                 </button>
                 <TransformWrapper initialScale={1} centerOnInit={true}>
                   {({ zoomIn, zoomOut, resetTransform, ...rest }) => (

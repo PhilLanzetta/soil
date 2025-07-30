@@ -7,6 +7,8 @@ import { GatsbyImage } from "gatsby-plugin-image"
 
 const IndexPage = ({ data }) => {
   const objectives = data.allContentfulObjective.nodes
+  const { aboutText } = data.contentfulHomePage
+  console.log(aboutText)
   return (
     <div>
       <svg
@@ -156,6 +158,18 @@ const IndexPage = ({ data }) => {
             </motion.div>
           ))}
         </div>
+        {aboutText && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            transition={{ duration: 1 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            dangerouslySetInnerHTML={{
+              __html: aboutText.childMarkdownRemark.html,
+            }}
+            className={styles.indexAbout}
+          ></motion.div>
+        )}
       </div>
     </div>
   )
@@ -171,6 +185,13 @@ export const query = graphql`
         image {
           description
           gatsbyImageData
+        }
+      }
+    }
+    contentfulHomePage {
+      aboutText {
+        childMarkdownRemark {
+          html
         }
       }
     }

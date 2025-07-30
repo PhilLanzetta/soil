@@ -45,6 +45,10 @@
   text-transform: uppercase;
 }
 
+.menuOpen a:hover {
+  opacity: 1;
+}
+
 .closeButton {
   height: 1rem;
   width: 1rem;
