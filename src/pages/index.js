@@ -1,18 +1,20 @@
-import * as React from "react"
+import React, { useRef, useEffect } from "react"
 import { Link, graphql } from "gatsby"
 import Seo from "../components/seo"
 import * as styles from "../components/index.module.css"
 import { motion } from "motion/react"
 import { GatsbyImage } from "gatsby-plugin-image"
+import useWindowSize from "../utils/useWindowSize"
 
 const IndexPage = ({ data }) => {
   const objectives = data.allContentfulObjective.nodes
   const { aboutText } = data.contentfulHomePage
-  console.log(aboutText)
+  const aboutRef = useRef()
   return (
     <div>
       <svg
-        className={styles.homeLogo}
+        className={`${styles.homeLogo} ${styles.logoFixed}`}
+        id="logo"
         viewBox="0 0 1698 82"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -168,6 +170,7 @@ const IndexPage = ({ data }) => {
               __html: aboutText.childMarkdownRemark.html,
             }}
             className={styles.indexAbout}
+            ref={aboutRef}
           ></motion.div>
         )}
       </div>

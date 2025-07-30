@@ -7,8 +7,21 @@ import Night from "../images/weather/nighttime.svg"
 import Showers from "../images/weather/showers.svg"
 import Thunderstorm from "../images/weather/thunderstorm.svg"
 import { motion } from "motion/react"
+import { graphql, useStaticQuery } from "gatsby"
 
 const Footer = ({ location }) => {
+  const data = useStaticQuery(graphql`
+    query {
+      allContentfulNewsEntry(sort: { date: DESC }, limit: 1) {
+        nodes {
+          title
+          slug
+          linkOutFromTile
+          externalLink
+        }
+      }
+    }
+  `)
   const API_KEY = process.env.GATSBY_WEATHER
   const isHome = location?.pathname === "/"
   const [nyTime, setNyTime] = useState(
@@ -81,6 +94,8 @@ const Footer = ({ location }) => {
       amWeatherIcon = Night
     }
   }
+
+  const newsItem = data.allContentfulNewsEntry.nodes[0]
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -186,6 +201,21 @@ const Footer = ({ location }) => {
           <Link>Instagram</Link>
           <Link>LinkedIn</Link>
         </div>
+        {newsItem && (
+          <div className={styles.footerColumn}>
+            {newsItem.linkOutFromTile ? (
+              <a
+                href={newsItem.externalLink}
+                target="_blank"
+                rel="noreferrer"
+              >{`News: ${newsItem.title} →`}</a>
+            ) : (
+              <Link
+                to={`/news/${newsItem.slug}`}
+              >{`News: ${newsItem.title} →`}</Link>
+            )}
+          </div>
+        )}
       </motion.div>
       {!isHome && (
         <motion.div

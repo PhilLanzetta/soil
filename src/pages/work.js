@@ -210,10 +210,19 @@ const Work = ({ data, location }) => {
       >
         <div className={styles.filterContainer}>
           <button
-            onClick={() => setFilterOpen(!filterOpen)}
+            onClick={() => {
+              if (filterOpen) {
+                setFilterOpen(false)
+                handleFilter()
+                updateURL()
+              } else {
+                setFilterOpen(true)
+              }
+            }}
             className={styles.filterBtn}
           >
-            Filter {filterOpen ? "-" : "+"}
+            Filter{" "}
+            <span className={styles.filterIcon}>{filterOpen ? "-" : "+"}</span>
           </button>
           {!isDisabled && (
             <div className={styles.currentFilters}>

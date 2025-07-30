@@ -59,6 +59,7 @@ const ZoomableImage = ({ images }) => {
             <GatsbyImage
               image={image.image.gatsbyImageData}
               alt={image.image.description}
+              className={styles.imageBorder}
             ></GatsbyImage>
           </button>
           <figcaption>{image.caption}</figcaption>
