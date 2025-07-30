@@ -31,7 +31,7 @@ const Layout = ({ children, location }) => {
           exit="out"
         >
           {children}
-          <Footer location={location} />
+          {location.pathname !== "/search/" && <Footer location={location} />}
         </motion.main>
       </AnimatePresence>
     </>

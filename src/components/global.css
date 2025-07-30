@@ -72,3 +72,7 @@ ul {
 .extra-padding {
   padding: 100px 0px;
 }
+
+.ais-SearchBox-input[type="search"]::-webkit-search-cancel-button {
+  display: none;
+}
