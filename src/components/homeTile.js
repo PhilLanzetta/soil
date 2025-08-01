@@ -12,8 +12,8 @@ const HomeTile = ({ tile, index }) => {
   })
   const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.5, 1, 0.5])
   const even = index % 2 === 0
-  const yPosSlow = useTransform(scrollYProgress, [0, 1], [0, 200])
-  const yPosFast = useTransform(scrollYProgress, [0, 1], [0, -300])
+  const y = useTransform(scrollYProgress, [0.25, 0.75], [0, 200])
+  const firstY = useTransform(scrollYProgress, [0.5, 1], [0, 200])
 
   let rowStyle
   if (tile.size === "Extra Large") {
@@ -43,7 +43,14 @@ const HomeTile = ({ tile, index }) => {
     }
   }
   return (
-    <div className={styles.imageRow}>
+    <motion.div
+      ref={ref}
+      style={{
+        y: index === 0 ? firstY : y,
+        zIndex: tile.size === "Extra Large" || tile.size === "Large" ? 25 : 0,
+      }}
+      className={styles.imageRow}
+    >
       <Link
         to={`/work/${tile.work.slug}`}
         className={styles.tileLink}
@@ -59,7 +66,7 @@ const HomeTile = ({ tile, index }) => {
           <GatsbyImage image={tile.image.gatsbyImageData}></GatsbyImage>
         )}
       </Link>
-    </div>
+    </motion.div>
   )
 }
 

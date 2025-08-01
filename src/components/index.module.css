@@ -21,6 +21,7 @@
 .imageRow {
   display: grid;
   padding-bottom: 200px;
+  position: relative;
 }
 
 .tileLink p {
