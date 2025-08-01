@@ -1,15 +1,38 @@
-import React, { useRef, useEffect } from "react"
+import React, { useRef } from "react"
 import { Link, graphql } from "gatsby"
 import Seo from "../components/seo"
 import * as styles from "../components/index.module.css"
 import { motion } from "motion/react"
 import { GatsbyImage } from "gatsby-plugin-image"
-import useWindowSize from "../utils/useWindowSize"
+import HomeTile from "../components/homeTile"
 
 const IndexPage = ({ data }) => {
   const objectives = data.allContentfulObjective.nodes
-  const { aboutText } = data.contentfulHomePage
+  const { aboutText, tiles } = data.contentfulHomePage
+  const shuffleData = array => {
+    let currentIndex = array.length,
+      randomIndex
+
+    // While there remain elements to shuffle.
+    while (currentIndex !== 0) {
+      // Pick a remaining element.
+      randomIndex = Math.floor(Math.random() * currentIndex)
+      currentIndex--
+
+      // And swap it with the current element.
+      ;[array[currentIndex], array[randomIndex]] = [
+        array[randomIndex],
+        array[currentIndex],
+      ]
+    }
+
+    return array
+  }
+
+  const randomTiles = shuffleData(tiles)
+
   const aboutRef = useRef()
+
   return (
     <div>
       <svg
@@ -127,7 +150,9 @@ const IndexPage = ({ data }) => {
         transition={{ delay: 2 }}
         className={styles.photoGrid}
       >
-        Photo Grid
+        {randomTiles?.map((tile, index) => (
+          <HomeTile key={tile.id} tile={tile} index={index}></HomeTile>
+        ))}
       </motion.div>
       <div className="margined-section">
         <motion.h2
@@ -196,6 +221,19 @@ export const query = graphql`
         childMarkdownRemark {
           html
         }
+      }
+      tiles {
+        id
+        image {
+          description
+          gatsbyImageData
+        }
+        title
+        work {
+          slug
+          title
+        }
+        size
       }
     }
   }

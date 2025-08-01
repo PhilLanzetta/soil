@@ -1,14 +1,16 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
-import * as styles from "../components/index.module.css"
+import * as styles from "../components/about.module.css"
 import { motion } from "motion/react"
 
 const Objectives = ({ data }) => {
   const objectives = data.allContentfulObjective.nodes
+  const { introText, objectiveImage } = data.contentfulObjectivesPage
   return (
-    <div className="margined-section extra-padding">
-      <div className={styles.objectivesContainer}>
+    <div className="margined-section">
+      <h1 className={styles.title}>Objectives</h1>
+      <div className={styles.subHeadingContainer}>
         {objectives.map(objective => (
           <motion.div
             initial={{ opacity: 0 }}
@@ -20,16 +22,30 @@ const Objectives = ({ data }) => {
               to={`/objective/${objective.slug}`}
               className={styles.objectiveLink}
             >
-              <div className={styles.objectiveOverlay}>{objective.title}</div>
-              <GatsbyImage
-                image={objective.image?.gatsbyImageData}
-                alt={objective.image?.description}
-                className={styles.objectiveImage}
-              ></GatsbyImage>
+              {objective.title}
             </Link>
           </motion.div>
         ))}
       </div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        transition={{ duration: 1 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        dangerouslySetInnerHTML={{ __html: introText.childMarkdownRemark.html }}
+        className={styles.objectiveIntroText}
+      ></motion.div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        transition={{ duration: 1 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+      >
+        <GatsbyImage
+          image={objectiveImage.gatsbyImageData}
+          alt={objectiveImage.description}
+        ></GatsbyImage>
+      </motion.div>
     </div>
   )
 }
@@ -39,12 +55,19 @@ export const query = graphql`
     allContentfulObjective {
       nodes {
         id
-        image {
-          gatsbyImageData
-          description
-        }
         title
         slug
+      }
+    }
+    contentfulObjectivesPage {
+      objectiveImage {
+        description
+        gatsbyImageData(layout: FULL_WIDTH)
+      }
+      introText {
+        childMarkdownRemark {
+          html
+        }
       }
     }
   }

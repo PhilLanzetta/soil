@@ -18,6 +18,28 @@
   min-height: 100vh;
 }
 
+.imageRow {
+  display: grid;
+  padding-bottom: 200px;
+}
+
+.tileLink p {
+  font-size: 2rem;
+  text-align: right;
+  margin-bottom: 0;
+  opacity: 0;
+  transition: all 400ms;
+}
+
+.tileLink:hover {
+  opacity: 1;
+}
+
+.tileLink:hover p {
+  opacity: 1;
+  transition: all 400ms;
+}
+
 .objectivesContainer {
   display: grid;
   grid-template-columns: repeat(4, 1fr);

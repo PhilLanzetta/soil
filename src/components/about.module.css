@@ -10,6 +10,7 @@
   font-size: 2rem;
   margin-top: 20px;
   margin-bottom: 20px;
+  flex-wrap: wrap;
 }
 
 .subHeadingContainer a {
@@ -139,5 +140,11 @@
 }
 
 .jobLink {
+  font-size: 2rem;
+}
+
+.objectiveIntroText {
+  margin-top: 100px;
+  margin-bottom: 20px;
   font-size: 2rem;
 }
