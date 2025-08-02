@@ -21,7 +21,7 @@ const Layout = ({ children, location }) => {
 
   return (
     <>
-      <Header />
+      <Header location={location} />
       <AnimatePresence mode="wait">
         <motion.main
           key={location.pathname}

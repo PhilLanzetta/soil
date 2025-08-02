@@ -1,10 +1,24 @@
 import React, { useState } from "react"
 import * as styles from "./header.module.css"
-import { Link } from "gatsby"
+import { Link, graphql, useStaticQuery } from "gatsby"
 import { AnimatePresence, motion } from "motion/react"
 
-const Header = () => {
-  const [menuOpen, setMenuOpen] = useState(false)
+const Header = ({ location }) => {
+  const [menuOpen, setMenuOpen] = useState(location.pathname === "/")
+  const isObjective = location.pathname.includes("objective")
+  const data = useStaticQuery(graphql`
+    query {
+      allContentfulObjective {
+        nodes {
+          id
+          slug
+          title
+        }
+      }
+    }
+  `)
+  const objectives = data.allContentfulObjective.nodes
+
   return (
     <header className={styles.header}>
       <div className={styles.nav}>
@@ -67,6 +81,29 @@ const Header = () => {
             >
               <button onClick={() => setMenuOpen(true)}>Menu</button>
             </motion.div>
+          )}
+          {isObjective && (
+            <div>
+              <h1 className={styles.title}>Objectives</h1>
+              <div className={styles.subHeadingContainer}>
+                {objectives.map(objective => (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    transition={{ duration: 1 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                  >
+                    <Link
+                      to={`/objective/${objective.slug}`}
+                      className={styles.objectiveLink}
+                      activeClassName={styles.activeObjective}
+                    >
+                      {objective.title}
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
           )}
         </AnimatePresence>
       </div>

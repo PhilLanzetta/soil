@@ -12,7 +12,6 @@ const Objective = ({ data }) => {
   const objectives = data.allContentfulObjective.nodes
   return (
     <div className="margined-section">
-      <h1 className="extra-padding">{title}</h1>
       <div
         dangerouslySetInnerHTML={{
           __html: description.childMarkdownRemark.html,

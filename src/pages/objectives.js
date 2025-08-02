@@ -9,24 +9,6 @@ const Objectives = ({ data }) => {
   const { introText, objectiveImage } = data.contentfulObjectivesPage
   return (
     <div className="margined-section">
-      <h1 className={styles.title}>Objectives</h1>
-      <div className={styles.subHeadingContainer}>
-        {objectives.map(objective => (
-          <motion.div
-            initial={{ opacity: 0 }}
-            transition={{ duration: 1 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-          >
-            <Link
-              to={`/objective/${objective.slug}`}
-              className={styles.objectiveLink}
-            >
-              {objective.title}
-            </Link>
-          </motion.div>
-        ))}
-      </div>
       <motion.div
         initial={{ opacity: 0 }}
         transition={{ duration: 1 }}
