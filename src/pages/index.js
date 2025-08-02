@@ -31,7 +31,36 @@ const IndexPage = ({ data }) => {
 
   const randomTiles = shuffleData(tiles)
 
-  const aboutRef = useRef()
+  const extraLargeTiles = randomTiles.filter(
+    entry => entry.size === "Extra Large"
+  )
+
+  const otherTiles = randomTiles.filter(entry => entry.size !== "Extra Large")
+
+  function insertEveryThird(arr1, arr2) {
+    let newArr = []
+    let arr2Index = 0
+
+    for (let i = 0; i < arr1.length; i++) {
+      newArr.push(arr1[i]) // Add element from the first array
+
+      // Insert from the second array every third position (after 3rd, 6th, etc. elements of arr1)
+      if ((i + 1) % 3 === 0 && arr2Index < arr2.length) {
+        newArr.push(arr2[arr2Index])
+        arr2Index++
+      }
+    }
+
+    // Add any remaining elements from the second array
+    while (arr2Index < arr2.length) {
+      newArr.push(arr2[arr2Index])
+      arr2Index++
+    }
+
+    return newArr
+  }
+
+  const preparedTiles = insertEveryThird(otherTiles, extraLargeTiles)
 
   return (
     <div>
@@ -154,7 +183,7 @@ const IndexPage = ({ data }) => {
           transition={{ delay: 2 }}
           className={styles.photoGrid}
         >
-          {randomTiles?.map((tile, index) => (
+          {preparedTiles?.map((tile, index) => (
             <HomeTile key={tile.id} tile={tile} index={index}></HomeTile>
           ))}
         </motion.div>
@@ -164,10 +193,11 @@ const IndexPage = ({ data }) => {
             transition={{ duration: 1 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
+            className={styles.objectiveTitle}
           >
             Objectives
           </motion.h2>
-          <div className={styles.objectivesContainer}>
+          <div className={styles.subHeadingContainer}>
             {objectives.map(objective => (
               <motion.div
                 initial={{ opacity: 0 }}
@@ -175,18 +205,8 @@ const IndexPage = ({ data }) => {
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
               >
-                <Link
-                  to={`/objective/${objective.slug}`}
-                  className={styles.objectiveLink}
-                >
-                  <div className={styles.objectiveOverlay}>
-                    {objective.title}
-                  </div>
-                  <GatsbyImage
-                    image={objective.image?.gatsbyImageData}
-                    alt={objective.image?.description}
-                    className={styles.objectiveImage}
-                  ></GatsbyImage>
+                <Link to={`/objective/${objective.slug}`}>
+                  {objective.title}
                 </Link>
               </motion.div>
             ))}
@@ -204,7 +224,6 @@ const IndexPage = ({ data }) => {
               __html: aboutText.childMarkdownRemark.html,
             }}
             className={styles.indexAbout}
-            ref={aboutRef}
           ></motion.div>
         )}
       </div>
@@ -241,6 +260,8 @@ export const query = graphql`
         work {
           slug
           title
+          city
+          country
         }
         size
       }

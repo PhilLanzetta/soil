@@ -10,22 +10,27 @@
   transform: translateY(-50%);
 }
 
-.logoUnfixed {
-  position: relative;
-}
-
 .photoGrid {
   min-height: 100vh;
 }
 
 .imageRow {
   display: grid;
-  padding-bottom: 200px;
+  position: relative;
+}
+
+.tileLink {
   position: relative;
 }
 
 .tileLink p {
-  font-size: 2rem;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  padding: 5px 10px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 5px;
+  z-index: 100;
   text-align: right;
   margin-bottom: 0;
   opacity: 0;
@@ -85,5 +90,19 @@
 .indexAbout {
   font-size: 2rem;
   margin: 15px;
-  margin-top: 0;
+  margin-top: -15px;
+  padding-bottom: 100px;
+}
+
+.subHeadingContainer {
+  display: flex;
+  gap: 20px;
+  font-size: 2rem;
+  margin-top: 20px;
+  padding-bottom: 300px;
+  flex-wrap: wrap;
+}
+
+.objectiveTitle {
+  font-size: 4rem;
 }

@@ -6,14 +6,45 @@ import * as styles from "./index.module.css"
 
 const HomeTile = ({ tile, index }) => {
   const ref = useRef(null)
-  const { scrollYProgress } = useScroll({
+  const { scrollYProgress, scrollY } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
   })
-  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.5, 1, 0.5])
+  const opacity = useTransform(
+    scrollYProgress,
+    [0, 0.1, 0.5, 0.9, 1],
+    [0, 0.25, 1, 0.25, 0]
+  )
+  const opacityBig = useTransform(
+    scrollYProgress,
+    [0, 0.1, 0.5, 0.9, 1],
+    [0, 1, 1, 1, 0]
+  )
   const even = index % 2 === 0
-  const y = useTransform(scrollYProgress, [0.25, 0.75], [0, 200])
-  const firstY = useTransform(scrollYProgress, [0.5, 1], [0, 200])
+  const ySlow = useTransform(scrollYProgress, [0, 1], [0, 300])
+  const yFirst = useTransform(scrollYProgress, [0.5, 1], [0, 400])
+  const yFast = useTransform(scrollYProgress, [0, 1], [0, -300])
+  const yMedium = useTransform(scrollYProgress, [0, 1], [0, 100])
+
+  let yFormat
+  let bottomPadding
+
+  if (index === 0) {
+    yFormat = yFirst
+    bottomPadding = "200px"
+  } else if ((index + 1) % 4 === 1) {
+    yFormat = ySlow
+    bottomPadding = "200px"
+  } else if ((index + 1) % 4 === 2) {
+    yFormat = yFast
+    bottomPadding = "20px"
+  } else if ((index + 1) % 4 === 3) {
+    yFormat = yFast
+    bottomPadding = "20px"
+  } else if ((index + 1) % 4 === 0) {
+    yFormat = undefined
+    bottomPadding = "200px"
+  }
 
   let rowStyle
   if (tile.size === "Extra Large") {
@@ -46,8 +77,9 @@ const HomeTile = ({ tile, index }) => {
     <motion.div
       ref={ref}
       style={{
-        y: index === 0 ? firstY : y,
+        y: yFormat,
         zIndex: tile.size === "Extra Large" || tile.size === "Large" ? 25 : 0,
+        paddingBottom: bottomPadding,
       }}
       className={styles.imageRow}
     >
@@ -56,14 +88,20 @@ const HomeTile = ({ tile, index }) => {
         className={styles.tileLink}
         style={rowStyle}
       >
-        <p>{tile.work.title}</p>
+        <p>
+          {tile.work.title && `${tile.work.title}, `}
+          {tile.work.city && `${tile.work.city}, `}
+          {tile.work.country}
+        </p>
         {(tile.size === "Medium" || tile.size === "Small") && (
-          <motion.div ref={ref} style={{ opacity }}>
+          <motion.div style={{ opacity }}>
             <GatsbyImage image={tile.image.gatsbyImageData}></GatsbyImage>
           </motion.div>
         )}
         {(tile.size === "Extra Large" || tile.size === "Large") && (
-          <GatsbyImage image={tile.image.gatsbyImageData}></GatsbyImage>
+          <motion.div style={{ opacity: opacityBig }}>
+            <GatsbyImage image={tile.image.gatsbyImageData}></GatsbyImage>
+          </motion.div>
         )}
       </Link>
     </motion.div>
