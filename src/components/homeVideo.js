@@ -39,10 +39,16 @@ const HomeVideo = ({ videoLink, aspectRatio, image }) => {
           className={styles.videoPlayerVideo}
           controls={false}
           playing={true}
-          playsinline
+          playsInline
           volume={0}
           muted={true}
+          config={{
+            vimeo: {
+                autopause: false,
+              },
+          }}
           onPlaying={() => setLoading(false)}
+          onError={() => setLoading(true)}
           loop
         ></ReactPlayer>
       </div>

@@ -258,6 +258,7 @@ const IndexPage = ({ data }) => {
                 transition={{ duration: 1 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
+                key={objective.id}
               >
                 <Link to={`/objective/${objective.slug}`}>
                   {objective.title}

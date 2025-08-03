@@ -224,7 +224,7 @@ const VideoPlayer = ({
           className={styles.videoPlayerVideo}
           controls={isMobile}
           playing={playing}
-          playsinline
+          playsInline
           onPlay={() => {
             setVideoState({ ...videoState, playing: true })
             setHasPlayed(true)

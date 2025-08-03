@@ -7,7 +7,8 @@ import HomeVideo from "./homeVideo"
 
 const HomeTile = ({ tile, index, autoScroll }) => {
   const ref = useRef(null)
-  const { scrollYProgress, scrollY } = useScroll({
+  const { scrollYProgress } = useScroll({
+    layoutEffect: false,
     target: ref,
     offset: ["start end", "end start"],
   })
