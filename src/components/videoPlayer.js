@@ -8,7 +8,7 @@ import small from "../images/smallScreen.svg"
 import screenfull from "screenfull"
 import useWindowSize from "../utils/useWindowSize"
 import * as styles from "./videoPlayer.module.css"
-import { AnimatePresence, motion } from "framer-motion"
+import { AnimatePresence, motion } from "motion/react"
 import play from "../images/play.svg"
 import useOnScreen from "../utils/useOnScreen"
 

@@ -3,6 +3,7 @@ import { GatsbyImage } from "gatsby-plugin-image"
 import { Link } from "gatsby"
 import { motion, useScroll, useTransform } from "motion/react"
 import * as styles from "./index.module.css"
+import HomeVideo from "./homeVideo"
 
 const HomeTile = ({ tile, index, autoScroll }) => {
   const ref = useRef(null)
@@ -87,12 +88,7 @@ const HomeTile = ({ tile, index, autoScroll }) => {
   }
   return (
     <motion.div ref={ref} className={styles.imageRow} style={rowStyle}>
-      <Link
-        to={`/work/${tile.work.slug}`}
-        className={styles.tileLink}
-        onMouseEnter={() => autoScroll(false)}
-        onMouseLeave={() => autoScroll(true)}
-      >
+      <Link to={`/work/${tile.work.slug}`} className={styles.tileLink}>
         <p>
           {tile.work.title && `${tile.work.title}, `}
           {tile.work.city && `${tile.work.city}, `}
@@ -100,12 +96,28 @@ const HomeTile = ({ tile, index, autoScroll }) => {
         </p>
         {(tile.size === "Medium" || tile.size === "Small") && (
           <motion.div style={{ opacity }}>
-            <GatsbyImage image={tile.image.gatsbyImageData}></GatsbyImage>
+            {tile.videoLink ? (
+              <HomeVideo
+                videoLink={tile.videoLink}
+                aspectRatio={tile.videoAspectRatio}
+                image={tile.image}
+              ></HomeVideo>
+            ) : (
+              <GatsbyImage image={tile.image.gatsbyImageData}></GatsbyImage>
+            )}
           </motion.div>
         )}
         {(tile.size === "Extra Large" || tile.size === "Large") && (
           <motion.div style={{ opacity: opacityBig }}>
-            <GatsbyImage image={tile.image.gatsbyImageData}></GatsbyImage>
+            {tile.videoLink ? (
+              <HomeVideo
+                videoLink={tile.videoLink}
+                aspectRatio={tile.videoAspectRatio}
+                image={tile.image}
+              ></HomeVideo>
+            ) : (
+              <GatsbyImage image={tile.image.gatsbyImageData}></GatsbyImage>
+            )}
           </motion.div>
         )}
       </Link>

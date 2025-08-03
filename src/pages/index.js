@@ -9,6 +9,7 @@ import HomeTile from "../components/homeTile"
 const IndexPage = ({ data }) => {
   const [isAutoScrolling, setIsAutoScrolling] = useState(true)
   const [tileData, setTileData] = useState([])
+  const [scrollPosition, setScrollPostion] = useState(0)
   const objectives = data.allContentfulObjective.nodes
   const { aboutText, tiles } = data.contentfulHomePage
   const shuffleData = array => {
@@ -90,14 +91,26 @@ const IndexPage = ({ data }) => {
       setIsAutoScrolling(false)
     }
 
+    const stopAutoScrollUp = () => {
+      const currentScroll = window.scrollY
+      if (currentScroll < 100) {
+        setIsAutoScrolling(true)
+      } else if (currentScroll < scrollPosition) {
+        setIsAutoScrolling(false)
+      }
+      setScrollPostion(currentScroll)
+    }
+
+    window.addEventListener("scroll", stopAutoScrollUp)
     window.addEventListener("mousedown", stopAutoScroll)
     window.addEventListener("keydown", stopAutoScroll)
 
     return () => {
       window.removeEventListener("mousedown", stopAutoScroll)
       window.removeEventListener("keydown", stopAutoScroll)
+      window.removeEventListener("scroll", stopAutoScrollUp)
     }
-  }, [])
+  }, [scrollPosition])
 
   return (
     <div>
@@ -221,7 +234,11 @@ const IndexPage = ({ data }) => {
           className={styles.photoGrid}
         >
           {tileData?.map((tile, index) => (
-            <HomeTile key={tile.id} tile={tile} index={index} autoScroll={setIsAutoScrolling}></HomeTile>
+            <HomeTile
+              key={index}
+              tile={tile}
+              index={index}
+            ></HomeTile>
           ))}
         </motion.div>
         <div className="margined-section">
@@ -293,7 +310,8 @@ export const query = graphql`
           description
           gatsbyImageData
         }
-        title
+        videoAspectRatio
+        videoLink
         work {
           slug
           title
