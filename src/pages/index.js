@@ -8,6 +8,7 @@ import HomeTile from "../components/homeTile"
 
 const IndexPage = ({ data }) => {
   const [isAutoScrolling, setIsAutoScrolling] = useState(true)
+  const [tileData, setTileData] = useState([])
   const objectives = data.allContentfulObjective.nodes
   const { aboutText, tiles } = data.contentfulHomePage
   const shuffleData = array => {
@@ -29,14 +30,6 @@ const IndexPage = ({ data }) => {
 
     return array
   }
-
-  const randomTiles = shuffleData(tiles)
-
-  const extraLargeTiles = randomTiles.filter(
-    entry => entry.size === "Extra Large"
-  )
-
-  const otherTiles = randomTiles.filter(entry => entry.size !== "Extra Large")
 
   function insertEveryThird(arr1, arr2) {
     let newArr = []
@@ -61,19 +54,35 @@ const IndexPage = ({ data }) => {
     return newArr
   }
 
-  const preparedTiles = insertEveryThird(otherTiles, extraLargeTiles)
+  useEffect(() => {
+    const randomTiles = shuffleData(tiles)
+
+    const extraLargeTiles = randomTiles.filter(
+      entry => entry.size === "Extra Large"
+    )
+
+    const otherTiles = randomTiles.filter(entry => entry.size !== "Extra Large")
+
+    const preparedTiles = insertEveryThird(otherTiles, extraLargeTiles)
+    setTileData(preparedTiles)
+  }, [])
 
   useEffect(() => {
     let scrollInterval
+    let timeoutId
 
     if (isAutoScrolling) {
-      console.log("auto scroll")
-      scrollInterval = setInterval(() => {
-        window.scrollBy(0, 1) // Adjust scroll amount as needed
-      }, 10) // Adjust interval duration as needed
+      timeoutId = setTimeout(() => {
+        scrollInterval = setInterval(() => {
+          window.scrollBy(0, 1) // Adjust scroll amount as needed
+        }, 15)
+      }, 1500) // Adjust interval duration as needed
     }
 
-    return () => clearInterval(scrollInterval)
+    return () => {
+      clearTimeout(timeoutId)
+      clearInterval(scrollInterval)
+    }
   }, [isAutoScrolling])
 
   useEffect(() => {
@@ -81,12 +90,10 @@ const IndexPage = ({ data }) => {
       setIsAutoScrolling(false)
     }
 
-    // window.addEventListener("scroll", stopAutoScroll)
     window.addEventListener("mousedown", stopAutoScroll)
     window.addEventListener("keydown", stopAutoScroll)
 
     return () => {
-      // window.removeEventListener("scroll", stopAutoScroll)
       window.removeEventListener("mousedown", stopAutoScroll)
       window.removeEventListener("keydown", stopAutoScroll)
     }
@@ -213,8 +220,8 @@ const IndexPage = ({ data }) => {
           transition={{ delay: 2 }}
           className={styles.photoGrid}
         >
-          {preparedTiles?.map((tile, index) => (
-            <HomeTile key={tile.id} tile={tile} index={index}></HomeTile>
+          {tileData?.map((tile, index) => (
+            <HomeTile key={tile.id} tile={tile} index={index} autoScroll={setIsAutoScrolling}></HomeTile>
           ))}
         </motion.div>
         <div className="margined-section">

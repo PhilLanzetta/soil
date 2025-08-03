@@ -41,8 +41,9 @@
   opacity: 1;
 }
 
-.tileLink:hover p {
-  opacity: 1;
+.tileLink:hover p,
+.tileLink:hover div {
+  opacity: 1 !important;
   transition: all 400ms;
 }
 

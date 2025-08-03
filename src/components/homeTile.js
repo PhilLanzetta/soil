@@ -4,7 +4,7 @@ import { Link } from "gatsby"
 import { motion, useScroll, useTransform } from "motion/react"
 import * as styles from "./index.module.css"
 
-const HomeTile = ({ tile, index }) => {
+const HomeTile = ({ tile, index, autoScroll }) => {
   const ref = useRef(null)
   const { scrollYProgress, scrollY } = useScroll({
     target: ref,
@@ -48,13 +48,21 @@ const HomeTile = ({ tile, index }) => {
 
   let rowStyle
   if (tile.size === "Extra Large") {
-    rowStyle = { width: "100%", position: "relative", zIndex: 50 }
+    rowStyle = {
+      width: "100%",
+      position: "relative",
+      zIndex: 50,
+      y: yFormat,
+      paddingBottom: bottomPadding,
+    }
   } else if (tile.size === "Large") {
     rowStyle = {
       width: "63%",
       position: "relative",
       zIndex: 50,
       justifySelf: even ? "flex-end" : "flex-start",
+      y: yFormat,
+      paddingBottom: bottomPadding,
     }
   } else if (tile.size === "Medium") {
     rowStyle = {
@@ -63,6 +71,8 @@ const HomeTile = ({ tile, index }) => {
       justifySelf: even ? "flex-end" : "flex-start",
       marginLeft: "12.5%",
       marginRight: "12.5%",
+      y: yFormat,
+      paddingBottom: bottomPadding,
     }
   } else {
     rowStyle = {
@@ -71,22 +81,17 @@ const HomeTile = ({ tile, index }) => {
       justifySelf: even ? "flex-end" : "flex-start",
       marginLeft: "12.5%",
       marginRight: "12.5%",
+      y: yFormat,
+      paddingBottom: bottomPadding,
     }
   }
   return (
-    <motion.div
-      ref={ref}
-      style={{
-        y: yFormat,
-        zIndex: tile.size === "Extra Large" || tile.size === "Large" ? 25 : 0,
-        paddingBottom: bottomPadding,
-      }}
-      className={styles.imageRow}
-    >
+    <motion.div ref={ref} className={styles.imageRow} style={rowStyle}>
       <Link
         to={`/work/${tile.work.slug}`}
         className={styles.tileLink}
-        style={rowStyle}
+        onMouseEnter={() => autoScroll(false)}
+        onMouseLeave={() => autoScroll(true)}
       >
         <p>
           {tile.work.title && `${tile.work.title}, `}
