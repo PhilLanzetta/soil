@@ -1,4 +1,4 @@
-import React, { useRef } from "react"
+import React, { useRef, useState, useEffect } from "react"
 import { Link, graphql } from "gatsby"
 import Seo from "../components/seo"
 import * as styles from "../components/index.module.css"
@@ -7,6 +7,7 @@ import { GatsbyImage } from "gatsby-plugin-image"
 import HomeTile from "../components/homeTile"
 
 const IndexPage = ({ data }) => {
+  const [isAutoScrolling, setIsAutoScrolling] = useState(true)
   const objectives = data.allContentfulObjective.nodes
   const { aboutText, tiles } = data.contentfulHomePage
   const shuffleData = array => {
@@ -61,6 +62,35 @@ const IndexPage = ({ data }) => {
   }
 
   const preparedTiles = insertEveryThird(otherTiles, extraLargeTiles)
+
+  useEffect(() => {
+    let scrollInterval
+
+    if (isAutoScrolling) {
+      console.log("auto scroll")
+      scrollInterval = setInterval(() => {
+        window.scrollBy(0, 1) // Adjust scroll amount as needed
+      }, 10) // Adjust interval duration as needed
+    }
+
+    return () => clearInterval(scrollInterval)
+  }, [isAutoScrolling])
+
+  useEffect(() => {
+    const stopAutoScroll = () => {
+      setIsAutoScrolling(false)
+    }
+
+    // window.addEventListener("scroll", stopAutoScroll)
+    window.addEventListener("mousedown", stopAutoScroll)
+    window.addEventListener("keydown", stopAutoScroll)
+
+    return () => {
+      // window.removeEventListener("scroll", stopAutoScroll)
+      window.removeEventListener("mousedown", stopAutoScroll)
+      window.removeEventListener("keydown", stopAutoScroll)
+    }
+  }, [])
 
   return (
     <div>
