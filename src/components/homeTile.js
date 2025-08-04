@@ -4,9 +4,12 @@ import { Link } from "gatsby"
 import { motion, useScroll, useTransform } from "motion/react"
 import * as styles from "./index.module.css"
 import HomeVideo from "./homeVideo"
+import useWindowSize from "../utils/useWindowSize"
 
 const HomeTile = ({ tile, index, autoScroll }) => {
   const ref = useRef(null)
+  const { width, height } = useWindowSize()
+  const isMobile = width < height
   const { scrollYProgress } = useScroll({
     layoutEffect: false,
     target: ref,
@@ -24,28 +27,31 @@ const HomeTile = ({ tile, index, autoScroll }) => {
   )
   const even = index % 2 === 0
   const ySlow = useTransform(scrollYProgress, [0, 1], [0, 300])
+  const ySlowMobile = useTransform(scrollYProgress, [0, 1], [0, 100])
   const yFirst = useTransform(scrollYProgress, [0.5, 1], [0, 400])
+  const yFirstMobile = useTransform(scrollYProgress, [0.5, 1], [0, 100])
   const yFast = useTransform(scrollYProgress, [0, 1], [0, -300])
-  const yMedium = useTransform(scrollYProgress, [0, 1], [0, 100])
+  const yFastMobile = useTransform(scrollYProgress, [0, 1], [0, -200])
+  const yFast2Mobile = useTransform(scrollYProgress, [0, 1], [0, -300])
 
   let yFormat
   let bottomPadding
 
   if (index === 0) {
-    yFormat = yFirst
+    yFormat = isMobile ? yFirstMobile : yFirst
     bottomPadding = "200px"
   } else if ((index + 1) % 4 === 1) {
-    yFormat = ySlow
+    yFormat = isMobile ? ySlowMobile : ySlow
     bottomPadding = "200px"
   } else if ((index + 1) % 4 === 2) {
-    yFormat = yFast
+    yFormat = isMobile ? yFastMobile : yFast
     bottomPadding = "20px"
   } else if ((index + 1) % 4 === 3) {
-    yFormat = yFast
-    bottomPadding = "20px"
+    yFormat = isMobile ? yFast2Mobile : yFast
+    bottomPadding = isMobile ? "0px" : "20px"
   } else if ((index + 1) % 4 === 0) {
     yFormat = undefined
-    bottomPadding = "200px"
+    bottomPadding = isMobile ? "100px" : "200px"
   }
 
   let rowStyle
@@ -59,7 +65,7 @@ const HomeTile = ({ tile, index, autoScroll }) => {
     }
   } else if (tile.size === "Large") {
     rowStyle = {
-      width: "63%",
+      width: isMobile ? "80%" : "63%",
       position: "relative",
       zIndex: 50,
       justifySelf: even ? "flex-end" : "flex-start",
@@ -68,21 +74,21 @@ const HomeTile = ({ tile, index, autoScroll }) => {
     }
   } else if (tile.size === "Medium") {
     rowStyle = {
-      width: "38%",
+      width: isMobile ? "55%" : "38%",
       position: "relative",
       justifySelf: even ? "flex-end" : "flex-start",
-      marginLeft: "12.5%",
-      marginRight: "12.5%",
+      marginLeft: isMobile ? "0" : "12.5%",
+      marginRight: isMobile ? "0" : "12.5%",
       y: yFormat,
       paddingBottom: bottomPadding,
     }
   } else {
     rowStyle = {
-      width: "25%",
+      width: isMobile ? "45%" : "25%",
       position: "relative",
       justifySelf: even ? "flex-end" : "flex-start",
-      marginLeft: "12.5%",
-      marginRight: "12.5%",
+      marginLeft: isMobile ? "15%" : "12.5%",
+      marginRight: isMobile ? "15%" : "12.5%",
       y: yFormat,
       paddingBottom: bottomPadding,
     }

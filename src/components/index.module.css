@@ -7,10 +7,6 @@
   transform: translateY(-50%);
 }
 
-.photoGrid {
-  min-height: 100vh;
-}
-
 .imageRow {
   display: grid;
   position: relative;
@@ -103,4 +99,18 @@
 
 .objectiveTitle {
   font-size: 4rem;
+}
+
+@media screen and (max-width: 700px) {
+  .indexAbout {
+    font-size: 1.5rem;
+    padding-bottom: 50px;
+  }
+
+  .subHeadingContainer {
+    font-size: 1.5rem;
+    padding-bottom: 100px;
+    gap: 15px;
+    row-gap: 5px;
+  }
 }
