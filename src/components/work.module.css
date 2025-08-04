@@ -19,6 +19,7 @@
   display: flex;
   width: 100%;
   justify-content: space-between;
+  align-items: flex-start;
 }
 
 .viewContainer {
@@ -72,24 +73,33 @@
   width: 120%;
   padding: 20px 10%;
   display: flex;
-  gap: 10%;
+  gap: 10vw;
   z-index: 10;
 }
 
-.filterOptionsContainer div {
+.filterGrouping {
+  display: flex;
+  gap: 10vw;
+}
+
+.filterColumn,
+.filterGrouping div {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 
-.filterOptionsContainer div p {
+.filterColumn p,
+.filterGrouping div p {
   margin-bottom: 10px;
 }
 
-.filterOptionsContainer div button {
+.filterColumn button,
+.filterGrouping div button {
   display: flex;
   gap: 5px;
   align-items: center;
+  text-align: left;
 }
 
 .option {
@@ -108,16 +118,40 @@
 
 .filterContainer {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
   align-items: flex-end;
 }
 
 .currentFilters {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
 }
 
 .currentFilters button {
   display: flex;
   align-items: flex-end;
+}
+
+@media screen and (max-width: 850px) {
+  .filterOptionsContainer {
+    gap: 5vw;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .filterOptionsContainer {
+    flex-wrap: wrap;
+  }
+
+  .filterGrouping {
+    flex-direction: column;
+    gap: 30px;
+    width: 45%;
+  }
+
+  .filterColumn {
+    width: 45%;
+  }
 }

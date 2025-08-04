@@ -9,6 +9,10 @@
   background: #fff;
 }
 
+.objectiveContainer {
+  padding: 10px 15px;
+}
+
 .nav {
   position: relative;
   width: 100%;

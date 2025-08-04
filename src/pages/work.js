@@ -370,7 +370,7 @@ const Work = ({ data, location }) => {
               animate={{ maxHeight: "500px", opacity: 1 }}
               className={styles.filterOptionsContainer}
             >
-              <div>
+              <div className={styles.filterColumn}>
                 <p>Typology:</p>
                 {typologies.map((type, index) => (
                   <button key={index} onClick={() => handleTypeFilter(type)}>
@@ -384,58 +384,62 @@ const Work = ({ data, location }) => {
                   </button>
                 ))}
               </div>
-              <div>
-                <p>Location:</p>
-                {locations.map((locale, index) => (
-                  <button
-                    key={index}
-                    onClick={() => handleLocaleFilter(locale)}
-                  >
+              <div className={styles.filterGrouping}>
+                <div>
+                  <p>Location:</p>
+                  {locations.map((locale, index) => (
+                    <button
+                      key={index}
+                      onClick={() => handleLocaleFilter(locale)}
+                    >
+                      <div
+                        className={`${styles.option} ${
+                          regionFilter.includes(locale) ? styles.selected : ""
+                        }`}
+                      >
+                        {locale}
+                      </div>
+                    </button>
+                  ))}
+                </div>
+                <div>
+                  <p>Status:</p>
+                  <button onClick={() => handleStatusFilter("In Progress")}>
                     <div
                       className={`${styles.option} ${
-                        regionFilter.includes(locale) ? styles.selected : ""
+                        statusFilter.includes("In Progress")
+                          ? styles.selected
+                          : ""
                       }`}
                     >
-                      {locale}
+                      In Progress
                     </div>
                   </button>
-                ))}
+                  <button onClick={() => handleStatusFilter("Completed")}>
+                    <div
+                      className={`${styles.option} ${
+                        statusFilter.includes("Completed")
+                          ? styles.selected
+                          : ""
+                      }`}
+                    >
+                      Completed
+                    </div>
+                  </button>
+                  <button onClick={() => handleStatusFilter("Competition")}>
+                    <div
+                      className={`${styles.option} ${
+                        statusFilter.includes("Competition")
+                          ? styles.selected
+                          : ""
+                      }`}
+                    >
+                      Competition
+                    </div>
+                  </button>
+                </div>
               </div>
-              <div>
-                <p>Status:</p>
-                <button onClick={() => handleStatusFilter("In Progress")}>
-                  <div
-                    className={`${styles.option} ${
-                      statusFilter.includes("In Progress")
-                        ? styles.selected
-                        : ""
-                    }`}
-                  >
-                    In Progress
-                  </div>
-                </button>
-                <button onClick={() => handleStatusFilter("Completed")}>
-                  <div
-                    className={`${styles.option} ${
-                      statusFilter.includes("Completed") ? styles.selected : ""
-                    }`}
-                  >
-                    Completed
-                  </div>
-                </button>
-                <button onClick={() => handleStatusFilter("Competition")}>
-                  <div
-                    className={`${styles.option} ${
-                      statusFilter.includes("Competition")
-                        ? styles.selected
-                        : ""
-                    }`}
-                  >
-                    Competition
-                  </div>
-                </button>
-              </div>
-              <div>
+              <div className={styles.filterColumn}>
                 <button
                   disabled={isDisabled}
                   onClick={() => {

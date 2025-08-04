@@ -82,26 +82,6 @@ const Objective = ({ data }) => {
           </div>
         </div>
       )}
-      <div className={styles.categoryContainer}>
-        <h2>Objectives</h2>
-        <motion.div
-          initial={{ opacity: 0 }}
-          transition={{ duration: 1 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className={styles.tagContainer}
-        >
-          {objectives.map(objective => (
-            <Link
-              to={`/objective/${objective.slug}`}
-              className={styles.tagBtn}
-              key={objective.id}
-            >
-              {objective.title}
-            </Link>
-          ))}
-        </motion.div>
-      </div>
       <div className={styles.paddingDiv}></div>
     </div>
   )

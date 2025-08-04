@@ -154,55 +154,59 @@ const Footer = ({ location }) => {
         viewport={{ once: true }}
         className={styles.footerContainer}
       >
-        <div className={styles.footerColumn}>
-          <div className={styles.locationContainer}>
-            <div>
-              New York
-              <br />
-              {nyTime}
-              <br />
-              {nyWeather && nyWeather.main.temp.toFixed(0)}&deg;F{" "}
-              {nyWeather && (
-                <img
-                  src={nyWeatherIcon}
-                  alt="weather icon"
-                  className={styles.weatherIcon}
-                />
-              )}
+        <div className={styles.footerGrouping}>
+          <div className={styles.footerColumn}>
+            <div className={styles.locationContainer}>
+              <div>
+                New York
+                <br />
+                {nyTime}
+                <br />
+                {nyWeather && nyWeather.main.temp.toFixed(0)}&deg;F{" "}
+                {nyWeather && (
+                  <img
+                    src={nyWeatherIcon}
+                    alt="weather icon"
+                    className={styles.weatherIcon}
+                  />
+                )}
+              </div>
+            </div>
+          </div>
+          <div className={styles.footerColumn}>
+            <div className={styles.locationContainer}>
+              <div>
+                Amsterdam
+                <br />
+                {cetTime}
+                <br />
+                {amsterdamWeather && amsterdamWeather.main.temp.toFixed(0)}
+                &deg;F{" "}
+                {amsterdamWeather && (
+                  <img
+                    src={amWeatherIcon}
+                    alt="weather icon"
+                    className={styles.weatherIcon}
+                  />
+                )}
+              </div>
             </div>
           </div>
         </div>
-        <div className={styles.footerColumn}>
-          <div className={styles.locationContainer}>
-            <div>
-              Amsterdam
-              <br />
-              {cetTime}
-              <br />
-              {amsterdamWeather &&
-                amsterdamWeather.main.temp.toFixed(0)}&deg;F{" "}
-              {amsterdamWeather && (
-                <img
-                  src={amWeatherIcon}
-                  alt="weather icon"
-                  className={styles.weatherIcon}
-                />
-              )}
-            </div>
+        <div className={styles.footerGrouping}>
+          <div className={styles.footerColumn}>
+            <Link to="/objectives">Objectives</Link>
+            <Link to="/contact">Contact</Link>
+            <Link to="/news">Press</Link>
           </div>
-        </div>
-        <div className={styles.footerColumn}>
-          <Link to="/objectives">Objectives</Link>
-          <Link to="/contact">Contact</Link>
-          <Link to="/news">Press</Link>
-        </div>
-        <div className={styles.footerColumn}>
-          <Link>Newsletter</Link>
-          <Link>Instagram</Link>
-          <Link>LinkedIn</Link>
+          <div className={styles.footerColumn}>
+            <Link>Newsletter</Link>
+            <Link>Instagram</Link>
+            <Link>LinkedIn</Link>
+          </div>
         </div>
         {newsItem && (
-          <div className={styles.footerColumn}>
+          <div className={styles.footerNews}>
             {newsItem.linkOutFromTile ? (
               <a
                 href={newsItem.externalLink}

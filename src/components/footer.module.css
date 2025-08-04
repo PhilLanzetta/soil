@@ -3,6 +3,7 @@
   margin: 15px;
   margin-bottom: 30px;
   display: flex;
+  flex-wrap: wrap;
   margin-top: 100px;
   font-size: 1.25rem;
 }
@@ -15,7 +16,18 @@
   width: 100%;
 }
 
+.footerGrouping {
+  display: flex;
+  width: 40%;
+}
+
 .footerColumn {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.footerNews {
   display: flex;
   flex-direction: column;
   width: 20%;
@@ -30,4 +42,29 @@
 .weatherIcon {
   height: 1rem;
   width: 1rem;
+}
+
+@media screen and (max-width: 1100px) {
+  .footerNews {
+    width: 100%;
+    margin-top: 30px;
+  }
+
+  .footerGrouping {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 610px) {
+  .footerGrouping {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .footerNews {
+    margin-top: 20px;
+  }
+
+  .footerContainer {
+    margin-bottom: 20px;
+  }
 }

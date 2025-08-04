@@ -76,3 +76,13 @@ ul {
 .ais-SearchBox-input[type="search"]::-webkit-search-cancel-button {
   display: none;
 }
+
+@media screen and (max-width: 800px) {
+  html {
+    font-size: 12px;
+  }
+
+  .extra-padding {
+    padding: 35px 0px;
+  }
+}

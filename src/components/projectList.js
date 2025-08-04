@@ -7,7 +7,7 @@ import * as styles from "./projectList.module.css"
 
 const ProjectList = ({ projects, setProjects }) => {
   const { width } = useWindowSize()
-  const isMobile = width < 601
+  const isMobile = width < 900
   const [projectToggle, setProjectToggle] = useState(false)
   const [sizeToggle, setSizeToggle] = useState(false)
   const [locationToggle, setLocationToggle] = useState(false)
@@ -117,97 +117,93 @@ const ProjectList = ({ projects, setProjects }) => {
   return (
     <div className={styles.projectListContainer}>
       {!isMobile && (
-        <>
-          <div className={styles.projectListHeader}>
-            <button onClick={orderByProject}>
-              Project{" "}
-              {activeSort === "project" && (
-                <PiCaretUpLight
-                  className={projectToggle ? "" : styles.toggleDown}
-                ></PiCaretUpLight>
-              )}
-            </button>
-            <button onClick={orderByLocation}>
-              Location{" "}
-              {activeSort === "location" && (
-                <PiCaretUpLight
-                  className={locationToggle ? "" : styles.toggleDown}
-                ></PiCaretUpLight>
-              )}
-            </button>
-            <button onClick={orderByYear}>
-              Status{" "}
-              {activeSort === "year" && (
-                <PiCaretUpLight
-                  className={yearToggle ? "" : styles.toggleDown}
-                ></PiCaretUpLight>
-              )}
-            </button>
-            <button onClick={orderBySize}>
-              Area{" "}
-              {activeSort === "size" && (
-                <PiCaretUpLight
-                  className={sizeToggle ? "" : styles.toggleDown}
-                ></PiCaretUpLight>
-              )}
-            </button>
-            <div className="list-button">Objectives </div>
-          </div>
-          <div className="list-items-container">
-            {projects.map(project => {
-              return (
-                <div key={project.id}>
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    transition={{ duration: 1 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    className={styles.projectRow}
-                  >
-                    <Link
-                      to={`/work/${project.slug}`}
-                      className={styles.projectLink}
-                    >
-                      <p className={styles.title}>{project.title}</p>
-                      <p>
-                        {project.city && <span>{project.city},</span>}{" "}
-                        {project.country}
-                      </p>
-                      <p>
-                        {project.status}{" "}
-                        {project.status !== "In Progress" && (
-                          <span>{project.year}</span>
-                        )}
-                      </p>
-                      <p>
-                        {project.squareMeters && (
-                          <span>
-                            {project.squareMeters} m<sup>2</sup> /{" "}
-                          </span>
-                        )}
-                        {project.squareFeet && (
-                          <span>{project.squareFeet} sf</span>
-                        )}
-                      </p>
-                    </Link>
-                    <div className={styles.tagContainer}>
-                      {project.objectives &&
-                        project.objectives.map(objective => (
-                          <Link
-                            to={`/objective/${objective.slug}`}
-                            className={styles.tagBtn}
-                          >
-                            {objective.title}
-                          </Link>
-                        ))}
-                    </div>
-                  </motion.div>
-                </div>
-              )
-            })}
-          </div>
-        </>
+        <div className={styles.projectListHeader}>
+          <button onClick={orderByProject}>
+            Project{" "}
+            {activeSort === "project" && (
+              <PiCaretUpLight
+                className={projectToggle ? "" : styles.toggleDown}
+              ></PiCaretUpLight>
+            )}
+          </button>
+          <button onClick={orderByLocation}>
+            Location{" "}
+            {activeSort === "location" && (
+              <PiCaretUpLight
+                className={locationToggle ? "" : styles.toggleDown}
+              ></PiCaretUpLight>
+            )}
+          </button>
+          <button onClick={orderByYear}>
+            Status{" "}
+            {activeSort === "year" && (
+              <PiCaretUpLight
+                className={yearToggle ? "" : styles.toggleDown}
+              ></PiCaretUpLight>
+            )}
+          </button>
+          <button onClick={orderBySize}>
+            Area{" "}
+            {activeSort === "size" && (
+              <PiCaretUpLight
+                className={sizeToggle ? "" : styles.toggleDown}
+              ></PiCaretUpLight>
+            )}
+          </button>
+          <div className="list-button">Objectives </div>
+        </div>
       )}
+      <div className="list-items-container">
+        {projects.map(project => {
+          return (
+            <div key={project.id}>
+              <motion.div
+                initial={{ opacity: 0 }}
+                transition={{ duration: 1 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                className={styles.projectRow}
+              >
+                <Link
+                  to={`/work/${project.slug}`}
+                  className={styles.projectLink}
+                >
+                  <p className={styles.title}>{project.title}</p>
+                  <p className={styles.loaction}>
+                    {project.city && <span>{project.city},</span>}{" "}
+                    {project.country}
+                  </p>
+                  <p className={styles.status}>
+                    {project.status}{" "}
+                    {project.status !== "In Progress" && (
+                      <span>{project.year}</span>
+                    )}
+                  </p>
+                  <p>
+                    {project.squareMeters && (
+                      <span>
+                        {project.squareMeters} m<sup>2</sup> /{" "}
+                      </span>
+                    )}
+                    {project.squareFeet && <span>{project.squareFeet} sf</span>}
+                  </p>
+                </Link>
+                <div className={styles.tagContainer}>
+                  {project.objectives &&
+                    project.objectives.map(objective => (
+                      <Link
+                        to={`/objective/${objective.slug}`}
+                        className={styles.tagBtn}
+                      >
+                        {objective.title}
+                      </Link>
+                    ))}
+                </div>
+              </motion.div>
+            </div>
+          )
+        })}
+      </div>
     </div>
   )
 }
