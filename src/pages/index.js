@@ -116,7 +116,7 @@ const IndexPage = ({ data }) => {
     <div>
       <div>
         <svg
-          className={`${styles.homeLogo} ${styles.logoFixed}`}
+          className={styles.homeLogo}
           id="logo"
           viewBox="0 0 1698 82"
           fill="none"

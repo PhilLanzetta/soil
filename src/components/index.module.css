@@ -1,10 +1,7 @@
 .homeLogo {
-  left: 10px;
-  width: calc(100vw - 20px);
+  left: 15px;
+  width: calc(100vw - 30px);
   z-index: 10;
-}
-
-.logoFixed {
   position: sticky;
   top: 50%;
   transform: translateY(-50%);
