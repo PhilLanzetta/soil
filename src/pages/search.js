@@ -53,7 +53,7 @@ function QueryHeading({ setSearched }) {
   const { indexUiState } = useInstantSearch()
 
   return (
-    <button onClick={() => setSearched(false)}>
+    <button onClick={() => setSearched(false)} className={styles.searchQuery}>
       <h1 className={styles.title}>
         {indexUiState.query}
         <sup className={styles.closeSearch}>&times;</sup>

@@ -328,4 +328,12 @@
   .threeColumnList {
     grid-column: 1;
   }
+
+  .forwardBtn {
+    right: 0px;
+  }
+
+  .backBtn {
+    left: 0px;
+  }
 }

@@ -3,10 +3,13 @@ import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch"
 import { GatsbyImage } from "gatsby-plugin-image"
 import * as styles from "./singleProject.module.css"
 import { AnimatePresence, motion } from "motion/react"
+import useWindowSize from "../utils/useWindowSize"
 
 const ZoomableImage = ({ images }) => {
   const [popUp, setPopUp] = useState(-1)
   const [popUpOpen, setPopUpOpen] = useState(false)
+  const { height, width } = useWindowSize()
+  const isMobile = height > width
 
   const handleForward = () => {
     if (popUp === images.length - 1) {
@@ -91,18 +94,28 @@ const ZoomableImage = ({ images }) => {
                           width: "100vw",
                         }}
                       >
-                        <GatsbyImage
-                          image={images[popUp].image?.gatsbyImageData}
-                          alt={images[popUp].image?.description}
-                          className={styles.popUpImageImg}
-                          style={{
-                            height: "80vh",
-                            width: `${
-                              (images[popUp].image?.width * 80) /
-                              images[popUp].image?.height
-                            }vh`,
-                          }}
-                        ></GatsbyImage>
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          key={popUp}
+                        >
+                          <GatsbyImage
+                            image={images[popUp].image?.gatsbyImageData}
+                            alt={images[popUp].image?.description}
+                            className={styles.popUpImageImg}
+                            style={{
+                              height: isMobile ? "auto" : "80vh",
+                              marginLeft: isMobile ? "15px" : "0",
+                              width: isMobile
+                                ? "calc(100% - 30px)"
+                                : `${
+                                    (images[popUp].image?.width * 80) /
+                                    images[popUp].image?.height
+                                  }vh`,
+                            }}
+                          ></GatsbyImage>
+                        </motion.div>
                       </TransformComponent>
                       <div className={styles.popUpControls}>
                         <button

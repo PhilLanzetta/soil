@@ -251,5 +251,54 @@
 }
 
 .closeSearch {
- font-size: 2rem;
+  font-size: 2rem;
+}
+
+@media screen and (max-width: 1100px) {
+  .searchLanding {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 15px;
+  }
+
+  .hitsContainer ol {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .searchLanding {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+  }
+
+  .searchBoxContainer {
+    width: 80vw;
+  }
+
+  .searchBoxInput {
+    font-size: 3rem;
+  }
+
+  .searchBoxIcon {
+    font-size: 3rem;
+  }
+
+  .searchHeading {
+    margin-top: 35px;
+    flex-wrap: wrap;
+    gap: 40px;
+  }
+
+  .searchQuery,
+  .viewContainer {
+    width: 100%;
+  }
+
+  .viewContainer {
+    justify-content: flex-end;
+  }
+
+  .hitsContainer ol {
+    grid-template-columns: 1fr;
+  }
 }
