@@ -68,7 +68,7 @@ const HomeTile = ({ tile, index, autoScroll }) => {
       width: isMobile ? "80%" : "63%",
       position: "relative",
       zIndex: 50,
-      justifySelf: even ? "flex-end" : "flex-start",
+      marginLeft: isMobile ? (even ? "20%" : "0") : even ? "37%" : "0",
       y: yFormat,
       paddingBottom: bottomPadding,
     }
@@ -76,9 +76,7 @@ const HomeTile = ({ tile, index, autoScroll }) => {
     rowStyle = {
       width: isMobile ? "55%" : "38%",
       position: "relative",
-      justifySelf: even ? "flex-end" : "flex-start",
-      marginLeft: isMobile ? "0" : "12.5%",
-      marginRight: isMobile ? "0" : "12.5%",
+      marginLeft: isMobile ? (even ? "45%" : "0") : even ? "49.5%" : "12.5%",
       y: yFormat,
       paddingBottom: bottomPadding,
     }
@@ -86,9 +84,7 @@ const HomeTile = ({ tile, index, autoScroll }) => {
     rowStyle = {
       width: isMobile ? "45%" : "25%",
       position: "relative",
-      justifySelf: even ? "flex-end" : "flex-start",
-      marginLeft: isMobile ? "15%" : "12.5%",
-      marginRight: isMobile ? "15%" : "12.5%",
+      marginLeft: isMobile ? (even ? "40%" : "15%") : even ? "60%" : "15%",
       y: yFormat,
       paddingBottom: bottomPadding,
     }
