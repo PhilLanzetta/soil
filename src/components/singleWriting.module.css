@@ -47,7 +47,8 @@
 }
 
 .bannerOneImage {
-  width: 100%;
+  min-width: 100%;
+  min-height: 100%;
 }
 
 .date {
@@ -75,8 +76,8 @@
 }
 
 .tileTextContainer {
- aspect-ratio: 1 / 1.25;
- overflow: hidden;
+  aspect-ratio: 1 / 1.25;
+  overflow: hidden;
 }
 
 .tagContainer {
@@ -128,4 +129,55 @@
   border-radius: 3px;
   font-weight: 100;
   z-index: 20;
+}
+
+@media screen and (max-width: 800px) {
+  .title {
+    padding-top: 35px;
+  }
+
+  .wideMargin {
+    margin: 0;
+  }
+
+  .date {
+    margin-bottom: 40px;
+  }
+
+  .bannerOneMedia {
+    height: 85vh;
+    min-width: 100%;
+  }
+
+  .secondarySectionHeading,
+  .tertiarySectionHeading {
+    grid-template-columns: 1fr;
+    gap: 0px;
+  }
+
+  .tertiarySectionHeading {
+    margin-bottom: 35px;
+    margin-top: 100px;
+  }
+
+  .threeColumnList {
+    grid-column: 1;
+    display: flex;
+    gap: 10px;
+    overflow-x: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .threeColumnList div {
+    min-width: 300px;
+  }
+
+  .threeColumnList::-webkit-scrollbar {
+    display: none;
+  }
+
+  .twoColumnImageContainer {
+    grid-template-columns: 1fr;
+  }
 }

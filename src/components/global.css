@@ -85,4 +85,8 @@ ul {
   .extra-padding {
     padding: 35px 0px;
   }
+
+  h1 {
+    font-size: 3rem;
+  }
 }

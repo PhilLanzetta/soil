@@ -148,4 +148,86 @@
   font-size: 2rem;
 }
 
+.awardsHeadingMobile {
+  display: none;
+}
 
+@media screen and (max-width: 800px) {
+  .title {
+    padding-top: 35px;
+  }
+
+  .subHeadingContainer {
+    row-gap: 5px;
+    font-size: 1.7rem;
+    margin-top: 5px;
+  }
+
+  .banner {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 85vh;
+    margin-top: 35px;
+    margin-bottom: 20px;
+  }
+
+  .bannerImage {
+    min-width: 100%;
+    min-height: 100%;
+  }
+
+  .introText,
+  .studioText {
+    font-size: 1.7rem;
+  }
+
+  .secondarySectionHeading {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .founders {
+    grid-column: 1 / 3;
+    margin-bottom: 100px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 80px;
+  }
+
+  .headshot {
+    width: 100%;
+  }
+
+  .twoColumnImageContainer {
+    grid-template-columns: 1fr;
+    gap: 0px;
+  }
+
+  .tertiarySectionHeading {
+    display: block;
+  }
+
+  .threeColumn,
+  .threeColumnAward {
+    column-count: 1;
+    grid-column: 1;
+  }
+
+  .galleryContainer {
+    margin-bottom: 100px;
+  }
+
+  .awardsHeading {
+    display: none;
+  }
+
+  .awardsHeadingMobile {
+    display: block;
+  }
+
+  .twoColumns {
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+}

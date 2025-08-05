@@ -134,7 +134,8 @@
 }
 
 .bannerOneImage {
-  width: 100%;
+  min-width: 100%;
+  min-height: 100%;
 }
 
 .relatedHeading {
@@ -254,4 +255,77 @@
 
 .imageBorder {
   border: 1px solid #e4e4e4;
+}
+
+@media screen and (max-width: 800px) {
+  .bannerOneMedia {
+    height: 85vh;
+    min-width: 100%;
+  }
+
+  .primaryText {
+    font-size: 1.7rem;
+  }
+
+  .secondaryInfoContainer {
+    flex-direction: column;
+    margin-bottom: 35px;
+  }
+
+  .secondaryInfoLeft {
+    width: 100%;
+    display: block;
+    column-count: 2;
+  }
+
+  .secondaryInfoLeft div {
+    break-inside: avoid;
+    margin-bottom: 30px;
+  }
+
+  .secondaryInfoRight {
+    width: 100%;
+  }
+
+  .twoColumnImageContainer {
+    grid-template-columns: 1fr;
+    gap: 0px;
+  }
+
+  .galleryContainer figcaption {
+    font-size: 1.7rem;
+  }
+
+  .galleryContainer,
+  .secondaryGallery {
+    margin-bottom: 35px;
+  }
+
+  .secondarySectionHeading,
+  .tertiarySectionHeading {
+    grid-template-columns: 1fr;
+    gap: 0px;
+  }
+
+  .tertiarySectionHeading {
+    margin-bottom: 35px;
+  }
+
+  .secondaryText {
+    grid-column: 1;
+    margin-bottom: 0px;
+  }
+
+  .secondaryMediaRow {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .threeColumn {
+    column-count: 1;
+    grid-column: 1;
+  }
+
+  .threeColumnList {
+    grid-column: 1;
+  }
 }

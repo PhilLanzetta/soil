@@ -161,7 +161,11 @@ const VideoPlayer = ({
   }, [isOnScreen, hasPlayed])
 
   return (
-    <div className={styles.videoPlayerContainer}>
+    <div
+      className={`${styles.videoPlayerContainer} ${
+        banner ? styles.bannerVideoContainer : ""
+      }`}
+    >
       <div
         className={styles.videoPlayer}
         style={{
@@ -222,7 +226,7 @@ const VideoPlayer = ({
           width={"100%"}
           height={"100%"}
           className={styles.videoPlayerVideo}
-          controls={isMobile}
+          controls={banner ? false : isMobile}
           playing={playing}
           playsInline
           onPlay={() => {

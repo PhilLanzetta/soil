@@ -3,7 +3,6 @@ import * as styles from "./header.module.css"
 import { Link, graphql, useStaticQuery } from "gatsby"
 import { AnimatePresence, motion } from "motion/react"
 import useWindowSize from "../utils/useWindowSize"
-import { delay, stagger } from "motion"
 
 const Header = ({ location }) => {
   const { width } = useWindowSize()
@@ -30,8 +29,9 @@ const Header = ({ location }) => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
-        duration: 0.5, // Stagger children by 0.1 seconds
+        staggerChildren: 0.05,
+        duration: 0.7,
+        delay: 0.25, // Stagger children by 0.1 seconds
       },
     },
   }

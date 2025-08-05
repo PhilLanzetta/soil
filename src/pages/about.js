@@ -277,6 +277,15 @@ const About = ({ data }) => {
               __html: recognitionPreface.childMarkdownRemark.html,
             }}
           ></motion.div>
+          <motion.p
+            initial={{ opacity: 0 }}
+            transition={{ duration: 1 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className={styles.awardsHeadingMobile}
+          >
+            Awards
+          </motion.p>
           <motion.div
             initial={{ opacity: 0 }}
             transition={{ duration: 1 }}

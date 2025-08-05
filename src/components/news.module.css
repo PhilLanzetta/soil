@@ -16,6 +16,7 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 10px;
+  row-gap: 60px;
 }
 
 .tileImageContainer {
@@ -34,8 +35,8 @@
 }
 
 .tileTextContainer {
- aspect-ratio: 1 / 1.25;
- overflow: hidden;
+  aspect-ratio: 1 / 1.25;
+  overflow: hidden;
 }
 
 .tagContainer {
@@ -80,4 +81,25 @@
   height: 3px;
   background: #000;
   left: 0;
+}
+
+@media screen and (max-width: 800px) {
+  .title {
+    padding-top: 35px;
+  }
+
+  .filterContainer {
+    row-gap: 5px;
+    font-size: 1.7rem;
+    margin-top: 5px;
+    margin-bottom: 40px;
+  }
+
+  .projectGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .tileTextContainer p {
+    font-size: 4rem;
+  }
 }

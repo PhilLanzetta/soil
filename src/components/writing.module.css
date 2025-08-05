@@ -46,3 +46,18 @@
   font-size: 0.8rem;
 }
 
+@media screen and (max-width: 800px) {
+  .title {
+    padding-top: 35px;
+  }
+
+  .projectGrid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .tileTextContainer p {
+    font-size: 4rem;
+  }
+}
+
