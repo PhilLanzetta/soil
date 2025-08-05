@@ -7,9 +7,8 @@ import Seo from "../components/seo"
 import { GatsbyImage } from "gatsby-plugin-image"
 
 const Objective = ({ data }) => {
-  const { title, description, project, writing_entry } =
-    data.contentfulObjective
-  const objectives = data.allContentfulObjective.nodes
+  const { description, project, writing_entry } = data.contentfulObjective
+
   return (
     <div className="margined-section">
       <div
@@ -39,6 +38,7 @@ const Objective = ({ data }) => {
                 transition={{ duration: 1 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
+                className={styles.writingEntry}
               >
                 <Link to={`/writing/${entry.slug}`}>
                   {entry.tileImage && (

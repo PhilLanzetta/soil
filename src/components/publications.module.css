@@ -26,8 +26,8 @@
 }
 
 .tileTextContainer {
- aspect-ratio: 1 / 1.25;
- overflow: hidden;
+  aspect-ratio: 1 / 1.25;
+  overflow: hidden;
 }
 
 .tagContainer {
@@ -43,4 +43,17 @@
   background: #e4e4e4;
   text-transform: uppercase;
   font-size: 0.8rem;
+}
+
+@media screen and (max-width: 800px) {
+  .title {
+    margin-bottom: 0;
+    padding-top: 35px;
+    padding-bottom: 35px;
+  }
+
+  .projectGrid {
+    grid-template-columns: 1fr;
+    gap: 80px;
+  }
 }

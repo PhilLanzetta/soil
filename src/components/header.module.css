@@ -148,3 +148,15 @@
 .menuOpen .mobileContainer {
   font-size: 2rem;
 }
+
+@media screen and (max-width: 800px) {
+  .title {
+    padding-top: 35px;
+  }
+
+  .subHeadingContainer {
+    row-gap: 5px;
+    font-size: 1.7rem;
+    margin-top: 5px;
+  }
+}

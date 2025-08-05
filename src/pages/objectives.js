@@ -1,11 +1,11 @@
 import React from "react"
-import { graphql, Link } from "gatsby"
+import { graphql } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
 import * as styles from "../components/about.module.css"
 import { motion } from "motion/react"
+import Seo from "../components/seo"
 
 const Objectives = ({ data }) => {
-  const objectives = data.allContentfulObjective.nodes
   const { introText, objectiveImage } = data.contentfulObjectivesPage
   return (
     <div className="margined-section">
@@ -34,13 +34,6 @@ const Objectives = ({ data }) => {
 
 export const query = graphql`
   query {
-    allContentfulObjective {
-      nodes {
-        id
-        title
-        slug
-      }
-    }
     contentfulObjectivesPage {
       objectiveImage {
         description
@@ -54,5 +47,7 @@ export const query = graphql`
     }
   }
 `
+
+export const Head = () => <Seo title="Objectives" />
 
 export default Objectives

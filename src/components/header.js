@@ -10,7 +10,7 @@ const Header = ({ location }) => {
   const [menuOpen, setMenuOpen] = useState(
     isMobile ? false : location.pathname === "/"
   )
-  const isObjective = location.pathname.includes("objective")
+  const isObjective = location.pathname.includes("/objective")
   const data = useStaticQuery(graphql`
     query {
       allContentfulObjective {

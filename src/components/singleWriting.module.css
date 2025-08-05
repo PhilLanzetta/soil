@@ -134,6 +134,7 @@
 @media screen and (max-width: 800px) {
   .title {
     padding-top: 35px;
+    margin-bottom: 10px;
   }
 
   .wideMargin {

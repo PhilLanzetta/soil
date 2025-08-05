@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { graphql, Link } from "gatsby"
+import { graphql } from "gatsby"
 import * as styles from "../components/singleWriting.module.css"
 import { GatsbyImage } from "gatsby-plugin-image"
 import VideoPlayer from "../components/videoPlayer"
