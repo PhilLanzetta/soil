@@ -77,6 +77,10 @@ ul {
   display: none;
 }
 
+.yNHHyP-marker-view svg {
+  fill: #000000;
+}
+
 @media screen and (max-width: 800px) {
   html {
     font-size: 12px;

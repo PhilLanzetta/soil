@@ -6,6 +6,8 @@ import { graphql } from "gatsby"
 import ProjectGrid from "../components/projectGrid"
 import ProjectList from "../components/projectList"
 import Seo from "../components/seo"
+import MapContainer from "../components/mapContainer"
+import MapView from "../components/mapView"
 
 const Work = ({ data, location }) => {
   const allProjects = data.allContentfulProject.nodes
@@ -524,6 +526,19 @@ const Work = ({ data, location }) => {
             ></ProjectList>
           </motion.div>
         )}
+        {view === "map" && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.7 }}
+            key="map-view"
+            className={styles.mapContainer}
+          >
+            {filterOpen && <div className={styles.filterOverlay}></div>}
+            <MapView locations={projects}></MapView>
+          </motion.div>
+        )}
       </AnimatePresence>
     </div>
   )
@@ -533,6 +548,7 @@ export const query = graphql`
   query {
     allContentfulProject(sort: { year: DESC }) {
       nodes {
+        id
         slug
         region
         typology
@@ -546,6 +562,10 @@ export const query = graphql`
         }
         city
         country
+        exactLocation {
+          lat
+          lon
+        }
         title
         objectives {
           id

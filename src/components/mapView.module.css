@@ -1,0 +1,33 @@
+.mapContainer {
+  height: 85vh;
+  width: 100%;
+  margin-top: 100px;
+}
+
+.marker {
+  position: relative;
+}
+
+.marker:hover {
+  opacity: 1;
+}
+
+.hoverState {
+  position: absolute;
+  top: 0;
+  left: 20px;
+  background: #fff;
+  border-radius: 5px;
+  padding: 5px;
+  font-family: "Inter", sans-serif;
+  font-weight: bold;
+  white-space: nowrap;
+  z-index: 40000000;
+  width: fit-content;
+}
+
+@media screen and (max-width: 800px) {
+  .mapContainer {
+    margin-top: 35px;
+  }
+}

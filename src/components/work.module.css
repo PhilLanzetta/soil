@@ -50,7 +50,8 @@
 
 .optionsContainer,
 .gridContainer,
-.listContainer {
+.listContainer,
+.mapContainer {
   position: relative;
 }
 
