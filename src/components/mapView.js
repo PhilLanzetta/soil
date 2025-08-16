@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from "react"
-import { APIProvider, Map, AdvancedMarker } from "@vis.gl/react-google-maps"
+import React from "react"
+import { APIProvider, Map } from "@vis.gl/react-google-maps"
 import * as styles from "./mapView.module.css"
 import { ClusteredWorkMarkers } from "./clusteredWorkMarkers"
 
