@@ -150,7 +150,6 @@ const ProjectList = ({ projects, setProjects }) => {
               ></PiCaretUpLight>
             )}
           </button>
-          <div className="list-button">Objectives </div>
         </div>
       )}
       <div className="list-items-container">
@@ -188,17 +187,6 @@ const ProjectList = ({ projects, setProjects }) => {
                     {project.squareFeet && <span>{project.squareFeet} sf</span>}
                   </p>
                 </Link>
-                <div className={styles.tagContainer}>
-                  {project.objectives &&
-                    project.objectives.map(objective => (
-                      <Link
-                        to={`/objective/${objective.slug}`}
-                        className={styles.tagBtn}
-                      >
-                        {objective.title}
-                      </Link>
-                    ))}
-                </div>
               </motion.div>
             </div>
           )

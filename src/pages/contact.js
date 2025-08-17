@@ -63,8 +63,6 @@ const Contact = () => {
             General
             <br />
             <a href="mailto:office@so-il.org">office@so-il.org</a>
-            <br />
-            <a href="tel:17186246666">718 624 6666</a>
           </p>
           <p>
             Press <br />
@@ -79,30 +77,6 @@ const Contact = () => {
             <br />
             <a href="mailto:work@so-il.org">work@so-il.org</a>
           </p>
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0 }}
-          transition={{ duration: 1 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className={styles.column}
-        >
-          <a href="https://google.com" target="_blank" rel="noreferrer">
-            Instagram
-          </a>
-          <br />
-          <a href="https://google.com" target="_blank" rel="noreferrer">
-            Linkedin
-          </a>
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0 }}
-          transition={{ duration: 1 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className={styles.column}
-        >
-          Newsletter
         </motion.div>
       </motion.div>
     </div>

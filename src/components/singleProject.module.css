@@ -33,7 +33,6 @@
 }
 
 .galleryContainer figcaption {
-  font-size: 2rem;
   font-weight: bold;
   margin-top: 5px;
 }
@@ -290,10 +289,6 @@
   .twoColumnImageContainer {
     grid-template-columns: 1fr;
     gap: 0px;
-  }
-
-  .galleryContainer figcaption {
-    font-size: 1.7rem;
   }
 
   .galleryContainer,

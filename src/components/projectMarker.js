@@ -13,7 +13,13 @@ import { GatsbyImage } from "gatsby-plugin-image"
  * Wrapper Component for an AdvancedMarker for a single tree.
  */
 export const ProjectMarker = props => {
-  const { project, setMarkerRef, clickedProject, setClickedMarker } = props
+  const {
+    project,
+    setMarkerRef,
+    clickedProject,
+    setClickedMarker,
+    setShowClusterInfo,
+  } = props
 
   const ref = useCallback(
     marker => setMarkerRef(marker, project.id),
@@ -23,7 +29,10 @@ export const ProjectMarker = props => {
   const handleClick = projectId => {
     if (clickedProject && projectId === clickedProject.id) {
       setClickedMarker(null)
-    } else setClickedMarker(projectId)
+      setShowClusterInfo([])
+    } else {
+      setShowClusterInfo([])
+      setClickedMarker(projectId)}
   }
 
   return (

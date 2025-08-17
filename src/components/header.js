@@ -7,9 +7,7 @@ import useWindowSize from "../utils/useWindowSize"
 const Header = ({ location }) => {
   const { width } = useWindowSize()
   const isMobile = width < 800
-  const [menuOpen, setMenuOpen] = useState(
-    isMobile ? false : location.pathname === "/"
-  )
+  const [menuOpen, setMenuOpen] = useState(false)
   const isObjective = location.pathname.includes("/objective")
   const data = useStaticQuery(graphql`
     query {
@@ -103,20 +101,20 @@ const Header = ({ location }) => {
                       <motion.div variants={itemVariants}>
                         <li>
                           <Link
-                            to="/writing"
+                            to="/publications"
                             onClick={() => setMenuOpen(false)}
                           >
-                            Writing
+                            Publications
                           </Link>
                         </li>
                       </motion.div>
                       <motion.div variants={itemVariants}>
                         <li>
                           <Link
-                            to="/publications"
+                            to="/writing"
                             onClick={() => setMenuOpen(false)}
                           >
-                            Publications
+                            Writing
                           </Link>
                         </li>
                       </motion.div>
@@ -154,10 +152,10 @@ const Header = ({ location }) => {
                       <Link to="/news">News</Link>
                     </li>
                     <li>
-                      <Link to="/writing">Writing</Link>
+                      <Link to="/publications">Publications</Link>
                     </li>
                     <li>
-                      <Link to="/publications">Publications</Link>
+                      <Link to="/writing">Writing</Link>
                     </li>
                     <li>
                       <Link to="/objectives">Objectives</Link>

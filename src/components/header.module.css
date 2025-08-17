@@ -1,12 +1,10 @@
 .header {
-  padding: 10px 15px;
   position: fixed;
   width: 100vw;
   top: 0;
   left: 0;
   z-index: 2000;
   font-weight: bold;
-  background: #fff;
 }
 
 .objectiveContainer {
@@ -23,6 +21,7 @@
   display: flex;
   width: 100%;
   justify-content: center;
+  padding: 10px 15px;
   position: absolute;
 }
 
@@ -32,6 +31,8 @@
 
 .menuOpen {
   position: absolute;
+  background: #fff;
+  padding: 10px 15px;
   width: 100%;
 }
 

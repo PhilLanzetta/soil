@@ -84,8 +84,9 @@
 .indexAbout {
   font-size: 2rem;
   margin: 15px;
-  margin-top: -15px;
-  padding-bottom: 100px;
+  height: 50vh;
+  display: grid;
+  place-items: center;
 }
 
 .subHeadingContainer {
@@ -105,6 +106,7 @@
   .indexAbout {
     font-size: 1.5rem;
     padding-bottom: 50px;
+    height: 45vh;
   }
 
   .subHeadingContainer {

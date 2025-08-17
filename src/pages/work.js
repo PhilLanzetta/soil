@@ -6,11 +6,10 @@ import { graphql } from "gatsby"
 import ProjectGrid from "../components/projectGrid"
 import ProjectList from "../components/projectList"
 import Seo from "../components/seo"
-import MapContainer from "../components/mapContainer"
 import MapView from "../components/mapView"
 
 const Work = ({ data, location }) => {
-  const allProjects = data.allContentfulProject.nodes
+  const allProjects = data.contentfulWorkPage.workTiles
   const [filterOpen, setFilterOpen] = useState(false)
   const [projects, setProjects] = useState(allProjects)
   const [view, setView] = useState()
@@ -406,17 +405,6 @@ const Work = ({ data, location }) => {
                 </div>
                 <div>
                   <p>Status:</p>
-                  <button onClick={() => handleStatusFilter("In Progress")}>
-                    <div
-                      className={`${styles.option} ${
-                        statusFilter.includes("In Progress")
-                          ? styles.selected
-                          : ""
-                      }`}
-                    >
-                      In Progress
-                    </div>
-                  </button>
                   <button onClick={() => handleStatusFilter("Completed")}>
                     <div
                       className={`${styles.option} ${
@@ -428,15 +416,24 @@ const Work = ({ data, location }) => {
                       Completed
                     </div>
                   </button>
-                  <button onClick={() => handleStatusFilter("Competition")}>
+                  <button onClick={() => handleStatusFilter("In Process")}>
                     <div
                       className={`${styles.option} ${
-                        statusFilter.includes("Competition")
+                        statusFilter.includes("In Process")
                           ? styles.selected
                           : ""
                       }`}
                     >
-                      Competition
+                      In Process
+                    </div>
+                  </button>
+                  <button onClick={() => handleStatusFilter("Proposal")}>
+                    <div
+                      className={`${styles.option} ${
+                        statusFilter.includes("Proposal") ? styles.selected : ""
+                      }`}
+                    >
+                      Proposal
                     </div>
                   </button>
                 </div>
@@ -450,7 +447,7 @@ const Work = ({ data, location }) => {
                     setFilterOpen(false)
                   }}
                 >
-                  Apply{" "}
+                  Apply Filter{" "}
                   <svg
                     width="18"
                     height="16"
@@ -461,33 +458,6 @@ const Work = ({ data, location }) => {
                     <path
                       d="M17.7071 8.70711C18.0976 8.31658 18.0976 7.68342 17.7071 7.29289L11.3431 0.928932C10.9526 0.538408 10.3195 0.538408 9.92893 0.928932C9.53841 1.31946 9.53841 1.95262 9.92893 2.34315L15.5858 8L9.92893 13.6569C9.53841 14.0474 9.53841 14.6805 9.92893 15.0711C10.3195 15.4616 10.9526 15.4616 11.3431 15.0711L17.7071 8.70711ZM0 8V9H17V8V7H0V8Z"
                       fill="black"
-                    />
-                  </svg>
-                </button>
-                <button onClick={() => handleClearAll()}>
-                  Clear All{" "}
-                  <svg
-                    width="12"
-                    height="12"
-                    viewBox="0 0 12 12"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <line
-                      x1="10.6055"
-                      y1="0.707107"
-                      x2="0.706049"
-                      y2="10.6066"
-                      stroke="black"
-                      stroke-width="2"
-                    />
-                    <line
-                      x1="10.6054"
-                      y1="10.6055"
-                      x2="0.705898"
-                      y2="0.70605"
-                      stroke="black"
-                      stroke-width="2"
                     />
                   </svg>
                 </button>
@@ -506,7 +476,16 @@ const Work = ({ data, location }) => {
             key={projects.length}
             className={styles.gridContainer}
           >
-            {filterOpen && <div className={styles.filterOverlay}></div>}
+            {filterOpen && (
+              <div
+                className={styles.filterOverlay}
+                onClick={() => {
+                  setFilterOpen(false)
+                  handleFilter()
+                  updateURL()
+                }}
+              ></div>
+            )}
             <ProjectGrid projects={projects}></ProjectGrid>
           </motion.div>
         )}
@@ -519,7 +498,16 @@ const Work = ({ data, location }) => {
             key={projects.length}
             className={styles.listContainer}
           >
-            {filterOpen && <div className={styles.filterOverlay}></div>}
+            {filterOpen && (
+              <div
+                className={styles.filterOverlay}
+                onClick={() => {
+                  setFilterOpen(false)
+                  handleFilter()
+                  updateURL()
+                }}
+              ></div>
+            )}
             <ProjectList
               projects={projects}
               setProjects={setProjects}
@@ -535,7 +523,16 @@ const Work = ({ data, location }) => {
             key="map-view"
             className={styles.mapContainer}
           >
-            {filterOpen && <div className={styles.filterOverlay}></div>}
+            {filterOpen && (
+              <div
+                className={styles.filterOverlay}
+                onClick={() => {
+                  setFilterOpen(false)
+                  handleFilter()
+                  updateURL()
+                }}
+              ></div>
+            )}
             <MapView locations={projects}></MapView>
           </motion.div>
         )}
@@ -546,8 +543,8 @@ const Work = ({ data, location }) => {
 
 export const query = graphql`
   query {
-    allContentfulProject(sort: { year: DESC }) {
-      nodes {
+    contentfulWorkPage {
+      workTiles {
         id
         slug
         region

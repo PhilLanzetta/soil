@@ -78,12 +78,13 @@ const SingleProject = ({ data }) => {
         )}
         {objectives && (
           <div className={styles.tagContainer}>
-            {objectives.map(objective => (
+            {objectives.map((objective, index) => (
               <motion.div
                 initial={{ opacity: 0 }}
                 transition={{ duration: 1 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
+                key={index}
               >
                 <Link
                   to={`/objective/${objective.slug}`}
@@ -197,6 +198,7 @@ const SingleProject = ({ data }) => {
                     transition={{ duration: 1 }}
                     whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
+                    key={item.imageId}
                   >
                     <GatsbyImage
                       image={item.image.gatsbyImageData}
@@ -212,6 +214,7 @@ const SingleProject = ({ data }) => {
                     transition={{ duration: 1 }}
                     whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
+                    key={item.videoId}
                   >
                     <VideoPlayer
                       video={item}

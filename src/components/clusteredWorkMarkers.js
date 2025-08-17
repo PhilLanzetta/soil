@@ -13,18 +13,15 @@ import * as styles from "./mapView.module.css"
  * The ClusteredTreeMarkers component is responsible for integrating the
  * markers with the markerclusterer.
  */
-export const ClusteredWorkMarkers = ({ projects }) => {
+export const ClusteredWorkMarkers = ({
+  projects,
+  clickedMarker,
+  setClickedMarker,
+  showClusterInfo,
+  setShowClusterInfo,
+  handleClusterClick,
+}) => {
   const [markers, setMarkers] = useState({})
-  const [clickedMarker, setClickedMarker] = useState()
-  const [showClusterInfo, setShowClusterInfo] = useState([])
-
-  const handleClusterClick = (event, cluster, map) => {
-    const clusterProjects = cluster.markers.map(marker => marker.innerText)
-    const filteredProjects = projects.filter(
-      item => clusterProjects.indexOf(item.id) !== -1
-    )
-    setShowClusterInfo(filteredProjects)
-  }
 
   // create the markerClusterer once the map is available and update it when
   // the markers are changed
@@ -74,6 +71,7 @@ export const ClusteredWorkMarkers = ({ projects }) => {
           setMarkerRef={setMarkerRef}
           setClickedMarker={setClickedMarker}
           clickedProject={clickedProject}
+          setShowClusterInfo={setShowClusterInfo}
         />
       ))}
       <AnimatePresence>
@@ -84,8 +82,19 @@ export const ClusteredWorkMarkers = ({ projects }) => {
             exit={{ opacity: 0 }}
             className={styles.clusterContainer}
           >
+            <div className={styles.clusterHeading}>
+              {showClusterInfo.length} Projects Near {showClusterInfo[0].city},{" "}
+              {showClusterInfo[0].country}{" "}
+            </div>
             {showClusterInfo.map(project => (
-              <Link to={`/work/${project.slug}`}>{project.title}</Link>
+              <Link
+                to={`/work/${project.slug}`}
+                className={styles.clusterListItem}
+              >
+                {project.title && `${project.title}`}
+                {project.city && `, ${project.city}`}
+                {`, ${project.country}`} →
+              </Link>
             ))}
           </motion.div>
         )}

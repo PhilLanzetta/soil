@@ -4,7 +4,7 @@
 }
 
 .filterBtn {
-  font-size: 2rem;
+  font-size: 1.25rem;
 }
 
 .filterBtn:hover {
@@ -19,7 +19,7 @@
   display: flex;
   width: 100%;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .viewContainer {
@@ -120,7 +120,7 @@
 .filterContainer {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 20px;
   align-items: flex-end;
 }
 
@@ -132,7 +132,8 @@
 
 .currentFilters button {
   display: flex;
-  align-items: flex-end;
+  align-items: flex-start;
+  font-size: 0.85rem;
 }
 
 @media screen and (max-width: 850px) {

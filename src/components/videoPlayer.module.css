@@ -3,12 +3,6 @@
   min-width: 100%;
 }
 
-.bannerVideoContainer {
-  height: 85vh;
-  display: flex;
-  justify-content: center;
-}
-
 .bannerVideoContainerMuted {
   cursor: url(../images/sound.svg), auto !important;
 }
@@ -20,11 +14,6 @@
 .videoPlayer {
   position: relative;
   width: 100%;
-}
-
-.bannerVideoContainer .videoPlayer {
-  height: 85vh;
-  width: auto;
 }
 
 .videoPlayerVideo,
@@ -84,4 +73,17 @@
   top: 10px;
   right: 10px;
   cursor: pointer;
+}
+
+@media screen and (max-width: 800px) {
+  .bannerVideoContainer {
+    height: 85vh;
+    display: flex;
+    justify-content: center;
+  }
+
+  .bannerVideoContainer .videoPlayer {
+    height: 85vh;
+    width: auto;
+  }
 }

@@ -77,7 +77,7 @@ const IndexPage = ({ data }) => {
         scrollInterval = setInterval(() => {
           window.scrollBy(0, 1) // Adjust scroll amount as needed
         }, 15)
-      }, 1500) // Adjust interval duration as needed
+      }, 1000) // Adjust interval duration as needed
     }
 
     return () => {
@@ -97,6 +97,9 @@ const IndexPage = ({ data }) => {
         setIsAutoScrolling(true)
       } else if (currentScroll < scrollPosition) {
         setIsAutoScrolling(false)
+        setTimeout(() => {
+          setIsAutoScrolling(true)
+        }, 10)
       }
       setScrollPostion(currentScroll)
     }
@@ -230,43 +233,13 @@ const IndexPage = ({ data }) => {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 2 }}
+          transition={{ delay: 1 }}
           className={styles.photoGrid}
         >
           {tileData?.map((tile, index) => (
-            <HomeTile
-              key={index}
-              tile={tile}
-              index={index}
-            ></HomeTile>
+            <HomeTile key={index} tile={tile} index={index}></HomeTile>
           ))}
         </motion.div>
-        <div className="margined-section">
-          <motion.h2
-            initial={{ opacity: 0 }}
-            transition={{ duration: 1 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className={styles.objectiveTitle}
-          >
-            Objectives
-          </motion.h2>
-          <div className={styles.subHeadingContainer}>
-            {objectives.map(objective => (
-              <motion.div
-                initial={{ opacity: 0 }}
-                transition={{ duration: 1 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                key={objective.id}
-              >
-                <Link to={`/objective/${objective.slug}`}>
-                  {objective.title}
-                </Link>
-              </motion.div>
-            ))}
-          </div>
-        </div>
       </div>
       <div>
         {aboutText && (

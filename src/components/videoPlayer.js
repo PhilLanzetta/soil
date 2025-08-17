@@ -28,7 +28,7 @@ const VideoPlayer = ({
   const isOnScreen = useOnScreen(elementRef)
 
   const [videoState, setVideoState] = useState({
-    playing: banner ? true : false,
+    playing: false,
     muted: true,
     volume: 0,
     playbackRate: 1.0,
@@ -38,6 +38,7 @@ const VideoPlayer = ({
   })
 
   const [hasPlayed, setHasPlayed] = useState(false)
+
   const [timeElapsed, setTimeElapsed] = useState(formatTime("00:00"))
 
   const { width, height } = useWindowSize()
@@ -151,14 +152,14 @@ const VideoPlayer = ({
   }
 
   useEffect(() => {
-    if (!isOnScreen && hasPlayed) {
-      setVideoState(prevVideoState => ({ ...prevVideoState, playing: false }))
-    } else if (isOnScreen) {
-      setVideoState(prevVideoState => ({ ...prevVideoState, playing: true }))
+    if (isOnScreen) {
+      setVideoState({ ...videoState, playing: true })
+    } else if (!isOnScreen) {
+      setVideoState({ ...videoState, playing: false })
     } else {
       return
     }
-  }, [isOnScreen, hasPlayed])
+  }, [isOnScreen])
 
   return (
     <div
@@ -230,7 +231,6 @@ const VideoPlayer = ({
           playing={playing}
           playsInline
           onPlay={() => {
-            setVideoState({ ...videoState, playing: true })
             setHasPlayed(true)
           }}
           onPause={() => setVideoState({ ...videoState, playing: false })}
