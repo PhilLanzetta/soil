@@ -27,7 +27,10 @@
 }
 
 .tileTextContainer {
- aspect-ratio: 1 / 1.25;
+ display: -webkit-box;
+ -webkit-box-orient: vertical;
+ line-clamp: 4;
+ -webkit-line-clamp: 10;
  overflow: hidden;
 }
 

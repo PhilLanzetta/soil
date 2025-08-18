@@ -15,7 +15,7 @@ import { motion, AnimatePresence } from "motion/react"
 const Layout = ({ children, location }) => {
   const container = {
     out: { opacity: 0, transition: { duration: 0.5 } },
-    in: { opacity: 1, transition: { duration: 2 } },
+    in: { opacity: 1, transition: { duration: 1 } },
     start: { opacity: 0 },
   }
 

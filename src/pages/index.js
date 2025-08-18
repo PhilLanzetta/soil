@@ -69,22 +69,20 @@ const IndexPage = ({ data }) => {
   }, [])
 
   useEffect(() => {
-    let scrollInterval
-    let timeoutId
+    let animationFrameId
+    const step = () => {
+      if (isAutoScrolling) {
+        window.scrollBy({ top: 1, behavior: "auto" })
+      }
 
-    if (isAutoScrolling) {
-      timeoutId = setTimeout(() => {
-        scrollInterval = setInterval(() => {
-          window.scrollBy(0, 1) // Adjust scroll amount as needed
-        }, 15)
-      }, 1000) // Adjust interval duration as needed
-    }
+        animationFrameId = requestAnimationFrame(step)
+      }
 
-    return () => {
-      clearTimeout(timeoutId)
-      clearInterval(scrollInterval)
-    }
-  }, [isAutoScrolling])
+      animationFrameId = requestAnimationFrame(step)
+
+      // Clean up the animation frame on component unmount
+      return () => cancelAnimationFrame(animationFrameId) // Adjust interval duration as needed
+    }, [isAutoScrolling])
 
   useEffect(() => {
     const stopAutoScroll = () => {
@@ -93,13 +91,11 @@ const IndexPage = ({ data }) => {
 
     const stopAutoScrollUp = () => {
       const currentScroll = window.scrollY
-      if (currentScroll < 100) {
-        setIsAutoScrolling(true)
-      } else if (currentScroll < scrollPosition) {
+       if (currentScroll < scrollPosition) {
         setIsAutoScrolling(false)
         setTimeout(() => {
           setIsAutoScrolling(true)
-        }, 10)
+        }, 1000)
       }
       setScrollPostion(currentScroll)
     }

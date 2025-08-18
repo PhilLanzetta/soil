@@ -15,11 +15,7 @@ const News = ({ data }) => {
     return array.indexOf(value) === index
   }
 
-  const categories = data.allContentfulNewsEntry.nodes
-    .map(entry => entry.category)
-    .flat()
-    .filter(onlyUnique)
-    .sort()
+  const categories = ["Events", "Awards", "Press", "Project Updates"]
 
   return (
     <div className="margined-section">
@@ -74,7 +70,6 @@ const News = ({ data }) => {
                   rel="noreferrer"
                   className={styles.externalContainer}
                 >
-                  <div className={styles.outLink}> → </div>
                   {entry.tileImage && (
                     <div>
                       <div className={styles.tileImageContainer}>

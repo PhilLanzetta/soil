@@ -21,19 +21,6 @@ const Writing = ({ data }) => {
             viewport={{ once: true }}
           >
             <Link to={`/writing/${entry.slug}`}>
-              {entry.tileImage && (
-                <div>
-                  <div className={styles.tileImageContainer}>
-                    <GatsbyImage
-                      image={entry.tileImage.gatsbyImageData}
-                      alt={entry.tileImage.description}
-                      className={styles.tileImage}
-                      imgStyle={{ objectFit: "cover" }}
-                    ></GatsbyImage>
-                  </div>
-                  <p className={styles.tileText}>{entry.title}</p>
-                </div>
-              )}
               {entry.tileTextLong && (
                 <div className={styles.tileTextContainer}>
                   <div
@@ -45,18 +32,6 @@ const Writing = ({ data }) => {
                 </div>
               )}
             </Link>
-            <div className={styles.tagContainer}>
-              {entry.objectives &&
-                entry.objectives.map(objective => (
-                  <Link
-                    to={`/objective/${objective.slug}`}
-                    className={styles.tagBtn}
-                    key={objective.id}
-                  >
-                    {objective.title}
-                  </Link>
-                ))}
-            </div>
           </motion.div>
         ))}
       </div>
