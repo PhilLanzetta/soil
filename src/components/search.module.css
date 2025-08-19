@@ -276,7 +276,17 @@
 @media screen and (max-width: 800px) {
   .searchLanding {
     grid-template-columns: repeat(3, 1fr);
+    align-items: start;
     gap: 15px;
+  }
+
+  .backgroundContainer {
+    display: flex;
+    max-height: calc((100vh - 130px) / 8);
+  }
+
+  .searchSearch {
+    margin-bottom: 15px;
   }
 
   .searchBoxContainer {
