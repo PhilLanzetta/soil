@@ -93,18 +93,6 @@ const Hit = ({ hit }) => {
                   )}
                 </Link>
               )}
-              <div className={styles.tagContainer}>
-                {objectives &&
-                  objectives.map(objective => (
-                    <Link
-                      to={`/objective/${objective.slug}`}
-                      className={styles.tagBtn}
-                      key={objective.id}
-                    >
-                      {objective.title}
-                    </Link>
-                  ))}
-              </div>
             </motion.div>
           )}
           {searchCategory === "Writing" && (
@@ -115,18 +103,6 @@ const Hit = ({ hit }) => {
               viewport={{ once: true }}
             >
               <Link to={`/writing/${slug}`}>
-                {tileImage && (
-                  <div>
-                    <div className={styles.tileImageContainer}>
-                      <GatsbyImage
-                        image={tileImage.gatsbyImageData}
-                        alt={tileImage.description}
-                        className={styles.tileImage}
-                      ></GatsbyImage>
-                    </div>
-                    <p className={styles.tileText}>{title}</p>
-                  </div>
-                )}
                 {tileTextLong && (
                   <div className={styles.tileTextContainer}>
                     <div
@@ -138,18 +114,6 @@ const Hit = ({ hit }) => {
                   </div>
                 )}
               </Link>
-              <div className={styles.tagContainer}>
-                {objectives &&
-                  objectives.map(objective => (
-                    <Link
-                      to={`/objective/${objective.slug}`}
-                      className={styles.tagBtn}
-                      key={objective.id}
-                    >
-                      {objective.title}
-                    </Link>
-                  ))}
-              </div>
             </motion.div>
           )}
         </div>

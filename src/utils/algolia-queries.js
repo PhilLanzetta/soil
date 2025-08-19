@@ -61,10 +61,6 @@ const pagesQuery = `{
           internal {
             contentDigest
           }
-          tileImage {
-            description
-            gatsbyImageData(width: 600)
-          }
           tileTextLong {
             childMarkdownRemark {
               html
