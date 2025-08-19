@@ -2,7 +2,6 @@ import React, { useState } from "react"
 import * as styles from "../components/writing.module.css"
 import { graphql, Link } from "gatsby"
 import { motion } from "motion/react"
-import { GatsbyImage } from "gatsby-plugin-image"
 
 const Writing = ({ data }) => {
   const [writingEntries, setWritingEntries] = useState(
@@ -45,10 +44,6 @@ export const query = graphql`
       nodes {
         id
         slug
-        tileImage {
-          description
-          gatsbyImageData(layout: FULL_WIDTH)
-        }
         tileTextLong {
           childMarkdownRemark {
             html

@@ -129,7 +129,6 @@ const SinglePublication = ({ data }) => {
                         rel="noreferrer"
                         className={styles.externalContainer}
                       >
-                        <div className={styles.outLink}> → </div>
                         {relatedItem.tileImage && (
                           <div>
                             <div className={styles.tileImageContainer}>
@@ -284,10 +283,6 @@ export const query = graphql`
         }
         ... on ContentfulWritingEntry {
           writingId: id
-          tileImage {
-            description
-            gatsbyImageData(layout: FULL_WIDTH)
-          }
           tileTextLong {
             childMarkdownRemark {
               html

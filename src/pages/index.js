@@ -75,14 +75,14 @@ const IndexPage = ({ data }) => {
         window.scrollBy({ top: 1, behavior: "auto" })
       }
 
-        animationFrameId = requestAnimationFrame(step)
-      }
-
       animationFrameId = requestAnimationFrame(step)
+    }
 
-      // Clean up the animation frame on component unmount
-      return () => cancelAnimationFrame(animationFrameId) // Adjust interval duration as needed
-    }, [isAutoScrolling])
+    animationFrameId = requestAnimationFrame(step)
+
+    // Clean up the animation frame on component unmount
+    return () => cancelAnimationFrame(animationFrameId) // Adjust interval duration as needed
+  }, [isAutoScrolling])
 
   useEffect(() => {
     const stopAutoScroll = () => {
@@ -91,7 +91,7 @@ const IndexPage = ({ data }) => {
 
     const stopAutoScrollUp = () => {
       const currentScroll = window.scrollY
-       if (currentScroll < scrollPosition) {
+      if (currentScroll < scrollPosition) {
         setIsAutoScrolling(false)
         setTimeout(() => {
           setIsAutoScrolling(true)
@@ -229,7 +229,7 @@ const IndexPage = ({ data }) => {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1 }}
+          transition={{ delay: 1, duration: 1 }}
           className={styles.photoGrid}
         >
           {tileData?.map((tile, index) => (

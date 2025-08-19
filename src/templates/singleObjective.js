@@ -4,7 +4,6 @@ import * as styles from "../components/objectives.module.css"
 import ProjectTile from "../components/projectTile"
 import { motion } from "motion/react"
 import Seo from "../components/seo"
-import { GatsbyImage } from "gatsby-plugin-image"
 
 const Objective = ({ data }) => {
   const { description, project, writing_entry } = data.contentfulObjective
@@ -41,19 +40,6 @@ const Objective = ({ data }) => {
                 className={styles.writingEntry}
               >
                 <Link to={`/writing/${entry.slug}`}>
-                  {entry.tileImage && (
-                    <div>
-                      <div className={styles.tileImageContainer}>
-                        <GatsbyImage
-                          image={entry.tileImage.gatsbyImageData}
-                          alt={entry.tileImage.description}
-                          className={styles.tileImage}
-                          imgStyle={{ objectFit: "cover" }}
-                        ></GatsbyImage>
-                      </div>
-                      <p className={styles.tileText}>{entry.title}</p>
-                    </div>
-                  )}
                   {entry.tileTextLong && (
                     <div className={styles.tileTextContainer}>
                       <div
@@ -65,18 +51,6 @@ const Objective = ({ data }) => {
                     </div>
                   )}
                 </Link>
-                <div className={styles.tagContainer}>
-                  {entry.objectives &&
-                    entry.objectives.map(objective => (
-                      <Link
-                        to={`/objective/${objective.slug}`}
-                        className={styles.tagBtn}
-                        key={objective.id}
-                      >
-                        {objective.title}
-                      </Link>
-                    ))}
-                </div>
               </motion.div>
             ))}
           </div>
@@ -115,10 +89,6 @@ export const query = graphql`
       writing_entry {
         id
         slug
-        tileImage {
-          description
-          gatsbyImageData(layout: FULL_WIDTH)
-        }
         tileTextLong {
           childMarkdownRemark {
             html

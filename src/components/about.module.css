@@ -48,7 +48,7 @@
 .studioText {
   scroll-margin-top: 80px;
   font-size: 2rem;
-  margin-top: 100px;
+  margin-top: 180px;
   margin-bottom: 100px;
 }
 
@@ -151,6 +151,10 @@
   display: none;
 }
 
+.teamImage {
+  margin-bottom: 10px;
+}
+
 @media screen and (max-width: 800px) {
   .title {
     padding-top: 35px;
@@ -226,7 +230,7 @@
   }
 
   .twoColumns {
-  grid-template-columns: 1fr;
-  gap: 20px;
-}
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
 }

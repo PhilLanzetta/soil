@@ -144,6 +144,7 @@ const About = ({ data }) => {
               <GatsbyImage
                 image={member.headshot.gatsbyImageData}
                 alt={member.headshot.description}
+                className={styles.teamImage}
               ></GatsbyImage>
               <div>{member.name}</div>
               <div>{member.title}</div>

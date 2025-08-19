@@ -16,7 +16,7 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 10px;
-  row-gap: 60px;
+  row-gap: 90px;
 }
 
 .tileImageContainer {
@@ -32,6 +32,7 @@
 
 .tileText {
   font-size: 2rem;
+  margin-bottom: 0;
 }
 
 .tileTextContainer {

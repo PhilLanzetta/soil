@@ -121,18 +121,6 @@ const News = ({ data }) => {
                   )}
                 </Link>
               )}
-              <div className={styles.tagContainer}>
-                {entry.objectives &&
-                  entry.objectives.map(objective => (
-                    <Link
-                      to={`/objective/${objective.slug}`}
-                      className={styles.tagBtn}
-                      key={objective.id}
-                    >
-                      {objective.title}
-                    </Link>
-                  ))}
-              </div>
             </motion.div>
           ))}
         </motion.div>

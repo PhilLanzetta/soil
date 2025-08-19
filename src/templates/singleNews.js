@@ -96,7 +96,7 @@ const SingleNews = ({ data }) => {
                 <div
                   key={index}
                   className={`${styles.textModuleNews} ${
-                    contentItem.margin === "Full Width" ? "" : styles.wideMargin
+                    contentItem.margin === "Full Width" ? "" : styles.wideMarginNews
                   }`}
                   dangerouslySetInnerHTML={{
                     __html: contentItem.text.childMarkdownRemark.html,
@@ -219,18 +219,6 @@ const SingleNews = ({ data }) => {
                         )}
                       </Link>
                     )}
-                    <div className={styles.tagContainer}>
-                      {relatedItem.objectives &&
-                        relatedItem.objectives.map(objective => (
-                          <Link
-                            to={`/objective/${objective.slug}`}
-                            className={styles.tagBtn}
-                            key={objective.id}
-                          >
-                            {objective.title}
-                          </Link>
-                        ))}
-                    </div>
                   </motion.div>
                 )
               }

@@ -55,6 +55,11 @@
   position: relative;
 }
 
+.listContainer,
+.mapContainer {
+  margin-bottom: 80px;
+}
+
 .filterOverlay {
   position: absolute;
   top: 0;

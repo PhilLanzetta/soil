@@ -79,6 +79,26 @@ function CustomStats() {
   return <span>All results &#40;{nbHits.toLocaleString()}&#41;</span>
 }
 
+const shuffleData = array => {
+  let currentIndex = array.length,
+    randomIndex
+
+  // While there remain elements to shuffle.
+  while (currentIndex !== 0) {
+    // Pick a remaining element.
+    randomIndex = Math.floor(Math.random() * currentIndex)
+    currentIndex--
+
+    // And swap it with the current element.
+    ;[array[currentIndex], array[randomIndex]] = [
+      array[randomIndex],
+      array[currentIndex],
+    ]
+  }
+
+  return array
+}
+
 const Search = ({ data, location }) => {
   const searchClient = useMemo(
     () =>
@@ -91,7 +111,7 @@ const Search = ({ data, location }) => {
   const [filterOpen, setFilterOpen] = useState(false)
   const [searched, setSearched] = useState(location.search ? true : false)
   const [view, setView] = useState("grid")
-  const backgroundImages = data.allContentfulProject.nodes
+  const backgroundImages = shuffleData(data.allContentfulProject.nodes)
   const objectives = data.allContentfulObjective.nodes
 
   return (
@@ -257,7 +277,7 @@ export const query = graphql`
     allContentfulProject {
       nodes {
         tileImage {
-          gatsbyImageData(width: 600)
+          gatsbyImageData(width: 400)
         }
       }
     }

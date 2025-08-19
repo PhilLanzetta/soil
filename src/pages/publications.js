@@ -28,7 +28,7 @@ const Publications = ({ data }) => {
               </div>
               <div className={styles.tileText}>{entry.title}</div>
             </Link>
-            <div className={styles.tagContainer}>
+            {/* <div className={styles.tagContainer}>
               {entry.objectives &&
                 entry.objectives.map(objective => (
                   <Link
@@ -39,7 +39,7 @@ const Publications = ({ data }) => {
                     {objective.title}
                   </Link>
                 ))}
-            </div>
+            </div> */}
           </motion.div>
         ))}
       </div>

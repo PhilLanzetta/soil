@@ -10,6 +10,10 @@
   gap: 20px;
 }
 
+.contentContainer {
+  margin-top: 20px;
+}
+
 .contentContainer figure {
   margin-bottom: 30px;
 }
@@ -21,6 +25,10 @@
 
 .wideMargin {
   margin: 0 10%;
+}
+
+.wideMarginNews {
+  margin: 0 20% 0 0;
 }
 
 .textModule {
