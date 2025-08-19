@@ -115,7 +115,7 @@ const Search = ({ data, location }) => {
   const objectives = data.allContentfulObjective.nodes
 
   return (
-    <>
+    <div className={styles.searchPageContainer}>
       <InstantSearch
         searchClient={searchClient}
         indexName="Pages"
@@ -268,7 +268,7 @@ const Search = ({ data, location }) => {
           </EmptyQueryBoundary>
         )}
       </InstantSearch>
-    </>
+    </div>
   )
 }
 

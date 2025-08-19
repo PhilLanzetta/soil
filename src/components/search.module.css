@@ -1,3 +1,7 @@
+.searchPageContainer {
+  min-height: 100vh;
+}
+
 .searchLanding {
   position: fixed;
   display: grid;
@@ -77,6 +81,7 @@
   width: 100%;
   border: none;
   font-size: 4rem;
+  padding-bottom: 10px;
   font-weight: bold;
   background: none;
 }

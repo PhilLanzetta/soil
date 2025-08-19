@@ -6,7 +6,7 @@ import * as styles from "./index.module.css"
 import HomeVideo from "./homeVideo"
 import useWindowSize from "../utils/useWindowSize"
 
-const HomeTile = ({ tile, index, autoScroll }) => {
+const HomeTile = ({ tile, index }) => {
   const ref = useRef(null)
   const { width, height } = useWindowSize()
   const isMobile = width < height

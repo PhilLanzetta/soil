@@ -215,6 +215,7 @@ const Header = ({ location }) => {
           </div>
         </div>
       )}
+      {isMobile && menuOpen && <div className={styles.mobileOverlay}></div>}
     </>
   )
 }

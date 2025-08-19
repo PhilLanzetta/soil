@@ -201,8 +201,20 @@ const Footer = ({ location }) => {
           </div>
           <div className={styles.footerColumn}>
             <Link>Newsletter</Link>
-            <a href="https://www.instagram.com/solidobjectives/" target="_blank" rel="noreferrer">Instagram</a>
-            <a href="https://www.linkedin.com/company/so-il" rel="noreferrer" target="_blank">LinkedIn</a>
+            <a
+              href="https://www.instagram.com/solidobjectives/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Instagram
+            </a>
+            <a
+              href="https://www.linkedin.com/company/so-il"
+              rel="noreferrer"
+              target="_blank"
+            >
+              LinkedIn
+            </a>
           </div>
         </div>
         {newsItem && (

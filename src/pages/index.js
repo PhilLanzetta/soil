@@ -85,10 +85,6 @@ const IndexPage = ({ data }) => {
   }, [isAutoScrolling])
 
   useEffect(() => {
-    const stopAutoScroll = () => {
-      setIsAutoScrolling(false)
-    }
-
     const stopAutoScrollUp = () => {
       const currentScroll = window.scrollY
       if (currentScroll < scrollPosition) {
@@ -101,12 +97,8 @@ const IndexPage = ({ data }) => {
     }
 
     window.addEventListener("scroll", stopAutoScrollUp)
-    window.addEventListener("mousedown", stopAutoScroll)
-    window.addEventListener("keydown", stopAutoScroll)
 
     return () => {
-      window.removeEventListener("mousedown", stopAutoScroll)
-      window.removeEventListener("keydown", stopAutoScroll)
       window.removeEventListener("scroll", stopAutoScrollUp)
     }
   }, [scrollPosition])

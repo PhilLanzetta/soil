@@ -275,8 +275,6 @@ const Work = ({ data, location }) => {
             }}
           >
             <svg
-              width="21"
-              height="21"
               viewBox="0 0 21 21"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -298,8 +296,6 @@ const Work = ({ data, location }) => {
             }}
           >
             <svg
-              width="24"
-              height="21"
               viewBox="0 0 24 21"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -341,8 +337,6 @@ const Work = ({ data, location }) => {
             }}
           >
             <svg
-              width="15"
-              height="22"
               viewBox="0 0 15 22"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"

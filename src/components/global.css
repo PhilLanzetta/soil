@@ -86,6 +86,10 @@ ul {
     font-size: 12px;
   }
 
+  p {
+    font-size: calc(1rem + 1px);
+  }
+
   .extra-padding {
     padding: 35px 0px;
   }

@@ -19,6 +19,8 @@ const Layout = ({ children, location }) => {
     start: { opacity: 0 },
   }
 
+  console.log(location)
+
   return (
     <>
       <Header location={location} />
@@ -31,7 +33,7 @@ const Layout = ({ children, location }) => {
           exit="out"
         >
           {children}
-          {location.pathname !== "/search/" && <Footer location={location} />}
+          <Footer location={location} />
         </motion.main>
       </AnimatePresence>
     </>
