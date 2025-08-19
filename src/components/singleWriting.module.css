@@ -78,7 +78,7 @@
   min-width: 100%;
 }
 
-.tileText {
+.tileText, .tileText p {
   font-size: 2rem;
 }
 
@@ -141,7 +141,7 @@
 @media screen and (max-width: 800px) {
   .title {
     padding-top: 35px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
   }
 
   .wideMargin {
@@ -149,7 +149,8 @@
   }
 
   .date {
-    margin-bottom: 40px;
+    margin-bottom: 20px;
+    margin-top: 20px;
   }
 
   .bannerOneMedia {
@@ -164,7 +165,7 @@
   }
 
   .tertiarySectionHeading {
-    margin-bottom: 35px;
+    margin-bottom: 60px;
     margin-top: 100px;
   }
 
@@ -187,5 +188,6 @@
 
   .twoColumnImageContainer {
     grid-template-columns: 1fr;
+    gap: 0;
   }
 }

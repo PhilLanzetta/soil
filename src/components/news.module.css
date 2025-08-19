@@ -30,10 +30,11 @@
   min-width: 100%;
 }
 
-.tileText {
+.tileText, .tileText p {
   font-size: 2rem;
   margin-bottom: 0;
 }
+
 
 .tileTextContainer {
   aspect-ratio: 1 / 1.25;
@@ -91,7 +92,8 @@
 
   .filterContainer {
     row-gap: 5px;
-    font-size: 1.7rem;
+    flex-wrap: wrap;
+    font-size: 1.25rem;
     margin-top: 5px;
     margin-bottom: 40px;
   }
@@ -100,7 +102,4 @@
     grid-template-columns: 1fr;
   }
 
-  .tileTextContainer p {
-    font-size: 4rem;
-  }
 }

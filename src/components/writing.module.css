@@ -23,7 +23,7 @@
   min-width: 100%;
 }
 
-.tileText {
+.tileText, .tileText p {
   font-size: 2rem;
 }
 
@@ -58,10 +58,6 @@
   .projectGrid {
     grid-template-columns: 1fr;
     gap: 40px;
-  }
-
-  .tileTextContainer p {
-    font-size: 4rem;
   }
 }
 
