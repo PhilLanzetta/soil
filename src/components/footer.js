@@ -195,7 +195,7 @@ const Footer = ({ location }) => {
         </div>
         <div className={styles.footerGrouping}>
           <div className={styles.footerColumn}>
-            <Link to="/objectives">Objectives</Link>
+            <Link to="/objectives/design-discovery">Objectives</Link>
             <Link to="/contact">Contact</Link>
             <Link to="/news">Press</Link>
           </div>
