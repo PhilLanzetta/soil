@@ -26,6 +26,16 @@ const pagesQuery = `{
           slug
           status
           title
+          teamText {
+            childMarkdownRemark {
+              html
+            }
+          }
+          collaboratorsText {
+            childMarkdownRemark {
+              html
+            }
+          }
           typology
           year
           internal {

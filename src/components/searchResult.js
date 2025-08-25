@@ -116,6 +116,25 @@ const Hit = ({ hit }) => {
               </Link>
             </motion.div>
           )}
+          {searchCategory === "Publication" && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              transition={{ duration: 1 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+            >
+              <Link to={`/publications/${slug}`}>
+                <div className={styles.tileImageContainer}>
+                  <GatsbyImage
+                    image={tileImage?.gatsbyImageData}
+                    alt={tileImage?.description}
+                    className={styles.tileImage}
+                  ></GatsbyImage>
+                </div>
+                <div className={styles.tileText}>{title}</div>
+              </Link>
+            </motion.div>
+          )}
         </div>
       )}
     </>
