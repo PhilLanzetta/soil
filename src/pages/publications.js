@@ -3,6 +3,7 @@ import { graphql, Link } from "gatsby"
 import { motion } from "motion/react"
 import * as styles from "../components/publications.module.css"
 import { GatsbyImage } from "gatsby-plugin-image"
+import Seo from "../components/seo"
 
 const Publications = ({ data }) => {
   const publications = data.allContentfulPublicationEntry.nodes
@@ -67,5 +68,7 @@ export const query = graphql`
     }
   }
 `
+
+export const Head = () => <Seo title="Publications" />
 
 export default Publications

@@ -9,7 +9,7 @@ import Thunderstorm from "../images/weather/thunderstorm.svg"
 import { motion } from "motion/react"
 import { graphql, useStaticQuery } from "gatsby"
 
-const Footer = ({ location }) => {
+const Footer = ({ location, setPopUp }) => {
   const data = useStaticQuery(graphql`
     query {
       allContentfulNewsEntry(sort: { date: DESC }, limit: 1) {
@@ -200,7 +200,12 @@ const Footer = ({ location }) => {
             <Link to="/news">Press</Link>
           </div>
           <div className={styles.footerColumn}>
-            <Link>Newsletter</Link>
+            <button
+              onClick={() => setPopUp(true)}
+              className={styles.newsletter}
+            >
+              Newsletter
+            </button>
             <a
               href="https://www.instagram.com/solidobjectives/"
               target="_blank"
@@ -220,11 +225,11 @@ const Footer = ({ location }) => {
         {newsItem && (
           <div className={styles.footerNews}>
             {newsItem.linkOutFromTile ? (
-              <a
-                href={newsItem.externalLink}
+              <Link
+                to="/news"
                 target="_blank"
                 rel="noreferrer"
-              >{`News: ${newsItem.title} →`}</a>
+              >{`News: ${newsItem.title} →`}</Link>
             ) : (
               <Link
                 to={`/news/${newsItem.slug}`}

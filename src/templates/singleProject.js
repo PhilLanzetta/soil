@@ -487,11 +487,6 @@ export const query = graphql`
       secondarySections {
         id
         heading
-        text {
-          childMarkdownRemark {
-            html
-          }
-        }
         media {
           caption
           image {
