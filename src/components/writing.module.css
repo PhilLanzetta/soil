@@ -50,6 +50,10 @@
   font-size: 0.8rem;
 }
 
+.tileInfo {
+  margin-top: 10px;
+}
+
 @media screen and (max-width: 800px) {
   .title {
     padding-top: 35px;

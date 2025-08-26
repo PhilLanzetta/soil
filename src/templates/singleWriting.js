@@ -8,12 +8,19 @@ import ProjectTile from "../components/projectTile"
 import Seo from "../components/seo"
 
 const SingleWriting = ({ data }) => {
-  const { title, author, content, relatedContent } = data.contentfulWritingEntry
+  const { title, author, content, relatedContent, publisher, date } =
+    data.contentfulWritingEntry
   const [activeVideo, setActiveVideo] = useState()
   return (
     <div className="margined-section">
       <h1 className={styles.title}>{title}</h1>
-      <h2>{author}</h2>
+      <h2>
+        {author && <span>{author}</span>}
+        {author && <span> – </span>}
+        {publisher && <span>{publisher}</span>}
+        {publisher && date && <span>, </span>}
+        {date && <span>{date}</span>}
+      </h2>
       {content && (
         <div className={styles.contentContainer}>
           {content.map((contentItem, index) => {
@@ -120,6 +127,8 @@ export const query = graphql`
     contentfulWritingEntry(slug: { eq: $slug }) {
       title
       author
+      publisher
+      date(locale: "America/New_York")
       content {
         ... on ContentfulImageWrapper {
           imageId: id

@@ -30,6 +30,12 @@ const Writing = ({ data }) => {
                   ></div>
                 </div>
               )}
+              {(entry.author || entry.publisher) && (
+                <div className={styles.tileInfo}>
+                  {entry.author && <div>{entry.author}</div>}
+                  {entry.publisher && <div>{entry.publisher}</div>}
+                </div>
+              )}
             </Link>
           </motion.div>
         ))}
@@ -50,6 +56,8 @@ export const query = graphql`
           }
         }
         title
+        author
+        publisher
         objectives {
           id
           slug
