@@ -11,10 +11,6 @@ const News = ({ data }) => {
   )
   const [filter, setFilter] = useState("all")
 
-  function onlyUnique(value, index, array) {
-    return array.indexOf(value) === index
-  }
-
   const categories = ["Events", "Awards", "Press", "Project Updates"]
 
   return (
@@ -62,6 +58,7 @@ const News = ({ data }) => {
               transition={{ duration: 1 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
+              className={entry.isFeatured ? styles.featured : ""}
             >
               {entry.linkOutFromTile ? (
                 <a
@@ -72,7 +69,13 @@ const News = ({ data }) => {
                 >
                   {entry.tileImage && (
                     <div>
-                      <div className={styles.tileImageContainer}>
+                      <div
+                        className={
+                          entry.isFeatured
+                            ? styles.featuredImageContainer
+                            : styles.tileImageContainer
+                        }
+                      >
                         <GatsbyImage
                           image={entry.tileImage.gatsbyImageData}
                           alt={entry.tileImage.description}
@@ -98,7 +101,13 @@ const News = ({ data }) => {
                 <Link to={`/news/${entry.slug}`}>
                   {entry.tileImage && (
                     <div>
-                      <div className={styles.tileImageContainer}>
+                      <div
+                        className={
+                          entry.isFeatured
+                            ? styles.featuredImageContainer
+                            : styles.tileImageContainer
+                        }
+                      >
                         <GatsbyImage
                           image={entry.tileImage.gatsbyImageData}
                           alt={entry.tileImage.description}
@@ -146,6 +155,7 @@ export const query = graphql`
         }
         title
         linkOutFromTile
+        isFeatured
         externalLink
         category
         objectives {

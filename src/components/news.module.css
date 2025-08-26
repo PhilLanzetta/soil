@@ -25,16 +25,22 @@
   margin-bottom: 10px;
 }
 
+.featuredImageContainer {
+  aspect-ratio: 1 / 0.615;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
 .tileImage {
   min-height: 100%;
   min-width: 100%;
 }
 
-.tileText, .tileText p {
+.tileText,
+.tileText p {
   font-size: 2rem;
   margin-bottom: 0;
 }
-
 
 .tileTextContainer {
   aspect-ratio: 1 / 1.25;
@@ -85,6 +91,10 @@
   left: 0;
 }
 
+.featured {
+  grid-column: span 2;
+}
+
 @media screen and (max-width: 800px) {
   .title {
     padding-top: 35px;
@@ -101,5 +111,4 @@
   .projectGrid {
     grid-template-columns: 1fr;
   }
-
 }
