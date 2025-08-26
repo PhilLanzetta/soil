@@ -3,7 +3,7 @@
 }
 
 .searchLanding {
-  position: fixed;
+  position: absolute;
   display: grid;
   grid-template-columns: repeat(8, 1fr);
   padding: 15px;
@@ -17,7 +17,6 @@
 
 .hide {
   opacity: 0;
-  transition: all 400ms;
 }
 
 .show {
@@ -25,12 +24,16 @@
   transition: all 400ms;
 }
 
+.searchLanding > .backgroundContainer:nth-child(n + 25) {
+  display: none;
+}
+
 .backgroundImage {
   width: 100%;
 }
 
 .searchBoxContainer {
-  position: fixed;
+  position: absolute;
   width: 60vw;
   background: #f7f7f7;
   min-height: 200px;

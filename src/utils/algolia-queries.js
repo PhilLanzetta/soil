@@ -49,6 +49,7 @@ const pagesQuery = `{
         ... on ContentfulWritingEntry {
           writing: id
           author
+          publisher
           category
           content {
             ... on ContentfulTextModule {

@@ -114,20 +114,6 @@ const Search = ({ data, location }) => {
   const backgroundImages = shuffleData(data.allContentfulProject.nodes)
   const objectives = data.allContentfulObjective.nodes
 
-  useEffect(() => {
-    if (!searched) {
-      const scrollY = window.scrollY
-      const body = document.body
-      body.style.position = "fixed"
-      body.style.top = "0"
-    } else {
-      const body = document.body
-      const scrollY = body.style.top
-      body.style.position = ""
-      body.style.top = ""
-    }
-  }, [searched])
-
   return (
     <div className={styles.searchPageContainer}>
       <InstantSearch
