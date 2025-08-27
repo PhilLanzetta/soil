@@ -4,6 +4,7 @@ import { GatsbyImage } from "gatsby-plugin-image"
 import * as styles from "../components/about.module.css"
 import { motion } from "motion/react"
 import Seo from "../components/seo"
+import ExpandingText from "../components/expandingText"
 
 const About = ({ data }) => {
   const {
@@ -21,6 +22,7 @@ const About = ({ data }) => {
     careers,
     jobs,
     studioHeroImage,
+    leadership,
     studioText,
     transparency,
   } = data.contentfulAboutPage
@@ -124,15 +126,7 @@ const About = ({ data }) => {
                 className={styles.headshot}
               ></GatsbyImage>
             </motion.div>
-            <motion.div
-              initial={{ opacity: 0 }}
-              transition={{ duration: 1 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              dangerouslySetInnerHTML={{
-                __html: jingLiuBio.childMarkdownRemark.html,
-              }}
-            ></motion.div>
+            <ExpandingText text={jingLiuBio} principal={true}></ExpandingText>
           </div>
           <div>
             <motion.div
@@ -147,19 +141,23 @@ const About = ({ data }) => {
                 className={styles.headshot}
               ></GatsbyImage>
             </motion.div>
-            <motion.div
-              initial={{ opacity: 0 }}
-              transition={{ duration: 1 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              dangerouslySetInnerHTML={{
-                __html: florianIdenburgBio.childMarkdownRemark.html,
-              }}
-            ></motion.div>
+            <ExpandingText
+              text={florianIdenburgBio}
+              principal={true}
+            ></ExpandingText>
           </div>
         </div>
-        {teamMembers &&
-          teamMembers.map(member => (
+        <motion.p
+          initial={{ opacity: 0 }}
+          transition={{ duration: 1 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className={styles.secondaryHeading}
+        >
+          Leadership
+        </motion.p>
+        {leadership &&
+          leadership.map(member => (
             <motion.div
               initial={{ opacity: 0 }}
               transition={{ duration: 1 }}
@@ -173,8 +171,38 @@ const About = ({ data }) => {
               ></GatsbyImage>
               <div>{member.name}</div>
               <div>{member.title}</div>
+              <ExpandingText text={member.bio}></ExpandingText>
             </motion.div>
           ))}
+        <motion.p
+          initial={{ opacity: 0 }}
+          transition={{ duration: 1 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className={styles.secondaryHeading}
+        >
+          Staff
+        </motion.p>
+        {teamMembers && (
+          <div className={styles.staffContainer}>
+            {teamMembers.map(member => (
+              <motion.div
+                initial={{ opacity: 0 }}
+                transition={{ duration: 1 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+              >
+                <GatsbyImage
+                  image={member.headshot.gatsbyImageData}
+                  alt={member.headshot.description}
+                  className={styles.teamImage}
+                ></GatsbyImage>
+                <div>{member.name}</div>
+                <div>{member.title}</div>
+              </motion.div>
+            ))}
+          </div>
+        )}
       </div>
       {clients && (
         <div className={styles.tertiarySectionHeading} id="clients">
@@ -183,7 +211,7 @@ const About = ({ data }) => {
             transition={{ duration: 1 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className={styles.secondaryHeading}
+            className={styles.secondaryBigHeading}
           >
             Clients
           </motion.p>
@@ -206,7 +234,7 @@ const About = ({ data }) => {
             transition={{ duration: 1 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className={styles.secondaryHeading}
+            className={styles.secondaryBigHeading}
           >
             Recognition
           </motion.p>
@@ -248,24 +276,28 @@ const About = ({ data }) => {
               __html: awards.childMarkdownRemark.html,
             }}
           ></motion.div>
-          {collections && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              transition={{ duration: 1 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              className={styles.secondColumn}
-            >
-              <p>Collections</p>
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: collections.childMarkdownRemark.html,
-                }}
-              ></div>
-            </motion.div>
-          )}
         </div>
       )}
+      {collections && (
+        <div className={styles.tertiarySectionHeading}>
+          <motion.p
+            initial={{ opacity: 0 }}
+            transition={{ duration: 1 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className={styles.secondaryBigHeading}
+          >
+            Collections
+          </motion.p>
+          <div
+            className={styles.threeColumnSpan}
+            dangerouslySetInnerHTML={{
+              __html: collections.childMarkdownRemark.html,
+            }}
+          ></div>
+        </div>
+      )}
+
       {transparency && (
         <div className={styles.tertiarySectionHeading} id="transparency">
           <motion.p
@@ -273,7 +305,7 @@ const About = ({ data }) => {
             transition={{ duration: 1 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className={styles.secondaryHeading}
+            className={styles.secondaryBigHeading}
           >
             Transparency
           </motion.p>
@@ -296,7 +328,7 @@ const About = ({ data }) => {
             transition={{ duration: 1 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className={styles.secondaryHeading}
+            className={styles.secondaryBigHeading}
           >
             Careers
           </motion.p>
@@ -320,16 +352,20 @@ const About = ({ data }) => {
                 >
                   Open Roles:
                 </motion.p>
-                {jobs.map(job => (
-                  <a
-                    href={job.pdfFile?.file.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className={styles.jobLink}
-                  >
-                    {job.title}
-                  </a>
-                ))}
+                <ol>
+                  {jobs.map((job, index) => (
+                    <li key={index}>
+                      <a
+                        href={job.pdfFile?.file.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className={styles.jobLink}
+                      >
+                        {job.title}
+                      </a>
+                    </li>
+                  ))}
+                </ol>
               </div>
             )}
           </div>
@@ -342,7 +378,7 @@ const About = ({ data }) => {
             transition={{ duration: 1 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className={styles.secondaryHeading}
+            className={styles.secondaryBigHeading}
           >
             Contact
           </motion.p>
@@ -351,9 +387,9 @@ const About = ({ data }) => {
             transition={{ duration: 1 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className={styles.threeColumn}
+            className={styles.contactInfo}
             dangerouslySetInnerHTML={{
-              __html: contact.childMarkdownRemark.html.replace(/\n/g, "<br />"),
+              __html: contact.childMarkdownRemark.html,
             }}
           ></motion.div>
         </div>
@@ -391,6 +427,20 @@ export const query = graphql`
         }
         name
         title
+      }
+      leadership {
+        id
+        headshot {
+          description
+          gatsbyImageData(layout: FULL_WIDTH)
+        }
+        name
+        title
+        bio {
+          childMarkdownRemark {
+            html
+          }
+        }
       }
       studioGallery {
         id

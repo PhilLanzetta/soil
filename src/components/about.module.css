@@ -63,12 +63,11 @@
   font-weight: bold;
   gap: 20px;
   scroll-margin-top: 80px;
-  margin-bottom: 100px;
+  margin-bottom: 200px;
 }
 
 .founders {
   grid-column: 2 / 5;
-  margin-bottom: 100px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
@@ -108,13 +107,29 @@
 }
 
 .tertiarySectionHeading {
-  margin-bottom: 100px;
+  margin-bottom: 80px;
+}
+
+.tertiarySectionHeading ol {
+  list-style-position: inside;
+}
+
+.contactInfo {
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column: 2 / 5;
 }
 
 .threeColumn,
 .threeColumnAward {
   column-count: 3;
+  -moz-column-fill: balance;
+  column-fill: balance;
   grid-column: 2 / 5;
+}
+
+.contactInfo p {
+  grid-column: span 1;
 }
 
 .threeColumnSpan,
@@ -134,7 +149,7 @@
 
 .awardsHeading {
   grid-column: 2 / 5;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .secondaryBigHeading {
@@ -150,10 +165,6 @@
   grid-column: 2;
 }
 
-.jobLink {
-  font-size: 2rem;
-}
-
 .objectiveIntroText {
   margin-bottom: 40px;
   font-size: 2rem;
@@ -165,6 +176,13 @@
 
 .teamImage {
   margin-bottom: 10px;
+}
+
+.staffContainer {
+  grid-column: 2 / 5;
+  display: grid;
+  grid-template-columns: subgrid;
+  row-gap: 20px;
 }
 
 @media screen and (max-width: 800px) {

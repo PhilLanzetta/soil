@@ -1,0 +1,38 @@
+.expandingContainer {
+  margin-bottom: 40px;
+}
+
+.principalClosed p:nth-of-type(n + 3) {
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+  transition: all 400ms;
+  margin-bottom: 0;
+}
+
+.closed p:nth-of-type(n + 2) {
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+  transition: all 400ms;
+  margin-bottom: 0;
+}
+
+.principalOpen p:nth-of-type(n + 3) {
+  opacity: 1;
+  height: fit-content;
+  overflow: hidden;
+  transition: all 400ms;
+}
+
+.open p:nth-of-type(n + 2) {
+  opacity: 1;
+  height: fit-content;
+  transition: all 400ms;
+  overflow: hidden;
+}
+
+.closed,
+.open {
+  margin-top: 30px;
+}
