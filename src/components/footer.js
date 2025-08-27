@@ -126,7 +126,7 @@ const Footer = ({ location, setPopUp }) => {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?id=2759794&units=imperial&appid=${API_KEY}`
+        `https://api.openweathermap.org/data/2.5/weather?id=2759794&units=metric&appid=${API_KEY}`
       )
       const data = await response.json()
       setAmsterdamWeather(data)
@@ -181,7 +181,7 @@ const Footer = ({ location, setPopUp }) => {
                 {cetTime}
                 <br />
                 {amsterdamWeather && amsterdamWeather.main.temp.toFixed(0)}
-                &deg;F{" "}
+                &deg;C{" "}
                 {amsterdamWeather && (
                   <img
                     src={amWeatherIcon}
@@ -195,7 +195,7 @@ const Footer = ({ location, setPopUp }) => {
         </div>
         <div className={styles.footerGrouping}>
           <div className={styles.footerColumn}>
-            <Link to="/objectives/design-discovery">Objectives</Link>
+            <a href="http://localhost:8000/about/#careers">Careers</a>
             <Link to="/contact">Contact</Link>
             <Link to="/news">Press</Link>
           </div>

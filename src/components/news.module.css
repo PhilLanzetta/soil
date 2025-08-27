@@ -14,9 +14,13 @@
 .projectGrid {
   margin-top: 20px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   gap: 10px;
   row-gap: 90px;
+}
+
+.projectGrid p {
+  margin-bottom: 0;
 }
 
 .tileImageContainer {
@@ -43,8 +47,11 @@
 }
 
 .tileTextContainer {
-  aspect-ratio: 1 / 1.25;
-  overflow: hidden;
+ display: -webkit-box;
+ -webkit-box-orient: vertical;
+ line-clamp: 8;
+ -webkit-line-clamp: 8;
+ overflow: hidden;
 }
 
 .tagContainer {

@@ -76,26 +76,6 @@ const SingleProject = ({ data }) => {
             }}
           ></motion.div>
         )}
-        {objectives && (
-          <div className={styles.tagContainer}>
-            {objectives.map((objective, index) => (
-              <motion.div
-                initial={{ opacity: 0 }}
-                transition={{ duration: 1 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                key={index}
-              >
-                <Link
-                  to={`/objective/${objective.slug}`}
-                  className={styles.tagBtn}
-                >
-                  {objective.title}
-                </Link>
-              </motion.div>
-            ))}
-          </div>
-        )}
       </div>
       {banner2Media && (
         <motion.div
@@ -373,19 +353,6 @@ const SingleProject = ({ data }) => {
                       )}
                     </div>
                   </Link>
-                  {relatedProject.objectives && (
-                    <div className={styles.relatedTagContainer}>
-                      {relatedProject.objectives.map(objective => (
-                        <Link
-                          key={objective.id}
-                          to={`/objective/${objective.slug}`}
-                          className={styles.tagBtn}
-                        >
-                          {objective.title}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
                 </motion.div>
               ))}
             </ul>

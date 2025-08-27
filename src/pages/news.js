@@ -11,7 +11,7 @@ const News = ({ data }) => {
   )
   const [filter, setFilter] = useState("all")
 
-  const categories = ["Events", "Awards", "Press", "Project Updates"]
+  const categories = ["Press", "Awards", "Events"]
 
   return (
     <div className="margined-section">
@@ -83,7 +83,7 @@ const News = ({ data }) => {
                           imgStyle={{ objectFit: "cover" }}
                         ></GatsbyImage>
                       </div>
-                      <p className={styles.tileText}>{entry.title}</p>
+                      <p>{entry.title}</p>
                     </div>
                   )}
                   {entry.tileText && (
@@ -115,7 +115,7 @@ const News = ({ data }) => {
                           imgStyle={{ objectFit: "cover" }}
                         ></GatsbyImage>
                       </div>
-                      <p className={styles.tileText}>{entry.title}</p>
+                      <p>{entry.title}</p>
                     </div>
                   )}
                   {entry.tileText && (
