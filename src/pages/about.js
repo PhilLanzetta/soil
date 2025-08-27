@@ -21,6 +21,7 @@ const About = ({ data }) => {
     collections,
     careers,
     jobs,
+    featuredProjects,
     studioHeroImage,
     leadership,
     studioText,
@@ -72,7 +73,7 @@ const About = ({ data }) => {
 
       {studioGallery && (
         <div className={styles.galleryContainer}>
-          {studioGallery.map(item => {
+          {studioGallery.map((item, index) => {
             const imgWidth = (item.image?.width * 60) / item.image?.height
             return (
               <motion.figure
@@ -80,6 +81,7 @@ const About = ({ data }) => {
                 transition={{ duration: 1 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
+                key={index}
               >
                 <GatsbyImage
                   image={item.image.gatsbyImageData}
@@ -276,6 +278,29 @@ const About = ({ data }) => {
               __html: awards.childMarkdownRemark.html,
             }}
           ></motion.div>
+        </div>
+      )}
+      {featuredProjects && (
+        <div className={styles.featuredContainer}>
+          {featuredProjects.map(project => (
+            <motion.figure
+              initial={{ opacity: 0 }}
+              transition={{ duration: 1 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              key={project.id}
+              className={styles.featuredTileContainer}
+            >
+              <div className={styles.featuredTileImageContainer}>
+                <GatsbyImage
+                  image={project.tileImage.gatsbyImageData}
+                  alt={project.tileImage.description}
+                  className={styles.featuredTile}
+                ></GatsbyImage>
+              </div>
+              <figcaption>{project.title}</figcaption>
+            </motion.figure>
+          ))}
         </div>
       )}
       {collections && (
@@ -484,6 +509,16 @@ export const query = graphql`
         childMarkdownRemark {
           html
         }
+      }
+      featuredProjects {
+        title
+        tileImage {
+          description
+          gatsbyImageData(width: 600)
+          height
+          width
+        }
+        id
       }
       jobs {
         id

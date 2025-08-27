@@ -98,6 +98,28 @@
   scrollbar-width: none;
 }
 
+.featuredContainer {
+  display: flex;
+  gap: 20px;
+  overflow-x: scroll;
+  margin-bottom: 80px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.featuredTileContainer {
+  width: 15vw;
+  flex-shrink: 0;
+}
+
+.featuredTileImageContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  aspect-ratio: 1 / 1.25;
+  overflow: hidden;
+}
+
 .tertiarySectionHeading {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
