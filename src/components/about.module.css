@@ -9,15 +9,17 @@
   gap: 20px;
   font-size: 2rem;
   margin-top: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 100px;
   flex-wrap: wrap;
 }
 
-.subHeadingContainer a {
+.subHeadingContainer a,
+.studioAnchor {
   position: relative;
 }
 
-.subHeadingContainer a:focus::after {
+.subHeadingContainer a:focus::after,
+.studioAnchor::after {
   content: "";
   position: absolute;
   bottom: -3px;
@@ -29,9 +31,11 @@
 
 .banner {
   width: 100%;
+  max-height: 100vh;
+  overflow: hidden;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   margin-top: 80px;
   margin-bottom: 20px;
 }
@@ -43,6 +47,7 @@
 .introText {
   font-size: 2rem;
   margin-bottom: 100px;
+  scroll-margin-top: 80px;
 }
 
 .studioText {
@@ -70,7 +75,7 @@
 }
 
 .headshot {
-  width: 75%;
+  width: 100%;
   margin-bottom: 20px;
 }
 
@@ -80,17 +85,18 @@
   gap: 20px;
 }
 
-.galleryContainer figure {
-  margin-bottom: 30px;
-}
-
 .galleryContainer figcaption {
   font-weight: bold;
   margin-top: 5px;
 }
 
 .galleryContainer {
+  display: flex;
+  gap: 20px;
+  overflow-x: scroll;
   margin-bottom: 200px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .tertiarySectionHeading {
@@ -129,6 +135,11 @@
 .awardsHeading {
   grid-column: 2 / 5;
   margin-bottom: 10px;
+}
+
+.secondaryBigHeading {
+  font-size: 2rem;
+  margin-bottom: 20px;
 }
 
 .secondaryHeading {

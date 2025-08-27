@@ -2,14 +2,11 @@ import React, { useState } from "react"
 import { graphql } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
 import * as styles from "../components/about.module.css"
-import VideoPlayer from "../components/videoPlayer"
 import { motion } from "motion/react"
 import Seo from "../components/seo"
 
 const About = ({ data }) => {
   const {
-    banner,
-    introText,
     jingLiuHeadshot,
     florianIdenburgHeadshot,
     jingLiuBio,
@@ -23,6 +20,8 @@ const About = ({ data }) => {
     collections,
     careers,
     jobs,
+    studioHeroImage,
+    studioText,
     transparency,
   } = data.contentfulAboutPage
   const [activeVideo, setActiveVideo] = useState()
@@ -30,7 +29,9 @@ const About = ({ data }) => {
     <div className="margined-section">
       <h1 className={styles.title}>About</h1>
       <div className={styles.subHeadingContainer}>
-        <a href="#studio">Studio</a>
+        <a href="#studio" className={styles.studioAnchor}>
+          Studio
+        </a>
         <a href="#team">Team</a>
         <a href="#clients">Clients</a>
         <a href="#recognition">Recognition</a>
@@ -38,7 +39,20 @@ const About = ({ data }) => {
         <a href="#careers">Careers</a>
         <a href="#contact">Contact</a>
       </div>
-      {banner && (
+      {studioText && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          transition={{ duration: 1 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          dangerouslySetInnerHTML={{
+            __html: studioText.childMarkdownRemark.html,
+          }}
+          className={styles.introText}
+          id="studio"
+        ></motion.div>
+      )}
+      {studioHeroImage && (
         <motion.div
           initial={{ opacity: 0 }}
           transition={{ duration: 1 }}
@@ -46,98 +60,46 @@ const About = ({ data }) => {
           viewport={{ once: true }}
           className={styles.banner}
         >
-          {banner.imageId && (
-            <GatsbyImage
-              image={banner.image.gatsbyImageData}
-              alt={banner.image.description}
-              className={styles.bannerImage}
-            ></GatsbyImage>
-          )}
-          {banner.videoId && (
-            <VideoPlayer
-              video={banner}
-              activeVideo={activeVideo}
-              setActiveVideo={setActiveVideo}
-              banner={true}
-              videoId={`${banner.videoId}-banner`}
-            ></VideoPlayer>
-          )}
+          <GatsbyImage
+            image={studioHeroImage.image.gatsbyImageData}
+            alt={studioHeroImage.image.description}
+            className={styles.bannerImage}
+          ></GatsbyImage>
         </motion.div>
       )}
-      {introText && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          transition={{ duration: 1 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          dangerouslySetInnerHTML={{
-            __html: introText.childMarkdownRemark.html,
-          }}
-          className={styles.introText}
-          id="studio"
-        ></motion.div>
-      )}
+
       {studioGallery && (
         <div className={styles.galleryContainer}>
           {studioGallery.map(item => {
-            if (item.imageId) {
-              return (
-                <motion.figure
-                  initial={{ opacity: 0 }}
-                  transition={{ duration: 1 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                >
-                  <GatsbyImage
-                    image={item.image.gatsbyImageData}
-                    alt={item.image.description}
-                  ></GatsbyImage>
-                  <figcaption>{item.caption}</figcaption>
-                </motion.figure>
-              )
-            } else if (item.videoId) {
-              return (
-                <motion.figure
-                  initial={{ opacity: 0 }}
-                  transition={{ duration: 1 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                >
-                  <VideoPlayer
-                    video={item}
-                    activeVideo={activeVideo}
-                    setActiveVideo={setActiveVideo}
-                    videoId={item.videoId}
-                  ></VideoPlayer>
-                  <figcaption>{item.caption}</figcaption>
-                </motion.figure>
-              )
-            } else if (item.twoImageId) {
-              return (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  transition={{ duration: 1 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                  className={styles.twoColumnImageContainer}
-                >
-                  {item.images.map((image, index) => (
-                    <figure key={index}>
-                      <GatsbyImage
-                        image={image.image.gatsbyImageData}
-                        alt={image.image.description}
-                      ></GatsbyImage>
-                      <figcaption>{image.caption}</figcaption>
-                    </figure>
-                  ))}
-                </motion.div>
-              )
-            } else {
-              return <div>Unknown Content</div>
-            }
+            const imgWidth = (item.image?.width * 60) / item.image?.height
+            return (
+              <motion.figure
+                initial={{ opacity: 0 }}
+                transition={{ duration: 1 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+              >
+                <GatsbyImage
+                  image={item.image.gatsbyImageData}
+                  alt={item.image.description}
+                  className={styles.galleryImage}
+                  style={{ height: "60vh", width: `${imgWidth}vh` }}
+                ></GatsbyImage>
+                <figcaption>{item.caption}</figcaption>
+              </motion.figure>
+            )
           })}
         </div>
       )}
+      <motion.p
+        initial={{ opacity: 0 }}
+        transition={{ duration: 1 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        className={styles.secondaryBigHeading}
+      >
+        Team
+      </motion.p>
       <div className={styles.secondarySectionHeading} id="team">
         <motion.p
           initial={{ opacity: 0 }}
@@ -146,7 +108,7 @@ const About = ({ data }) => {
           viewport={{ once: true }}
           className={styles.secondaryHeading}
         >
-          Team
+          Principals
         </motion.p>
         <div className={styles.founders}>
           <div>
@@ -403,14 +365,6 @@ const About = ({ data }) => {
 export const query = graphql`
   query {
     contentfulAboutPage {
-      banner {
-        imageId: id
-        image {
-          gatsbyImageData(layout: FULL_WIDTH)
-          description
-        }
-        caption
-      }
       florianIdenburgBio {
         childMarkdownRemark {
           html
@@ -419,11 +373,6 @@ export const query = graphql`
       florianIdenburgHeadshot {
         description
         gatsbyImageData(layout: FULL_WIDTH)
-      }
-      introText {
-        childMarkdownRemark {
-          html
-        }
       }
       jingLiuBio {
         childMarkdownRemark {
@@ -444,23 +393,21 @@ export const query = graphql`
         title
       }
       studioGallery {
-        ... on ContentfulImageWrapper {
-          imageId: id
-          caption
-          image {
-            description
-            gatsbyImageData(layout: FULL_WIDTH)
-          }
+        id
+        caption
+        image {
+          description
+          gatsbyImageData(layout: FULL_WIDTH)
+          height
+          width
         }
-        ... on ContentfulTwoColumnImage {
-          twoImageId: id
-          images {
-            caption
-            image {
-              description
-              gatsbyImageData(layout: FULL_WIDTH)
-            }
-          }
+      }
+      studioHeroImage {
+        id
+        caption
+        image {
+          description
+          gatsbyImageData(layout: FULL_WIDTH)
         }
       }
       contact {
@@ -479,6 +426,11 @@ export const query = graphql`
         }
       }
       collections {
+        childMarkdownRemark {
+          html
+        }
+      }
+      studioText {
         childMarkdownRemark {
           html
         }
