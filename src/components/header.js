@@ -11,11 +11,11 @@ const Header = ({ location }) => {
   const isObjective = location.pathname.includes("/objective")
   const data = useStaticQuery(graphql`
     query {
-      allContentfulObjective {
+      allContentfulObjective(sort: { number: ASC }) {
         nodes {
           id
           slug
-          title
+          number
         }
       }
     }
@@ -208,7 +208,7 @@ const Header = ({ location }) => {
                   className={styles.objectiveLink}
                   activeClassName={styles.activeObjective}
                 >
-                  {objective.title}
+                  {objective.number}.
                 </Link>
               </motion.div>
             ))}

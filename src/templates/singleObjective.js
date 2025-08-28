@@ -8,6 +8,28 @@ import Seo from "../components/seo"
 const Objective = ({ data }) => {
   const { description, project, writing_entry } = data.contentfulObjective
 
+  const shuffleData = array => {
+    let currentIndex = array.length,
+      randomIndex
+
+    // While there remain elements to shuffle.
+    while (currentIndex !== 0) {
+      // Pick a remaining element.
+      randomIndex = Math.floor(Math.random() * currentIndex)
+      currentIndex--
+
+      // And swap it with the current element.
+      ;[array[currentIndex], array[randomIndex]] = [
+        array[randomIndex],
+        array[currentIndex],
+      ]
+    }
+
+    return array
+  }
+
+  const content = shuffleData(project.concat(writing_entry))
+
   return (
     <div className="margined-section">
       <div
@@ -16,43 +38,44 @@ const Objective = ({ data }) => {
         }}
         className={styles.description}
       ></div>
-      {project && project.length > 0 && (
+      {content && content.length > 0 && (
         <div className={styles.categoryContainer}>
-          <h2>Work</h2>
           <div className={styles.itemsContainer}>
-            {project.map(item => (
-              <ProjectTile key={item.id} project={item}></ProjectTile>
-            ))}
-          </div>
-        </div>
-      )}
-      {writing_entry && writing_entry.length > 0 && (
-        <div className={styles.categoryContainer}>
-          <h2>Writing</h2>
-          <div className={styles.itemsContainer}>
-            {writing_entry.map(entry => (
-              <motion.div
-                key={entry.id}
-                initial={{ opacity: 0 }}
-                transition={{ duration: 1 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                className={styles.writingEntry}
-              >
-                <Link to={`/writing/${entry.slug}`}>
-                  {entry.tileTextLong && (
-                    <div className={styles.tileTextContainer}>
-                      <div
-                        className={styles.tileText}
-                        dangerouslySetInnerHTML={{
-                          __html: entry.tileTextLong.childMarkdownRemark.html,
-                        }}
-                      ></div>
-                    </div>
-                  )}
-                </Link>
-              </motion.div>
-            ))}
+            {content.map(item => {
+              if (item.projectId) {
+                return (
+                  <ProjectTile
+                    key={item.projectId}
+                    project={item}
+                  ></ProjectTile>
+                )
+              } else if (item.writingId) {
+                return (
+                  <motion.div
+                    key={item.writingId}
+                    initial={{ opacity: 0 }}
+                    transition={{ duration: 1 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    className={styles.writingEntry}
+                  >
+                    <Link to={`/writing/${item.slug}`}>
+                      {item.tileTextLong && (
+                        <div className={styles.tileTextContainer}>
+                          <div
+                            className={styles.tileText}
+                            dangerouslySetInnerHTML={{
+                              __html:
+                                item.tileTextLong.childMarkdownRemark.html,
+                            }}
+                          ></div>
+                        </div>
+                      )}
+                    </Link>
+                  </motion.div>
+                )
+              }
+            })}
           </div>
         </div>
       )}
@@ -71,7 +94,7 @@ export const query = graphql`
         }
       }
       project {
-        id
+        projectId: id
         tileImage {
           description
           gatsbyImageData
@@ -87,7 +110,7 @@ export const query = graphql`
         slug
       }
       writing_entry {
-        id
+        writingId: id
         slug
         tileTextLong {
           childMarkdownRemark {
@@ -100,13 +123,6 @@ export const query = graphql`
           slug
           title
         }
-      }
-    }
-    allContentfulObjective {
-      nodes {
-        id
-        slug
-        title
       }
     }
   }
