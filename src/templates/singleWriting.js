@@ -8,12 +8,13 @@ import ProjectTile from "../components/projectTile"
 import Seo from "../components/seo"
 
 const SingleWriting = ({ data }) => {
-  const { title, author, content, relatedContent, publisher, date } =
+  const { title, author, content, relatedContent, publisher, date, subtitle } =
     data.contentfulWritingEntry
   const [activeVideo, setActiveVideo] = useState()
   return (
     <div className="margined-section">
       <h1 className={styles.title}>{title}</h1>
+      {subtitle && <h2 className={styles.subtitle}>{subtitle}</h2>}
       <h2>
         {author && <span>{author}</span>}
         {author && <span> – </span>}
@@ -126,6 +127,7 @@ export const query = graphql`
   query getSingleWriting($slug: String) {
     contentfulWritingEntry(slug: { eq: $slug }) {
       title
+      subtitle
       author
       publisher
       date(locale: "America/New_York")

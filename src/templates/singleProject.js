@@ -140,11 +140,13 @@ const SingleProject = ({ data }) => {
                 <br />
                 {squareMeters && (
                   <span>
-                    {squareMeters} m<sup>2</sup>
+                    {squareMeters.toLocaleString("en-US")} m<sup>2</sup>
                   </span>
                 )}
                 {squareMeters && squareFeet && <span> / </span>}
-                {squareFeet && <span>{squareFeet} sf</span>}
+                {squareFeet && (
+                  <span>{squareFeet.toLocaleString("en-US")} sf</span>
+                )}
               </div>
             )}
             {status && (

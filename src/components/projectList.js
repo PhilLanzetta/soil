@@ -12,7 +12,7 @@ const ProjectList = ({ projects, setProjects }) => {
   const [sizeToggle, setSizeToggle] = useState(false)
   const [locationToggle, setLocationToggle] = useState(false)
   const [yearToggle, setYearToggle] = useState(true)
-  const [activeSort, setActiveSort] = useState("year")
+  const [activeSort, setActiveSort] = useState()
 
   const orderByProject = () => {
     let orderedProjects
@@ -174,17 +174,22 @@ const ProjectList = ({ projects, setProjects }) => {
                   </p>
                   <p className={styles.status}>
                     {project.status}{" "}
-                    {project.status !== "In Progress" && (
+                    {project.status !== "In Process" && (
                       <span>{project.year}</span>
                     )}
                   </p>
                   <p>
                     {project.squareMeters && (
                       <span>
-                        {project.squareMeters} m<sup>2</sup> /{" "}
+                        {project.squareMeters.toLocaleString("en-US")} m
+                        <sup>2</sup> /{" "}
                       </span>
                     )}
-                    {project.squareFeet && <span>{project.squareFeet} sf</span>}
+                    {project.squareFeet && (
+                      <span>
+                        {project.squareFeet.toLocaleString("en-US")} sf
+                      </span>
+                    )}
                   </p>
                 </Link>
               </motion.div>

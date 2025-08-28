@@ -4,6 +4,11 @@
   padding-bottom: 0;
 }
 
+.subtitle {
+  font-size: 3rem;
+  margin-bottom: 30px;
+}
+
 .twoColumnImageContainer {
   display: grid;
   grid-template-columns: 1fr 1fr;
