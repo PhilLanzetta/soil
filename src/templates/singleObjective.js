@@ -74,6 +74,8 @@ const Objective = ({ data }) => {
                     </Link>
                   </motion.div>
                 )
+              } else {
+                return null
               }
             })}
           </div>

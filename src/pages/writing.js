@@ -7,9 +7,43 @@ const Writing = ({ data }) => {
   const [writingEntries, setWritingEntries] = useState(
     data.allContentfulWritingEntry.nodes
   )
+
+  function onlyUnique(value, index, array) {
+    return array.indexOf(value) === index
+  }
+
+  const [filter, setFilter] = useState("all")
+  const categories = ["Form", "Theory", "Process"]
+
   return (
     <div className="margined-section">
       <h1 className={styles.title}>Writing</h1>
+      <div className={styles.filterContainer}>
+        <button
+          onClick={() => {
+            setFilter("all")
+            setWritingEntries(data.allContentfulWritingEntry.nodes)
+          }}
+          className={filter === "all" ? styles.active : ""}
+        >
+          All
+        </button>
+        {categories.map(category => (
+          <button
+            onClick={() => {
+              setWritingEntries(
+                data.allContentfulWritingEntry.nodes.filter(entry =>
+                  entry.category?.includes(category)
+                )
+              )
+              setFilter(category)
+            }}
+            className={filter === category ? styles.active : ""}
+          >
+            {category}
+          </button>
+        ))}
+      </div>
       <div className={styles.projectGrid}>
         {writingEntries.map(entry => (
           <motion.div
@@ -57,6 +91,7 @@ export const query = graphql`
         }
         title
         author
+        category
         publisher
         objectives {
           id

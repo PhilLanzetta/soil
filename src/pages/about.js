@@ -5,6 +5,7 @@ import * as styles from "../components/about.module.css"
 import { motion } from "motion/react"
 import Seo from "../components/seo"
 import ExpandingText from "../components/expandingText"
+import useWindowSize from "../utils/useWindowSize"
 
 const About = ({ data }) => {
   const {
@@ -28,6 +29,8 @@ const About = ({ data }) => {
     transparency,
   } = data.contentfulAboutPage
   const [activeVideo, setActiveVideo] = useState()
+  const { height, width } = useWindowSize()
+  const isMobile = height > width
   return (
     <div className="margined-section">
       <h1 className={styles.title}>About</h1>
@@ -74,7 +77,9 @@ const About = ({ data }) => {
       {studioGallery && (
         <div className={styles.galleryContainer}>
           {studioGallery.map((item, index) => {
-            const imgWidth = (item.image?.width * 60) / item.image?.height
+            const imgWidth = isMobile
+              ? (item.image?.width * 30) / item.image?.height
+              : (item.image?.width * 60) / item.image?.height
             return (
               <motion.figure
                 initial={{ opacity: 0 }}
@@ -87,7 +92,10 @@ const About = ({ data }) => {
                   image={item.image.gatsbyImageData}
                   alt={item.image.description}
                   className={styles.galleryImage}
-                  style={{ height: "60vh", width: `${imgWidth}vh` }}
+                  style={{
+                    height: isMobile ? "30vh" : "60vh",
+                    width: `${imgWidth}vh`,
+                  }}
                 ></GatsbyImage>
                 <figcaption>{item.caption}</figcaption>
               </motion.figure>
