@@ -32,8 +32,6 @@ const Objective = ({ data }) => {
     item => item !== null
   )
 
-  console.log(content)
-
   return (
     <div className="margined-section">
       <div
