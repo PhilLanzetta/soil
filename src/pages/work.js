@@ -104,8 +104,8 @@ const Work = ({ data, location }) => {
   }
 
   useEffect(() => {
-    if (localStorage.getItem("view")) {
-      setView(localStorage.getItem("view"))
+    if (sessionStorage.getItem("view")) {
+      setView(sessionStorage.getItem("view"))
     } else {
       setView("grid")
     }
@@ -270,7 +270,7 @@ const Work = ({ data, location }) => {
           <button
             className={styles.viewBtn}
             onClick={() => {
-              localStorage.setItem("view", "grid")
+              sessionStorage.setItem("view", "grid")
               setView("grid")
             }}
           >
@@ -291,7 +291,7 @@ const Work = ({ data, location }) => {
           <button
             className={styles.viewBtn}
             onClick={() => {
-              localStorage.setItem("view", "list")
+              sessionStorage.setItem("view", "list")
               setView("list")
             }}
           >
@@ -332,7 +332,7 @@ const Work = ({ data, location }) => {
           <button
             className={styles.viewBtn}
             onClick={() => {
-              localStorage.setItem("view", "map")
+              sessionStorage.setItem("view", "map")
               setView("map")
             }}
           >
