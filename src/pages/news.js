@@ -294,6 +294,7 @@ const News = ({ data }) => {
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 className={styles.newsRow}
+                key={entry.id}
               >
                 {entry.linkOutFromTile ? (
                   <a

@@ -39,6 +39,12 @@ const Header = ({ location }) => {
     visible: { opacity: 1 },
   }
 
+  const container = {
+    out: { opacity: 0, transition: { duration: 0.5 } },
+    in: { opacity: 1, transition: { duration: 1 } },
+    start: { opacity: 0 },
+  }
+
   return (
     <>
       <header className={styles.header}>
@@ -192,29 +198,37 @@ const Header = ({ location }) => {
           </AnimatePresence>
         </div>
       </header>
-      {isObjective && (
-        <div className={styles.objectiveContainer}>
-          <h1 className={styles.title}>Objectives</h1>
-          <div className={styles.subHeadingContainer}>
-            {objectives.map(objective => (
-              <motion.div
-                initial={{ opacity: 0 }}
-                transition={{ duration: 1 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-              >
-                <Link
-                  to={`/objective/${objective.slug}`}
-                  className={styles.objectiveLink}
-                  activeClassName={styles.activeObjective}
+      <AnimatePresence>
+        {isObjective && (
+          <motion.div
+            className={styles.objectiveContainer}
+            variants={container}
+            initial="start"
+            animate="in"
+            exit="out"
+          >
+            <h1 className={styles.title}>Objectives</h1>
+            <div className={styles.subHeadingContainer}>
+              {objectives.map(objective => (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  transition={{ duration: 1 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
                 >
-                  {objective.number}.
-                </Link>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      )}
+                  <Link
+                    to={`/objective/${objective.slug}`}
+                    className={styles.objectiveLink}
+                    activeClassName={styles.activeObjective}
+                  >
+                    {objective.number}.
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
       {isMobile && menuOpen && <div className={styles.mobileOverlay}></div>}
     </>
   )

@@ -150,6 +150,9 @@
   .filterOptionsContainer {
     gap: 5vw;
   }
+  .optionsContainer {
+    align-items: flex-start;
+  }
 }
 
 @media screen and (max-width: 650px) {

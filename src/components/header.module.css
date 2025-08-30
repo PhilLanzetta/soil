@@ -135,7 +135,7 @@
 
 .title {
   margin-bottom: 0;
-  padding-top: 100px;
+  padding-top: 140px;
   padding-bottom: 0;
 }
 
@@ -159,7 +159,7 @@
 
 @media screen and (max-width: 800px) {
   .title {
-    padding-top: 35px;
+    padding-top: 70px;
   }
 
   .subHeadingContainer {

@@ -194,6 +194,10 @@
     padding-top: 35px;
   }
 
+  .newsRowContent {
+    margin-bottom: 20px;
+  }
+
   .filterContainer {
     row-gap: 5px;
     flex-wrap: wrap;
