@@ -68,6 +68,7 @@ const News = ({ data }) => {
     setNewsEntries(orderedNews)
     setDateToggle(!dateToggle)
     setActiveSort("date")
+    setTitleToggle(false)
   }
 
   return (
