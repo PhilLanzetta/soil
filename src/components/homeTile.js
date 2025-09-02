@@ -59,7 +59,6 @@ const HomeTile = ({ tile, index }) => {
     rowStyle = {
       width: "100%",
       position: "relative",
-      zIndex: 50,
       y: yFormat,
       paddingBottom: bottomPadding,
     }
@@ -67,7 +66,6 @@ const HomeTile = ({ tile, index }) => {
     rowStyle = {
       width: isMobile ? "80%" : "63%",
       position: "relative",
-      zIndex: 50,
       marginLeft: isMobile ? (even ? "20%" : "0") : even ? "37%" : "0",
       y: yFormat,
       paddingBottom: bottomPadding,
@@ -78,6 +76,7 @@ const HomeTile = ({ tile, index }) => {
       position: "relative",
       marginLeft: isMobile ? (even ? "45%" : "0") : even ? "49.5%" : "12.5%",
       y: yFormat,
+      zIndex: 50,
       paddingBottom: bottomPadding,
     }
   } else {
@@ -86,6 +85,7 @@ const HomeTile = ({ tile, index }) => {
       position: "relative",
       marginLeft: isMobile ? (even ? "40%" : "15%") : even ? "60%" : "15%",
       y: yFormat,
+      zIndex: 50,
       paddingBottom: bottomPadding,
     }
   }
