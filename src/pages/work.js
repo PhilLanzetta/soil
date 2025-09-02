@@ -23,7 +23,7 @@ const Work = ({ data, location }) => {
     location.state?.statusFilter || []
   )
 
-  const url = new URL(`${location.origin}/work`)
+  const url = new URL(`${process.env.GATSBY_SITE_URL}/work`)
   const searchParams = new URLSearchParams(location.search)
 
   useEffect(() => {
