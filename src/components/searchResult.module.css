@@ -9,16 +9,25 @@
   min-width: 100%;
 }
 
-.tileText {
+.tileText,
+.tileText p {
   font-size: 2rem;
 }
 
 .tileTextContainer {
- display: -webkit-box;
- -webkit-box-orient: vertical;
- line-clamp: 4;
- -webkit-line-clamp: 10;
- overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  line-clamp: 4;
+  -webkit-line-clamp: 10;
+  overflow: hidden;
+}
+
+.tileTextContainer p {
+  margin-bottom: 0;
+}
+
+.tileInfo {
+  margin-top: 10px;
 }
 
 .tagContainer {
@@ -40,13 +49,36 @@
   position: relative;
 }
 
-.outLink {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  padding: 5px 10px;
-  background: #e4e4e4;
-  border-radius: 3px;
-  font-weight: 100;
-  z-index: 20;
+.listResult {
+  display: grid;
+  grid-template-columns: 3fr 1fr 1fr;
+  border-bottom: 1px solid #000;
+  align-items: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  gap: 10px;
+}
+
+.listTitle {
+  font-size: 2rem;
+}
+
+.tileContainer {
+  margin-bottom: 80px;
+}
+
+@media screen and (max-width: 800px) {
+  .listTitle {
+    grid-column: span 2;
+  }
+
+  .listResult {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+
+  .listDate {
+    text-align: right;
+    margin-bottom: 20px;
+  }
 }

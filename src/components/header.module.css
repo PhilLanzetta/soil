@@ -167,4 +167,9 @@
     font-size: 1.25rem;
     margin-top: 5px;
   }
+
+  .closeButton {
+    height: 2rem;
+    width: 2rem;
+  }
 }

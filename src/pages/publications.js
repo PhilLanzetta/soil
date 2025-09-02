@@ -190,7 +190,46 @@ const Publications = ({ data }) => {
             transition={{ duration: 0.7 }}
             key={pubEntries.length}
             className={styles.newsList}
-          ></motion.div>
+          >
+            {!isMobile && (
+              <div className={styles.projectListHeader}>
+                <button onClick={orderByTitle}>
+                  Title{" "}
+                  {activeSort === "title" && (
+                    <PiCaretUpLight
+                      className={titleToggle ? "" : styles.toggleDown}
+                    ></PiCaretUpLight>
+                  )}
+                </button>
+                <button onClick={orderByDate}>
+                  Date{" "}
+                  {activeSort === "date" && (
+                    <PiCaretUpLight
+                      className={dateToggle ? "" : styles.toggleDown}
+                    ></PiCaretUpLight>
+                  )}
+                </button>
+              </div>
+            )}
+            {pubEntries.map(entry => (
+              <motion.div
+                initial={{ opacity: 0 }}
+                transition={{ duration: 1 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                className={styles.newsRow}
+                key={entry.id}
+              >
+                <Link
+                  className={styles.newsRowContent}
+                  to={`/publications/${entry.slug}`}
+                >
+                  <div className={styles.listTitle}>{entry.title}</div>
+                  <div className={styles.listDate}>{entry.date}</div>
+                </Link>
+              </motion.div>
+            ))}
+          </motion.div>
         )}
       </AnimatePresence>
     </div>

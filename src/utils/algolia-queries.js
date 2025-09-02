@@ -158,7 +158,7 @@ const pageToAlgoliaRecord = edge => {
   } else if (publication) {
     return {
       objectID: publication,
-      searchCategory: "Publication",
+      searchCategory: "Publications",
       ...rest,
     }
   } else {

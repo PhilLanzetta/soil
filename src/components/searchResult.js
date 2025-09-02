@@ -18,6 +18,8 @@ const Hit = ({ hit }) => {
     linkOutFromTile,
     tileText,
     tileTextLong,
+    author,
+    publisher,
   } = hit
 
   return (
@@ -33,6 +35,7 @@ const Hit = ({ hit }) => {
               transition={{ duration: 1 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
+              className={styles.tileContainer}
             >
               {linkOutFromTile ? (
                 <a
@@ -41,7 +44,6 @@ const Hit = ({ hit }) => {
                   rel="noreferrer"
                   className={styles.externalContainer}
                 >
-                  <div className={styles.outLink}> → </div>
                   {tileImage && (
                     <div>
                       <div className={styles.tileImageContainer}>
@@ -101,6 +103,7 @@ const Hit = ({ hit }) => {
               transition={{ duration: 1 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
+              className={styles.tileContainer}
             >
               <Link to={`/writing/${slug}`}>
                 {tileTextLong && (
@@ -113,15 +116,22 @@ const Hit = ({ hit }) => {
                     ></div>
                   </div>
                 )}
+                {(author || publisher) && (
+                  <div className={styles.tileInfo}>
+                    {author && <div>{author}</div>}
+                    {publisher && <div>{publisher}</div>}
+                  </div>
+                )}
               </Link>
             </motion.div>
           )}
-          {searchCategory === "Publication" && (
+          {searchCategory === "Publications" && (
             <motion.div
               initial={{ opacity: 0 }}
               transition={{ duration: 1 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
+              className={styles.tileContainer}
             >
               <Link to={`/publications/${slug}`}>
                 <div className={styles.tileImageContainer}>

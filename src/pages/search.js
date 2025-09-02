@@ -14,6 +14,7 @@ import {
   useHits,
 } from "react-instantsearch-hooks-web"
 import Hit from "../components/searchResult"
+import ListHit from "../components/searchListResult"
 import Seo from "../components/seo"
 import { BsArrowRight, BsArrowLeft, BsFilterLeft } from "react-icons/bs"
 import { GrFormClose } from "react-icons/gr"
@@ -114,6 +115,14 @@ const Search = ({ data, location }) => {
   const backgroundImages = shuffleData(data.allContentfulProject.nodes)
   const objectives = data.allContentfulObjective.nodes
 
+  useEffect(() => {
+      if (sessionStorage.getItem("searchView")) {
+        setView(sessionStorage.getItem("searchView"))
+      } else {
+        setView("grid")
+      }
+    }, [])
+
   return (
     <div className={styles.searchPageContainer}>
       <InstantSearch
@@ -159,7 +168,7 @@ const Search = ({ data, location }) => {
               onSubmit={() => setSearched(true)}
             />
             <div className={styles.objectives}>
-              <p>Explore Objectives</p>
+              <p>Explore</p>
               <div className={styles.tagContainer}>
                 {objectives.map((objective, index) => (
                   <Link
@@ -188,7 +197,7 @@ const Search = ({ data, location }) => {
                     <button
                       className={styles.viewBtn}
                       onClick={() => {
-                        localStorage.setItem("view", "grid")
+                        sessionStorage.setItem("searchView", "grid")
                         setView("grid")
                       }}
                     >
@@ -213,7 +222,7 @@ const Search = ({ data, location }) => {
                     <button
                       className={styles.viewBtn}
                       onClick={() => {
-                        localStorage.setItem("view", "list")
+                        sessionStorage.setItem("searchView", "list")
                         setView("list")
                       }}
                     >
@@ -261,6 +270,12 @@ const Search = ({ data, location }) => {
                   <Hits
                     hitComponent={Hit}
                     classNames={{ root: styles.hitsContainer }}
+                  />
+                )}
+                {view === "list" && (
+                  <Hits
+                    hitComponent={ListHit}
+                    classNames={{ root: styles.hitsListContainer }}
                   />
                 )}
               </div>

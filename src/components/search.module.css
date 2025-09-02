@@ -119,6 +119,11 @@
   gap: 10px;
 }
 
+.hitsListContainer ol {
+  list-style: none;
+  margin-top: 20px;
+ }
+
 .searchOptionsBar {
   margin-top: 10px;
   display: flex;
