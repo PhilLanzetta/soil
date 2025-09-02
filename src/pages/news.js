@@ -7,11 +7,15 @@ import Seo from "../components/seo"
 import useWindowSize from "../utils/useWindowSize"
 import { PiCaretUpLight } from "react-icons/pi"
 
-const News = ({ data }) => {
+const News = ({ data, location }) => {
   const [newsEntries, setNewsEntries] = useState(
-    data.allContentfulNewsEntry.nodes
+    location.state
+      ? data.allContentfulNewsEntry.nodes.filter(item =>
+          item.category.includes("Press")
+        )
+      : data.allContentfulNewsEntry.nodes
   )
-  const [filter, setFilter] = useState("all")
+  const [filter, setFilter] = useState(location.state ? "Press" : "all")
   const [view, setView] = useState()
   const [activeSort, setActiveSort] = useState("date")
   const [titleToggle, setTitleToggle] = useState(false)

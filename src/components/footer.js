@@ -199,7 +199,9 @@ const Footer = ({ location, setPopUp }) => {
               Careers
             </a>
             <Link to="/contact">Contact</Link>
-            <Link to="/news">Press</Link>
+            <Link to="/news" state={{ filter: "Press" }}>
+              Press
+            </Link>
           </div>
           <div className={styles.footerColumn}>
             <button
