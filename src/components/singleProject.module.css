@@ -164,7 +164,6 @@
   left: 0;
   height: 100vh;
   width: 100vw;
-  background: rgba(255, 255, 255, 0.5);
   z-index: 200000;
 }
 
@@ -257,6 +256,15 @@
   border: 1px solid #e4e4e4;
 }
 
+.slideshowBackground {
+  backdrop-filter: blur(5px);
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+}
+
 @media screen and (max-width: 800px) {
   .bannerOneMedia {
     height: 85vh;
@@ -332,5 +340,10 @@
 
   .backBtn {
     left: 0px;
+  }
+
+  .closeButton {
+    height: 2rem;
+    width: 2rem;
   }
 }

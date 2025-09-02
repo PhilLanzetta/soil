@@ -72,152 +72,161 @@ const ZoomableImage = ({ images }) => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.7 }}
                 key="pop-up"
-                className={styles.imagePopUpContainer}
               >
-                <button
-                  className={styles.closeButton}
-                  onClick={() => setPopUpOpen(false)}
-                  aria-label="close"
-                >
-                  <span></span>
-                  <span></span>
-                </button>
-                <TransformWrapper initialScale={1} centerOnInit={true}>
-                  {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
-                    <>
-                      <TransformComponent
-                        wrapperStyle={{
-                          position: "relative",
-                          height: "100vh",
-                          width: "100vw",
-                        }}
-                      >
-                        <motion.div
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          key={popUp}
+                <div className={styles.imagePopUpContainer}>
+                  <button
+                    className={styles.closeButton}
+                    onClick={() => setPopUpOpen(false)}
+                    aria-label="close"
+                  >
+                    <span></span>
+                    <span></span>
+                  </button>
+                  <TransformWrapper initialScale={1} centerOnInit={true}>
+                    {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
+                      <>
+                        <TransformComponent
+                          wrapperStyle={{
+                            position: "relative",
+                            height: "100vh",
+                            width: "100vw",
+                          }}
                         >
-                          <GatsbyImage
-                            image={images[popUp].image?.gatsbyImageData}
-                            alt={images[popUp].image?.description}
-                            className={styles.popUpImageImg}
-                            style={{
-                              height: isMobile ? "auto" : "80vh",
-                              marginLeft: isMobile ? "15px" : "0",
-                              width: isMobile
-                                ? "calc(100% - 30px)"
-                                : `${
-                                    (images[popUp].image?.width * 80) /
-                                    images[popUp].image?.height
-                                  }vh`,
-                            }}
-                          ></GatsbyImage>
-                        </motion.div>
-                      </TransformComponent>
-                      <div className={styles.popUpControls}>
-                        <button
-                          className={styles.popUpControlsBtn}
-                          onClick={() => zoomOut()}
-                          aria-label="zoom out"
-                        >
-                          <svg
-                            viewBox="0 0 35 35"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
+                          <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            key={popUp}
                           >
-                            <circle
-                              cx="17.5"
-                              cy="17.5"
-                              r="16.5"
-                              stroke="black"
-                            />
-                            <line
-                              x1="7"
-                              y1="17.5"
-                              x2="28"
-                              y2="17.5"
-                              stroke="black"
+                            <GatsbyImage
+                              image={images[popUp].image?.gatsbyImageData}
+                              alt={images[popUp].image?.description}
+                              className={styles.popUpImageImg}
+                              style={{
+                                height: isMobile ? "auto" : "80vh",
+                                marginLeft: isMobile ? "15px" : "0",
+                                width: isMobile
+                                  ? "calc(100% - 30px)"
+                                  : `${
+                                      (images[popUp].image?.width * 80) /
+                                      images[popUp].image?.height
+                                    }vh`,
+                              }}
+                            ></GatsbyImage>
+                          </motion.div>
+                        </TransformComponent>
+                        <div className={styles.popUpControls}>
+                          <button
+                            className={styles.popUpControlsBtn}
+                            onClick={() => zoomOut()}
+                            aria-label="zoom out"
+                          >
+                            <svg
+                              viewBox="0 0 35 35"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <circle
+                                cx="17.5"
+                                cy="17.5"
+                                r="16.5"
+                                stroke="black"
+                              />
+                              <line
+                                x1="7"
+                                y1="17.5"
+                                x2="28"
+                                y2="17.5"
+                                stroke="black"
+                                strokeWidth={3}
+                              />
+                            </svg>
+                          </button>
+                          <button
+                            className={styles.popUpControlsBtn}
+                            onClick={() => zoomIn()}
+                            aria-label="zoom in"
+                          >
+                            <svg
+                              viewBox="0 0 35 35"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <circle
+                                cx="17.5"
+                                cy="17.5"
+                                r="16.5"
+                                stroke="black"
+                              />
+                              <line
+                                x1="17.5"
+                                y1="7"
+                                x2="17.5"
+                                y2="28"
+                                stroke="black"
+                                strokeWidth={3}
+                              />
+                              <line
+                                x1="7"
+                                y1="17.5"
+                                x2="28"
+                                y2="17.5"
+                                stroke="black"
+                                strokeWidth={3}
+                              />
+                            </svg>
+                          </button>
+                        </div>
+                        <button className={styles.backBtn} onClick={handleBack}>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 13.047 28.672"
+                          >
+                            <path
+                              id="Polygon_4"
+                              data-name="Polygon 4"
+                              d="M0,12.009,14.011,0,28.021,12.009"
+                              transform="translate(0.659 28.346) rotate(-90)"
+                              fill="none"
+                              stroke="#000"
                               strokeWidth={3}
                             />
                           </svg>
                         </button>
                         <button
-                          className={styles.popUpControlsBtn}
-                          onClick={() => zoomIn()}
-                          aria-label="zoom in"
+                          className={styles.forwardBtn}
+                          onClick={handleForward}
                         >
                           <svg
-                            viewBox="0 0 35 35"
-                            fill="none"
                             xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 13.047 28.672"
                           >
-                            <circle
-                              cx="17.5"
-                              cy="17.5"
-                              r="16.5"
-                              stroke="black"
-                            />
-                            <line
-                              x1="17.5"
-                              y1="7"
-                              x2="17.5"
-                              y2="28"
-                              stroke="black"
-                              strokeWidth={3}
-                            />
-                            <line
-                              x1="7"
-                              y1="17.5"
-                              x2="28"
-                              y2="17.5"
-                              stroke="black"
+                            <path
+                              id="Polygon_3"
+                              data-name="Polygon 3"
+                              d="M0,12.009,14.011,0,28.021,12.009"
+                              transform="translate(12.389 0.325) rotate(90)"
+                              fill="none"
+                              stroke="#000"
                               strokeWidth={3}
                             />
                           </svg>
                         </button>
-                      </div>
-                      <button className={styles.backBtn} onClick={handleBack}>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 13.047 28.672"
-                        >
-                          <path
-                            id="Polygon_4"
-                            data-name="Polygon 4"
-                            d="M0,12.009,14.011,0,28.021,12.009"
-                            transform="translate(0.659 28.346) rotate(-90)"
-                            fill="none"
-                            stroke="#000"
-                            strokeWidth={3}
-                          />
-                        </svg>
-                      </button>
-                      <button
-                        className={styles.forwardBtn}
-                        onClick={handleForward}
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 13.047 28.672"
-                        >
-                          <path
-                            id="Polygon_3"
-                            data-name="Polygon 3"
-                            d="M0,12.009,14.011,0,28.021,12.009"
-                            transform="translate(12.389 0.325) rotate(90)"
-                            fill="none"
-                            stroke="#000"
-                            strokeWidth={3}
-                          />
-                        </svg>
-                      </button>
-                    </>
-                  )}
-                </TransformWrapper>
+                      </>
+                    )}
+                  </TransformWrapper>
+                </div>
               </motion.div>
+            )}
+            {popUpOpen && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                key={popUp}
+                className={styles.slideshowBackground}
+              ></motion.div>
             )}
           </AnimatePresence>
         </motion.figure>
