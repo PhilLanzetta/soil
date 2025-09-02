@@ -32,6 +32,8 @@ const Footer = ({ location, setPopUp }) => {
     })
   )
 
+  console.log(location)
+
   const [cetTime, setCetTime] = useState(
     new Date().toLocaleTimeString("en-US", {
       timeZone: "Europe/Amsterdam",
@@ -195,7 +197,7 @@ const Footer = ({ location, setPopUp }) => {
         </div>
         <div className={styles.footerGrouping}>
           <div className={styles.footerColumn}>
-            <a href="http://localhost:8000/about/#careers">Careers</a>
+            <a href={`${location.origin}/about/#careers`}>Careers</a>
             <Link to="/contact">Contact</Link>
             <Link to="/news">Press</Link>
           </div>

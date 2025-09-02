@@ -23,7 +23,7 @@ const Work = ({ data, location }) => {
     location.state?.statusFilter || []
   )
 
-  const url = new URL(process.env.GATSBY_SITE_URL)
+  const url = new URL(`${location.origin}/work`)
   const searchParams = new URLSearchParams(location.search)
 
   useEffect(() => {
@@ -188,7 +188,7 @@ const Work = ({ data, location }) => {
       handleFilter()
       updateURL()
     }
-  }, [typologyFilter, regionFilter, statusFilter])
+  }, [typologyFilter, regionFilter, statusFilter, filterOpen])
 
   return (
     <div className={styles.workPage}>
