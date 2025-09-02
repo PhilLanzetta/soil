@@ -179,6 +179,13 @@
   font-size: 2rem;
 }
 
+@media screen and (max-width: 1200px) {
+  .projectGrid {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 10px;
+  }
+}
+
 @media screen and (max-width: 900px) {
   .newsRowContent {
     align-items: start;

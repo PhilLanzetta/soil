@@ -73,6 +73,12 @@ const Objective = ({ data }) => {
                           ></div>
                         </div>
                       )}
+                      {(item.author || item.publisher) && (
+                        <div className={styles.tileInfo}>
+                          {item.author && <div>{item.author}</div>}
+                          {item.publisher && <div>{item.publisher}</div>}
+                        </div>
+                      )}
                     </Link>
                   </motion.div>
                 )
@@ -116,6 +122,8 @@ export const query = graphql`
       writing_entry {
         writingId: id
         slug
+        author
+        publisher
         tileTextLong {
           childMarkdownRemark {
             html

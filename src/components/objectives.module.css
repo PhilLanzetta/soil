@@ -23,7 +23,7 @@
   min-width: 100%;
 }
 
-.tileText {
+.tileText, .tileText p {
   font-size: 2rem;
 }
 
@@ -56,6 +56,17 @@
 
 .writingEntry {
   margin-bottom: 80px;
+}
+
+.tileInfo {
+  margin-top: 10px;
+}
+
+@media screen and (max-width: 1200px) {
+  .itemsContainer {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 10px;
+  }
 }
 
 @media screen and (max-width: 800px) {
