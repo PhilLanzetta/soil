@@ -23,6 +23,7 @@ const About = ({ data }) => {
     careers,
     jobs,
     featuredProjects,
+    featuredProjects2,
     studioHeroImage,
     leadership,
     studioText,
@@ -237,6 +238,48 @@ const About = ({ data }) => {
           ></motion.div>
         </div>
       )}
+      {collections && (
+        <div className={styles.tertiarySectionHeading}>
+          <motion.p
+            initial={{ opacity: 0 }}
+            transition={{ duration: 1 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className={styles.secondaryBigHeading}
+          >
+            Collections
+          </motion.p>
+          <div
+            className={styles.threeColumnSpan}
+            dangerouslySetInnerHTML={{
+              __html: collections.childMarkdownRemark.html,
+            }}
+          ></div>
+        </div>
+      )}
+      {featuredProjects && (
+        <div className={styles.featuredContainer}>
+          {featuredProjects.map(project => (
+            <motion.figure
+              initial={{ opacity: 0 }}
+              transition={{ duration: 1 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              key={project.id}
+              className={styles.featuredTileContainer}
+            >
+              <div className={styles.featuredTileImageContainer}>
+                <GatsbyImage
+                  image={project.tileImage.gatsbyImageData}
+                  alt={project.tileImage.description}
+                  className={styles.featuredTile}
+                ></GatsbyImage>
+              </div>
+              <figcaption>{project.title}</figcaption>
+            </motion.figure>
+          ))}
+        </div>
+      )}
       {recognitionPreface && (
         <div className={styles.tertiarySectionHeading} id="recognition">
           <motion.p
@@ -288,9 +331,9 @@ const About = ({ data }) => {
           ></motion.div>
         </div>
       )}
-      {featuredProjects && (
+      {featuredProjects2 && (
         <div className={styles.featuredContainer}>
-          {featuredProjects.map(project => (
+          {featuredProjects2.map(project => (
             <motion.figure
               initial={{ opacity: 0 }}
               transition={{ duration: 1 }}
@@ -309,25 +352,6 @@ const About = ({ data }) => {
               <figcaption>{project.title}</figcaption>
             </motion.figure>
           ))}
-        </div>
-      )}
-      {collections && (
-        <div className={styles.tertiarySectionHeading}>
-          <motion.p
-            initial={{ opacity: 0 }}
-            transition={{ duration: 1 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className={styles.secondaryBigHeading}
-          >
-            Collections
-          </motion.p>
-          <div
-            className={styles.threeColumnSpan}
-            dangerouslySetInnerHTML={{
-              __html: collections.childMarkdownRemark.html,
-            }}
-          ></div>
         </div>
       )}
 
@@ -519,6 +543,16 @@ export const query = graphql`
         }
       }
       featuredProjects {
+        title
+        tileImage {
+          description
+          gatsbyImageData(width: 600)
+          height
+          width
+        }
+        id
+      }
+      featuredProjects2 {
         title
         tileImage {
           description
