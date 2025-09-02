@@ -270,12 +270,12 @@ const About = ({ data }) => {
             >
               <div className={styles.featuredTileImageContainer}>
                 <GatsbyImage
-                  image={project.tileImage.gatsbyImageData}
-                  alt={project.tileImage.description}
+                  image={project.image.gatsbyImageData}
+                  alt={project.image.description}
                   className={styles.featuredTile}
                 ></GatsbyImage>
               </div>
-              <figcaption>{project.title}</figcaption>
+              <figcaption>{project.caption}</figcaption>
             </motion.figure>
           ))}
         </div>
@@ -344,12 +344,12 @@ const About = ({ data }) => {
             >
               <div className={styles.featuredTileImageContainer}>
                 <GatsbyImage
-                  image={project.tileImage.gatsbyImageData}
-                  alt={project.tileImage.description}
+                  image={project.image.gatsbyImageData}
+                  alt={project.image.description}
                   className={styles.featuredTile}
                 ></GatsbyImage>
               </div>
-              <figcaption>{project.title}</figcaption>
+              <figcaption>{project.caption}</figcaption>
             </motion.figure>
           ))}
         </div>
@@ -543,8 +543,8 @@ export const query = graphql`
         }
       }
       featuredProjects {
-        title
-        tileImage {
+        caption
+        image {
           description
           gatsbyImageData(width: 600)
           height
@@ -553,8 +553,8 @@ export const query = graphql`
         id
       }
       featuredProjects2 {
-        title
-        tileImage {
+        caption
+        image {
           description
           gatsbyImageData(width: 600)
           height
