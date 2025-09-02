@@ -125,7 +125,7 @@ const Hit = ({ hit }) => {
               </Link>
             </motion.div>
           )}
-          {searchCategory === "Publications" && (
+          {searchCategory === "Publication" && (
             <motion.div
               initial={{ opacity: 0 }}
               transition={{ duration: 1 }}

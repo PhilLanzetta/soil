@@ -38,7 +38,11 @@ const ListHit = ({ hit }) => {
         </a>
       ) : (
         <Link
-          to={`/${searchCategory?.toLowerCase()}/${slug}`}
+          to={
+            searchCategory === "Publication"
+              ? `/publications/${slug}`
+              : `/${searchCategory?.toLowerCase()}/${slug}`
+          }
           className={styles.listResult}
         >
           <div className={styles.listTitle}>{title}</div>

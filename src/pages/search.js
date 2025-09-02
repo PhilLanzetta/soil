@@ -11,6 +11,7 @@ import {
   useStats,
   RefinementList,
   useSortBy,
+  useSearchBox,
   useHits,
 } from "react-instantsearch-hooks-web"
 import Hit from "../components/searchResult"
@@ -100,6 +101,30 @@ const shuffleData = array => {
   return array
 }
 
+function ProgrammaticSearchTrigger({ querySuggestions, setSearched }) {
+  const randomSuggestions = shuffleData(querySuggestions)
+  const { refine } = useSearchBox()
+
+  const handleProgrammaticSearch = newQuery => {
+    refine(newQuery) // This triggers the search
+    setSearched(true)
+  }
+
+  return (
+    <div className={styles.tagContainer}>
+      {randomSuggestions.map((query, index) => (
+        <button
+          key={index}
+          className={styles.tagBtn}
+          onClick={() => handleProgrammaticSearch(query)}
+        >
+          {query}
+        </button>
+      ))}
+    </div>
+  )
+}
+
 const Search = ({ data, location }) => {
   const searchClient = useMemo(
     () =>
@@ -114,14 +139,15 @@ const Search = ({ data, location }) => {
   const [view, setView] = useState("grid")
   const backgroundImages = shuffleData(data.allContentfulProject.nodes)
   const objectives = data.allContentfulObjective.nodes
+  const querySuggestions = data.contentfulQuerySuggestions.queries
 
   useEffect(() => {
-      if (sessionStorage.getItem("searchView")) {
-        setView(sessionStorage.getItem("searchView"))
-      } else {
-        setView("grid")
-      }
-    }, [])
+    if (sessionStorage.getItem("searchView")) {
+      setView(sessionStorage.getItem("searchView"))
+    } else {
+      setView("grid")
+    }
+  }, [])
 
   return (
     <div className={styles.searchPageContainer}>
@@ -149,7 +175,6 @@ const Search = ({ data, location }) => {
               placeholder="Type here"
               id="search-box"
               searchAsYouType={false}
-              autoFocus={!searched}
               classNames={{
                 root: searched ? styles.searchBoxSearched : styles.searchBox,
                 form: styles.searchBoxForm,
@@ -169,17 +194,10 @@ const Search = ({ data, location }) => {
             />
             <div className={styles.objectives}>
               <p>Explore</p>
-              <div className={styles.tagContainer}>
-                {objectives.map((objective, index) => (
-                  <Link
-                    key={index}
-                    to={`/objective/${objective.slug}`}
-                    className={styles.tagBtn}
-                  >
-                    {objective.title}
-                  </Link>
-                ))}
-              </div>
+              <ProgrammaticSearchTrigger
+                querySuggestions={querySuggestions}
+                setSearched={setSearched}
+              />
             </div>
           </div>
         </div>
@@ -301,6 +319,9 @@ export const query = graphql`
         title
         slug
       }
+    }
+    contentfulQuerySuggestions {
+      queries
     }
   }
 `
