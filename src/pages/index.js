@@ -9,8 +9,8 @@ import HomeTile from "../components/homeTile"
 const IndexPage = ({ data }) => {
   const [isAutoScrolling, setIsAutoScrolling] = useState(true)
   const [tileData, setTileData] = useState([])
+  const [initialVisit, setInitialVisit] = useState()
   const [scrollPosition, setScrollPostion] = useState(0)
-  const objectives = data.allContentfulObjective.nodes
   const { aboutText, tiles } = data.contentfulHomePage
   const shuffleData = array => {
     let currentIndex = array.length,
@@ -56,16 +56,23 @@ const IndexPage = ({ data }) => {
   }
 
   useEffect(() => {
-    const randomTiles = shuffleData(tiles)
+    if (sessionStorage.getItem("initialVisit")) {
+      const randomTiles = shuffleData(tiles)
 
-    const extraLargeTiles = randomTiles.filter(
-      entry => entry.size === "Extra Large"
-    )
+      const extraLargeTiles = randomTiles.filter(
+        entry => entry.size === "Extra Large"
+      )
 
-    const otherTiles = randomTiles.filter(entry => entry.size !== "Extra Large")
+      const otherTiles = randomTiles.filter(
+        entry => entry.size !== "Extra Large"
+      )
 
-    const preparedTiles = insertEveryThird(otherTiles, extraLargeTiles)
-    setTileData(preparedTiles)
+      const preparedTiles = insertEveryThird(otherTiles, extraLargeTiles)
+      setTileData(preparedTiles)
+    } else {
+      setTileData(tiles)
+      sessionStorage.setItem("initialVisit", "true")
+    }
   }, [])
 
   useEffect(() => {
