@@ -105,8 +105,8 @@
 @media screen and (max-width: 700px) {
   .indexAbout {
     font-size: 1.5rem;
-    padding-bottom: 50px;
-    height: 45vh;
+    height: 60vh;
+    margin-bottom: -100px;
   }
 
   .subHeadingContainer {
