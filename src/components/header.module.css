@@ -172,4 +172,9 @@
     height: 2rem;
     width: 2rem;
   }
+
+  .menuClosed button {
+    padding: 20px;
+    margin-top: -20px;
+  }
 }

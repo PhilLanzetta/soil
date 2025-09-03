@@ -8,9 +8,10 @@ import { Link } from "gatsby"
 import * as styles from "./mapView.module.css"
 import { AnimatePresence, motion } from "motion/react"
 import { GatsbyImage } from "gatsby-plugin-image"
+import useWindowSize from "../utils/useWindowSize"
 
 /**
- * Wrapper Component for an AdvancedMarker for a single tree.
+ * Wrapper Component for an AdvancedMarker for a single project.
  */
 export const ProjectMarker = props => {
   const {
@@ -20,6 +21,9 @@ export const ProjectMarker = props => {
     setClickedMarker,
     setShowClusterInfo,
   } = props
+
+  const { height, width } = useWindowSize()
+  const isMobile = height > width
 
   const ref = useCallback(
     marker => setMarkerRef(marker, project.id),
@@ -32,7 +36,8 @@ export const ProjectMarker = props => {
       setShowClusterInfo([])
     } else {
       setShowClusterInfo([])
-      setClickedMarker(projectId)}
+      setClickedMarker(projectId)
+    }
   }
 
   return (
@@ -44,16 +49,34 @@ export const ProjectMarker = props => {
         }}
         ref={ref}
         onClick={() => handleClick(project.id)}
+        onMouseEnter={isMobile ? null : () => handleClick(project.id)}
+        onMouseLeave={isMobile ? null : () => handleClick(project.id)}
       >
-        <div
-          style={{
-            backgroundColor: "black",
-            borderRadius: "50%",
-            height: "15px",
-            width: "15px",
-            position: "relative",
-          }}
-        ></div>
+        {" "}
+        {isMobile ? (
+          <div
+            style={{
+              backgroundColor: "black",
+              borderRadius: "50%",
+              height: "15px",
+              width: "15px",
+              position: "relative",
+            }}
+          ></div>
+        ) : (
+          <Link
+            to={`/work/${project.slug}`}
+            style={{
+              backgroundColor: "black",
+              borderRadius: "50%",
+              height: "15px",
+              width: "15px",
+              position: "relative",
+              display: "block",
+            }}
+            className={styles.desktopMarker}
+          ></Link>
+        )}
         <div className={styles.hiddenInfo}>{project.id}</div>
       </AdvancedMarker>
       <AnimatePresence>
