@@ -5,13 +5,14 @@ import * as styles from "../components/index.module.css"
 import { motion } from "motion/react"
 import { GatsbyImage } from "gatsby-plugin-image"
 import HomeTile from "../components/homeTile"
+import { useMyContext } from "../context/MyContext"
 
 const IndexPage = ({ data }) => {
   const [isAutoScrolling, setIsAutoScrolling] = useState(true)
   const [tileData, setTileData] = useState([])
-  const [initialVisit, setInitialVisit] = useState()
   const [scrollPosition, setScrollPostion] = useState(0)
   const { aboutText, tiles } = data.contentfulHomePage
+  const { popUp, pressPopUp } = useMyContext()
   const shuffleData = array => {
     let currentIndex = array.length,
       randomIndex
@@ -78,7 +79,7 @@ const IndexPage = ({ data }) => {
   useEffect(() => {
     let animationFrameId
     const step = () => {
-      if (isAutoScrolling) {
+      if (!popUp && !pressPopUp && isAutoScrolling) {
         window.scrollBy({ top: 1, behavior: "auto" })
       }
 
@@ -89,7 +90,7 @@ const IndexPage = ({ data }) => {
 
     // Clean up the animation frame on component unmount
     return () => cancelAnimationFrame(animationFrameId) // Adjust interval duration as needed
-  }, [isAutoScrolling])
+  }, [isAutoScrolling, popUp, pressPopUp])
 
   useEffect(() => {
     const stopAutoScrollUp = () => {
