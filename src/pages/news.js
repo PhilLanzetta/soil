@@ -9,13 +9,13 @@ import { PiCaretUpLight } from "react-icons/pi"
 
 const News = ({ data, location }) => {
   const [newsEntries, setNewsEntries] = useState(
-    location.state
+    location.state && location.state.filter
       ? data.allContentfulNewsEntry.nodes.filter(item =>
           item.category.includes("Press")
         )
       : data.allContentfulNewsEntry.nodes
   )
-  const [filter, setFilter] = useState(location.state ? "Press" : "all")
+  const [filter, setFilter] = useState(location.state && location.state.filter ? "Press" : "all")
   const [view, setView] = useState()
   const [activeSort, setActiveSort] = useState("date")
   const [titleToggle, setTitleToggle] = useState(false)

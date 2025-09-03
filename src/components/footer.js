@@ -9,7 +9,7 @@ import Thunderstorm from "../images/weather/thunderstorm.svg"
 import { motion } from "motion/react"
 import { graphql, useStaticQuery } from "gatsby"
 
-const Footer = ({ location, setPopUp }) => {
+const Footer = ({ location, setPopUp, setPressPopUp }) => {
   const data = useStaticQuery(graphql`
     query {
       allContentfulNewsEntry(sort: { date: DESC }, limit: 1) {
@@ -199,9 +199,12 @@ const Footer = ({ location, setPopUp }) => {
               Careers
             </a>
             <Link to="/contact">Contact</Link>
-            <Link to="/news" state={{ filter: "Press" }}>
+            <button
+              onClick={() => setPressPopUp(true)}
+              className={styles.newsletter}
+            >
               Press
-            </Link>
+            </button>
           </div>
           <div className={styles.footerColumn}>
             <button

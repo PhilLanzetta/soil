@@ -80,6 +80,65 @@
   margin-top: 40px;
   padding: 5px 0;
   margin-bottom: 25px;
+  justify-content: center;
+}
+
+.innerForm {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  row-gap: 20px;
+  margin-top: 20px;
+}
+
+.characterCount {
+  font-size: 0.8rem;
+  margin-top: -10px;
+}
+
+.inquireInput {
+  width: 48%;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.inquireEmailInput {
+  width: 100%;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.inquireArea {
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 10px;
+}
+
+
+.inquireInput:focus,
+.inquireEmailInput:focus, .inquireArea:focus {
+  outline: none;
+}
+
+.inquireInput::placeholder,
+.inquireEmailInput::placeholder, .inquireArea::placeholder {
+  color: #000;
+}
+
+.submitMessage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 @media screen and (max-width: 800px) {
