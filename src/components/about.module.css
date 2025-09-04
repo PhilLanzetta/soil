@@ -23,7 +23,7 @@
 
 .fixedSubHeader {
   position: fixed;
-  width: 100%;
+  width: calc(100% - 30px);
   background: #fff;
   top: 0;
   padding-top: 55px;
@@ -239,6 +239,7 @@
 
   .subHeadingContainer {
     margin-top: 5px;
+    margin-bottom: 20px;
   }
 
   .fixedSubHeader {
