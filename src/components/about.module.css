@@ -230,6 +230,14 @@
     padding-top: 35px;
   }
 
+  .anchorSection,
+  .introText,
+  .studioText,
+  .secondarySectionHeading,
+  .tertiarySectionHeading {
+    scroll-margin-top: 110px;
+  }
+
   .subHeadingContainer,
   .fixedSubHeader {
     row-gap: 5px;

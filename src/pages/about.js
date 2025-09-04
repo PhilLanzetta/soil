@@ -98,7 +98,7 @@ const About = ({ data }) => {
       <div>
         <h1 className={styles.title}>About</h1>
         <div ref={navRef}></div>
-        {isFixed && (
+        {isFixed && isMobile && (
           <div
             className={styles.subHeadingContainer}
             style={{
@@ -163,7 +163,7 @@ const About = ({ data }) => {
         )}
         <div
           className={
-            isFixed ? styles.fixedSubHeader : styles.subHeadingContainer
+            isFixed && isMobile ? styles.fixedSubHeader : styles.subHeadingContainer
           }
         >
           <a
