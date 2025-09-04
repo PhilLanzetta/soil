@@ -1,3 +1,8 @@
+.headingContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
 .title {
   margin-bottom: 0;
   padding-top: 100px;
@@ -20,6 +25,10 @@
 .viewContainer {
   display: flex;
   gap: 20px;
+}
+
+.viewMobileContainer {
+  display: none;
 }
 
 .viewBtn {
@@ -213,9 +222,14 @@
     margin-bottom: 40px;
   }
 
+  .viewMobileContainer {
+    padding-top: 35px;
+    display: flex;
+    gap: 20px;
+  }
+
   .viewContainer {
-    margin-top: 5px;
-    margin-bottom: 40px;
+    display: none;
   }
 
   .subHeading {
@@ -225,5 +239,6 @@
 
   .projectGrid {
     grid-template-columns: 1fr 1fr;
+    row-gap: 40px;
   }
 }

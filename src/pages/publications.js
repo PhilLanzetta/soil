@@ -70,7 +70,73 @@ const Publications = ({ data }) => {
 
   return (
     <div className="margined-section">
-      <h1 className={styles.title}>Publications</h1>
+      <div className={styles.headingContainer}>
+        <h1 className={styles.title}>Publications</h1>
+        <div className={styles.viewMobileContainer}>
+          <button
+            className={styles.viewBtn}
+            onClick={() => {
+              sessionStorage.setItem("pubView", "grid")
+              setView("grid")
+            }}
+          >
+            <svg
+              viewBox="0 0 21 21"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect x="12" width="9" height="9" fill="black" />
+              <rect width="9" height="9" fill="black" />
+              <rect x="12" y="12" width="9" height="9" fill="black" />
+              <rect y="12" width="9" height="9" fill="black" />
+            </svg>
+            <span className={view === "grid" ? styles.activeView : ""}>
+              Grid
+            </span>
+          </button>
+          <button
+            className={styles.viewBtn}
+            onClick={() => {
+              sessionStorage.setItem("pubView", "list")
+              setView("list")
+            }}
+          >
+            <svg
+              viewBox="0 0 24 21"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect
+                x="0.5"
+                y="16.5"
+                width="23"
+                height="4"
+                fill="black"
+                stroke="black"
+              />
+              <rect
+                x="0.5"
+                y="8.5"
+                width="23"
+                height="4"
+                fill="black"
+                stroke="black"
+              />
+              <rect
+                x="0.5"
+                y="0.5"
+                width="23"
+                height="4"
+                fill="black"
+                stroke="black"
+              />
+            </svg>
+            <span className={view === "list" ? styles.activeView : ""}>
+              List
+            </span>
+          </button>
+        </div>
+      </div>
       <div className={styles.subHeading}>
         <div className={styles.viewContainer}>
           <button

@@ -197,7 +197,7 @@ const Work = ({ data, location }) => {
   return (
     <div className={styles.workPage}>
       <div
-        className="extra-padding"
+        className={`extra-padding ${styles.headingContainer}`}
         onClick={() => setFilterOpen(false)}
         aria-label="close filter"
       >
@@ -209,6 +209,96 @@ const Work = ({ data, location }) => {
         >
           Work
         </motion.h1>
+        <div className={styles.viewMobileContainer}>
+          <button
+            className={styles.viewBtn}
+            onClick={() => {
+              sessionStorage.setItem("view", "grid")
+              setView("grid")
+            }}
+          >
+            <svg
+              viewBox="0 0 21 21"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect x="12" width="9" height="9" fill="black" />
+              <rect width="9" height="9" fill="black" />
+              <rect x="12" y="12" width="9" height="9" fill="black" />
+              <rect y="12" width="9" height="9" fill="black" />
+            </svg>
+            <span className={view === "grid" ? styles.activeView : ""}>
+              Grid
+            </span>
+          </button>
+          <button
+            className={styles.viewBtn}
+            onClick={() => {
+              sessionStorage.setItem("view", "list")
+              setView("list")
+            }}
+          >
+            <svg
+              viewBox="0 0 24 21"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect
+                x="0.5"
+                y="16.5"
+                width="23"
+                height="4"
+                fill="black"
+                stroke="black"
+              />
+              <rect
+                x="0.5"
+                y="8.5"
+                width="23"
+                height="4"
+                fill="black"
+                stroke="black"
+              />
+              <rect
+                x="0.5"
+                y="0.5"
+                width="23"
+                height="4"
+                fill="black"
+                stroke="black"
+              />
+            </svg>
+            <span className={view === "list" ? styles.activeView : ""}>
+              List
+            </span>
+          </button>
+          <button
+            className={styles.viewBtn}
+            onClick={() => {
+              sessionStorage.setItem("view", "map")
+              setView("map")
+            }}
+          >
+            <svg
+              viewBox="0 0 15 22"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g clip-path="url(#clip0_3676_9198)">
+                <path
+                  d="M7.5 0C3.3581 0 0 3.6939 0 8.25C0 10.044 0.534667 11.6903 1.42343 13.0385C1.43933 13.0707 1.4419 13.1069 1.46 13.1378L6.46 21.3878C6.69191 21.7704 7.08248 22 7.5 22C7.91752 22 8.3081 21.7704 8.54 21.3878L13.54 13.1378C13.5585 13.1069 13.5607 13.0707 13.5766 13.0385C14.4653 11.6903 15 10.044 15 8.25C15 3.6939 11.6419 0 7.5 0ZM7.5 11.873C5.68095 11.873 4.20638 10.251 4.20638 8.25C4.20638 6.24905 5.68095 4.62702 7.5 4.62702C9.31905 4.62702 10.7936 6.24905 10.7936 8.25C10.7936 10.251 9.31905 11.873 7.5 11.873Z"
+                  fill="#0F0F0F"
+                />
+              </g>
+              <defs>
+                <clipPath id="clip0_3676_9198">
+                  <rect width="15" height="22" fill="white" />
+                </clipPath>
+              </defs>
+            </svg>
+            <span className={view === "map" ? styles.activeView : ""}>Map</span>
+          </button>
+        </div>
       </div>
       <motion.div
         initial={{ opacity: 0 }}

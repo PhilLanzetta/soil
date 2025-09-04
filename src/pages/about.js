@@ -41,6 +41,7 @@ const About = ({ data }) => {
         </a>
         <a href="#team">Team</a>
         <a href="#clients">Clients</a>
+        <a href="#collections">Collections</a>
         <a href="#recognition">Recognition</a>
         <a href="#transparency">Transparency</a>
         <a href="#careers">Careers</a>
@@ -239,7 +240,7 @@ const About = ({ data }) => {
         </div>
       )}
       {collections && (
-        <div className={styles.tertiarySectionHeading}>
+        <div className={styles.tertiarySectionHeading} id="collections">
           <motion.p
             initial={{ opacity: 0 }}
             transition={{ duration: 1 }}

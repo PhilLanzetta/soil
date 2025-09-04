@@ -1,3 +1,8 @@
+.headingContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
 .title {
   margin-bottom: 0;
   padding-top: 100px;
@@ -54,6 +59,10 @@
 .viewContainer {
   display: flex;
   gap: 20px;
+}
+
+.viewMobileContainer {
+  display: none;
 }
 
 .viewBtn {
@@ -145,5 +154,15 @@
 
   .newsRowContent {
     margin-bottom: 20px;
+  }
+
+  .viewMobileContainer {
+    padding-top: 35px;
+    display: flex;
+    gap: 20px;
+  }
+
+  .viewContainer {
+    display: none;
   }
 }
