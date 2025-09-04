@@ -42,11 +42,18 @@ const Work = ({ data, location }) => {
     return array.indexOf(value) === index
   }
 
-  const typologies = allProjects
-    .map(project => project.typology)
-    .reduce((a, b) => a.concat(b), [])
-    .filter(onlyUnique)
-    .sort()
+  const typologies = [
+    "Art Galleries & Museums",
+    "Commercial Developments",
+    "Civic Spaces",
+    "Education & Research",
+    "Exhibitions & Installations",
+    "Objects",
+    "Performing Arts",
+    "Public realm & Masterplanning",
+    "Retail & Hospitality",
+    "Residential",
+  ]
 
   const handleTypeFilter = type => {
     if (typologyFilter.includes(type)) {
@@ -65,10 +72,7 @@ const Work = ({ data, location }) => {
     ]
   }
 
-  const locations = allProjects
-    .map(project => project.region)
-    .filter(onlyUnique)
-    .sort()
+  const locations = ["Americas", "Asia", "Europe", "Oceania"]
 
   const handleLocaleFilter = locale => {
     if (regionFilter.includes(locale)) {
