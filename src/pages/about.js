@@ -97,20 +97,74 @@ const About = ({ data }) => {
     <div className="margined-section">
       <div>
         <h1 className={styles.title}>About</h1>
+        <div ref={navRef}></div>
+        {isFixed && (
+          <div
+            className={styles.subHeadingContainer}
+            style={{
+              opacity: 0,
+            }}
+          >
+            <a
+              href="#studio"
+              className={activeSection === "studio" ? styles.studioAnchor : ""}
+            >
+              Studio
+            </a>
+            <a
+              href="#team"
+              className={activeSection === "team" ? styles.studioAnchor : ""}
+            >
+              Team
+            </a>
+            <a
+              href="#clients"
+              className={activeSection === "clients" ? styles.studioAnchor : ""}
+            >
+              Clients
+            </a>
+            <a
+              href="#collections"
+              className={
+                activeSection === "collections" ? styles.studioAnchor : ""
+              }
+            >
+              Collections
+            </a>
+            <a
+              href="#recognition"
+              className={
+                activeSection === "recognition" ? styles.studioAnchor : ""
+              }
+            >
+              Recognition
+            </a>
+            <a
+              href="#transparency"
+              className={
+                activeSection === "transparency" ? styles.studioAnchor : ""
+              }
+            >
+              Transparency
+            </a>
+            <a
+              href="#careers"
+              className={activeSection === "careers" ? styles.studioAnchor : ""}
+            >
+              Careers
+            </a>
+            <a
+              href="#contact"
+              className={activeSection === "contact" ? styles.studioAnchor : ""}
+            >
+              Contact
+            </a>
+          </div>
+        )}
         <div
-          ref={navRef}
-          style={{ marginBottom: isFixed ? "35px" : "0" }}
-        ></div>
-        <div
-          className={styles.subHeadingContainer}
-          style={{
-            // Initially relative, becomes fixed when scrolled to top
-            position: isFixed ? "fixed" : "relative",
-            top: isFixed ? 35 : "auto",
-            width: "100%", // Ensure it maintains full width when fixed
-            zIndex: 100, // Optional: for stacking context
-            backgroundColor: "#fff", // Optional: for visual clarity
-          }}
+          className={
+            isFixed ? styles.fixedSubHeader : styles.subHeadingContainer
+          }
         >
           <a
             href="#studio"
