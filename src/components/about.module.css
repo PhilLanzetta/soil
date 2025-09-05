@@ -13,7 +13,13 @@
   display: flex;
   gap: 20px;
   font-size: 2rem;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  width: calc(100% + 15px);
+  padding-right: 15px;
+  padding-bottom: 15px;
 }
 
 .subHeadingContainer {
@@ -251,7 +257,7 @@
   }
 
   .fixedSubHeader {
-    padding-top: 40px;
+    padding-top: 50px;
   }
 
   .banner {

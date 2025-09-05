@@ -84,7 +84,7 @@ const About = ({ data }) => {
       if (navRef.current) {
         const rect = navRef.current.getBoundingClientRect()
         // Check if the top of the div has reached or passed the top of the viewport
-        setIsFixed(rect.top <= 35)
+        setIsFixed(rect.top <= 45)
       }
     }
 
