@@ -39,14 +39,38 @@ function NoResultsBoundary({ children, fallback }) {
   return children
 }
 
-function NoResults() {
+function NoResults({ backgroundImages, setSearched, querySuggestions }) {
   const { indexUiState } = useInstantSearch()
 
   return (
-    <div>
-      <p>
-        No results for <q>{indexUiState.query}</q>.
-      </p>
+    <div className={`${styles.searchLanding}`}>
+      {backgroundImages.map((image, index) => (
+        <div key={index} className={styles.backgroundContainer}>
+          <GatsbyImage
+            image={image.tileImage.gatsbyImageData}
+            className={styles.backgroundImage}
+          ></GatsbyImage>
+        </div>
+      ))}
+      <div className={styles.searchBoxContainer}>
+        <p>No results for:</p>
+        <button
+          onClick={() => setSearched(false)}
+          className={`${styles.searchQuery} ${styles.emptySearch}`}
+        >
+          <h1 className={styles.title}>
+            {indexUiState.query}
+            <sup className={styles.closeSearch}>&times;</sup>
+          </h1>
+        </button>
+        <div className={styles.objectives}>
+          <p>Explore</p>
+          <ProgrammaticSearchTrigger
+            querySuggestions={querySuggestions}
+            setSearched={setSearched}
+          />
+        </div>
+      </div>
     </div>
   )
 }
@@ -203,7 +227,15 @@ const Search = ({ data, location }) => {
         </div>
         {searched && (
           <EmptyQueryBoundary fallback={null} setSearched={setSearched}>
-            <NoResultsBoundary fallback={<NoResults />}>
+            <NoResultsBoundary
+              fallback={
+                <NoResults
+                  backgroundImages={backgroundImages}
+                  setSearched={setSearched}
+                  querySuggestions={querySuggestions}
+                />
+              }
+            >
               <div
                 className={`margined-section ${
                   searched ? styles.searchResultPage : ""
