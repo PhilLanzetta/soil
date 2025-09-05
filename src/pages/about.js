@@ -44,13 +44,16 @@ const About = ({ data }) => {
   const isMobile = height > width
 
   useEffect(() => {
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          setActiveSection(entry.target.id)
-        }
-      })
-    })
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id)
+          }
+        })
+      },
+      { rootMargin: "-50% 0px" }
+    )
 
     // Observe each section
     if (studioRef.current) observer.observe(studioRef.current)
@@ -163,29 +166,35 @@ const About = ({ data }) => {
         )}
         <div
           className={
-            isFixed && isMobile ? styles.fixedSubHeader : styles.subHeadingContainer
+            isFixed && isMobile
+              ? styles.fixedSubHeader
+              : styles.subHeadingContainer
           }
         >
           <a
             href="#studio"
+            onClick={() => setActiveSection("studio")}
             className={activeSection === "studio" ? styles.studioAnchor : ""}
           >
             Studio
           </a>
           <a
             href="#team"
+            onClick={() => setActiveSection("team")}
             className={activeSection === "team" ? styles.studioAnchor : ""}
           >
             Team
           </a>
           <a
             href="#clients"
+            onClick={() => setActiveSection("clients")}
             className={activeSection === "clients" ? styles.studioAnchor : ""}
           >
             Clients
           </a>
           <a
             href="#collections"
+            onClick={() => setActiveSection("collections")}
             className={
               activeSection === "collections" ? styles.studioAnchor : ""
             }
@@ -194,6 +203,7 @@ const About = ({ data }) => {
           </a>
           <a
             href="#recognition"
+            onClick={() => setActiveSection("recognition")}
             className={
               activeSection === "recognition" ? styles.studioAnchor : ""
             }
@@ -202,6 +212,7 @@ const About = ({ data }) => {
           </a>
           <a
             href="#transparency"
+            onClick={() => setActiveSection("transparency")}
             className={
               activeSection === "transparency" ? styles.studioAnchor : ""
             }
@@ -210,12 +221,14 @@ const About = ({ data }) => {
           </a>
           <a
             href="#careers"
+            onClick={() => setActiveSection("careers")}
             className={activeSection === "careers" ? styles.studioAnchor : ""}
           >
             Careers
           </a>
           <a
             href="#contact"
+            onClick={() => setActiveSection("contact")}
             className={activeSection === "contact" ? styles.studioAnchor : ""}
           >
             Contact
