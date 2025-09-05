@@ -369,22 +369,11 @@ export const query = graphql`
   query getSingleProject($slug: String) {
     contentfulProject(slug: { eq: $slug }) {
       banner2Media {
-        ... on ContentfulImageWrapper {
-          imageId: id
-          caption
-          image {
-            description
-            gatsbyImageData(layout: FULL_WIDTH)
-          }
-        }
-        ... on ContentfulVideoWrapper {
-          videoId: id
-          aspectRatio
-          posterImage {
-            description
-            gatsbyImageData(layout: FULL_WIDTH)
-          }
-          videoLink
+        imageId: id
+        caption
+        image {
+          description
+          gatsbyImageData(layout: FULL_WIDTH)
         }
       }
       bannerMedia {

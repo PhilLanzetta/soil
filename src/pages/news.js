@@ -160,7 +160,7 @@ const News = ({ data, location }) => {
               onClick={() => {
                 setNewsEntries(
                   data.allContentfulNewsEntry.nodes.filter(entry =>
-                    entry.category.includes(category)
+                    entry.category?.includes(category)
                   )
                 )
                 setFilter(category)
