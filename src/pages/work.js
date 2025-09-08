@@ -186,8 +186,6 @@ const Work = ({ data, location }) => {
     if (isDisabled) {
       setProjects(allProjects)
       window.history.pushState({}, "", url)
-    } else if (filterOpen) {
-      return
     } else {
       handleFilter()
       updateURL()
@@ -549,8 +547,6 @@ const Work = ({ data, location }) => {
                 className={styles.filterOverlay}
                 onClick={() => {
                   setFilterOpen(false)
-                  handleFilter()
-                  updateURL()
                 }}
               ></div>
             )}
