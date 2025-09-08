@@ -539,7 +539,7 @@ const Work = ({ data, location }) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.7 }}
-            key={projects.length}
+            key="grid"
             className={styles.gridContainer}
           >
             {filterOpen && (
@@ -559,7 +559,7 @@ const Work = ({ data, location }) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.7 }}
-            key={projects.length}
+            key="list"
             className={styles.listContainer}
           >
             {filterOpen && (
