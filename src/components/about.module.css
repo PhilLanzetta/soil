@@ -137,7 +137,7 @@
 }
 
 .featuredTileImageContainer {
-  width: 100%;
+  width: 15vw;
   display: flex;
   justify-content: center;
   aspect-ratio: 1 / 1.25;

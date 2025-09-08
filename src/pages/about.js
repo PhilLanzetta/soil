@@ -6,6 +6,7 @@ import { motion } from "motion/react"
 import Seo from "../components/seo"
 import ExpandingText from "../components/expandingText"
 import useWindowSize from "../utils/useWindowSize"
+import Slider from "../components/slider"
 
 const About = ({ data }) => {
   const {
@@ -40,8 +41,8 @@ const About = ({ data }) => {
   const navRef = useRef(null)
   const [activeSection, setActiveSection] = useState("studio")
   const [isFixed, setIsFixed] = useState(false)
-  const { height, width } = useWindowSize()
-  const isMobile = height > width
+  const { width } = useWindowSize()
+  const isMobile = width < 900
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -264,32 +265,38 @@ const About = ({ data }) => {
           </motion.div>
         )}
         {studioGallery && (
-          <div className={styles.galleryContainer}>
-            {studioGallery.map((item, index) => {
-              const imgWidth = isMobile
-                ? (item.image?.width * 30) / item.image?.height
-                : (item.image?.width * 60) / item.image?.height
-              return (
-                <motion.figure
-                  initial={{ opacity: 0 }}
-                  transition={{ duration: 1 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                  key={index}
-                >
-                  <GatsbyImage
-                    image={item.image.gatsbyImageData}
-                    alt={item.image.description}
-                    className={styles.galleryImage}
-                    style={{
-                      height: isMobile ? "30vh" : "60vh",
-                      width: `${imgWidth}vh`,
-                    }}
-                  ></GatsbyImage>
-                  <figcaption>{item.caption}</figcaption>
-                </motion.figure>
-              )
-            })}
+          <div>
+            {isMobile ? (
+              <div className={styles.galleryContainer}>
+                {studioGallery.map((item, index) => {
+                  const imgWidth = isMobile
+                    ? (item.image?.width * 30) / item.image?.height
+                    : (item.image?.width * 60) / item.image?.height
+                  return (
+                    <motion.figure
+                      initial={{ opacity: 0 }}
+                      transition={{ duration: 1 }}
+                      whileInView={{ opacity: 1 }}
+                      viewport={{ once: true }}
+                      key={index}
+                    >
+                      <GatsbyImage
+                        image={item.image.gatsbyImageData}
+                        alt={item.image.description}
+                        className={styles.galleryImage}
+                        style={{
+                          height: isMobile ? "30vh" : "60vh",
+                          width: `${imgWidth}vh`,
+                        }}
+                      ></GatsbyImage>
+                      <figcaption>{item.caption}</figcaption>
+                    </motion.figure>
+                  )
+                })}
+              </div>
+            ) : (
+              <Slider images={studioGallery} gallery={true}></Slider>
+            )}
           </div>
         )}
       </div>
@@ -459,26 +466,32 @@ const About = ({ data }) => {
         </div>
       )}
       {featuredProjects && (
-        <div className={styles.featuredContainer}>
-          {featuredProjects.map(project => (
-            <motion.figure
-              initial={{ opacity: 0 }}
-              transition={{ duration: 1 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              key={project.id}
-              className={styles.featuredTileContainer}
-            >
-              <div className={styles.featuredTileImageContainer}>
-                <GatsbyImage
-                  image={project.image.gatsbyImageData}
-                  alt={project.image.description}
-                  className={styles.featuredTile}
-                ></GatsbyImage>
-              </div>
-              <figcaption>{project.caption}</figcaption>
-            </motion.figure>
-          ))}
+        <div>
+          {isMobile ? (
+            <div className={styles.featuredContainer}>
+              {featuredProjects.map(project => (
+                <motion.figure
+                  initial={{ opacity: 0 }}
+                  transition={{ duration: 1 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  key={project.id}
+                  className={styles.featuredTileContainer}
+                >
+                  <div className={styles.featuredTileImageContainer}>
+                    <GatsbyImage
+                      image={project.image.gatsbyImageData}
+                      alt={project.image.description}
+                      className={styles.featuredTile}
+                    ></GatsbyImage>
+                  </div>
+                  <figcaption>{project.caption}</figcaption>
+                </motion.figure>
+              ))}
+            </div>
+          ) : (
+            <Slider images={featuredProjects} gallery={false}></Slider>
+          )}
         </div>
       )}
       {recognitionPreface && (
@@ -537,26 +550,32 @@ const About = ({ data }) => {
         </div>
       )}
       {featuredProjects2 && (
-        <div className={styles.featuredContainer}>
-          {featuredProjects2.map(project => (
-            <motion.figure
-              initial={{ opacity: 0 }}
-              transition={{ duration: 1 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              key={project.id}
-              className={styles.featuredTileContainer}
-            >
-              <div className={styles.featuredTileImageContainer}>
-                <GatsbyImage
-                  image={project.image.gatsbyImageData}
-                  alt={project.image.description}
-                  className={styles.featuredTile}
-                ></GatsbyImage>
-              </div>
-              <figcaption>{project.caption}</figcaption>
-            </motion.figure>
-          ))}
+        <div>
+          {isMobile ? (
+            <div className={styles.featuredContainer}>
+              {featuredProjects.map(project => (
+                <motion.figure
+                  initial={{ opacity: 0 }}
+                  transition={{ duration: 1 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  key={project.id}
+                  className={styles.featuredTileContainer}
+                >
+                  <div className={styles.featuredTileImageContainer}>
+                    <GatsbyImage
+                      image={project.image.gatsbyImageData}
+                      alt={project.image.description}
+                      className={styles.featuredTile}
+                    ></GatsbyImage>
+                  </div>
+                  <figcaption>{project.caption}</figcaption>
+                </motion.figure>
+              ))}
+            </div>
+          ) : (
+            <Slider images={featuredProjects} gallery={false}></Slider>
+          )}
         </div>
       )}
 
