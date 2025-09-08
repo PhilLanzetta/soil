@@ -338,4 +338,8 @@
   .featuredTileContainer {
     width: 40vw;
   }
+
+  .featuredTileImageContainer {
+    width: 40vw;
+  }
 }
