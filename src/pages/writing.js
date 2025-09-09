@@ -15,7 +15,7 @@ const Writing = ({ data }) => {
   }
 
   const [filter, setFilter] = useState("all")
-  const categories = ["Form", "Theory", "Process"]
+  const categories = ["on SO-IL", "by SO-IL"]
   const [view, setView] = useState()
   const [activeSort, setActiveSort] = useState("date")
   const [titleToggle, setTitleToggle] = useState(false)

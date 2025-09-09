@@ -43,6 +43,7 @@ const Work = ({ data, location }) => {
   }
 
   const typologies = [
+    "Adaptive Reuse",
     "Art Galleries & Museums",
     "Commercial Developments",
     "Civic Spaces",
