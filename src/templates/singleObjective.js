@@ -1,12 +1,20 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
+import { GatsbyImage } from "gatsby-plugin-image"
 import * as styles from "../components/objectives.module.css"
 import ProjectTile from "../components/projectTile"
 import { motion } from "motion/react"
 import Seo from "../components/seo"
 
 const Objective = ({ data }) => {
-  const { description, project, writing_entry } = data.contentfulObjective
+  const { description, project, writing_entry, news_entry, publication_entry } =
+    data.contentfulObjective
+
+  const combinedData = [project, writing_entry, news_entry, publication_entry]
+    .filter(item => item !== null)
+    .flat()
+
+  console.log(combinedData)
 
   const shuffleData = array => {
     let currentIndex = array.length,
@@ -28,9 +36,7 @@ const Objective = ({ data }) => {
     return array
   }
 
-  const content = project ? shuffleData(project.concat(writing_entry)).filter(
-    item => item !== null
-  ) : writing_entry
+  const content = shuffleData(combinedData)
 
   return (
     <div className="margined-section">
@@ -82,6 +88,96 @@ const Objective = ({ data }) => {
                     </Link>
                   </motion.div>
                 )
+              } else if (item.pubId) {
+                return (
+                  <motion.div
+                    key={item.pubId}
+                    initial={{ opacity: 0 }}
+                    transition={{ duration: 1 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                  >
+                    <Link to={`/publications/${item.slug}`}>
+                      <div className={styles.tileImageContainer}>
+                        <GatsbyImage
+                          image={item.tileImage?.gatsbyImageData}
+                          alt={item.tileImage?.description}
+                          className={styles.tileImage}
+                        ></GatsbyImage>
+                      </div>
+                      <div className={styles.tileText}>{item.title}</div>
+                    </Link>
+                  </motion.div>
+                )
+              } else if (item.newsId) {
+                return (
+                  <motion.div
+                    key={item.newsId}
+                    initial={{ opacity: 0 }}
+                    transition={{ duration: 1 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                  >
+                    {item.linkOutFromTile ? (
+                      <a
+                        href={item.externalLink}
+                        target="_blank"
+                        rel="noreferrer"
+                        className={styles.externalContainer}
+                      >
+                        {item.tileImage && (
+                          <div>
+                            <div className={styles.tileImageContainer}>
+                              <GatsbyImage
+                                image={item.tileImage.gatsbyImageData}
+                                alt={item.tileImage.description}
+                                className={styles.tileImage}
+                                imgStyle={{ objectFit: "cover" }}
+                              ></GatsbyImage>
+                            </div>
+                            <p className={styles.tileText}>{item.title}</p>
+                          </div>
+                        )}
+                        {item.tileText && (
+                          <div className={styles.tileTextContainer}>
+                            <div
+                              className={styles.tileText}
+                              dangerouslySetInnerHTML={{
+                                __html: item.tileText.childMarkdownRemark.html,
+                              }}
+                            ></div>
+                          </div>
+                        )}
+                      </a>
+                    ) : (
+                      <Link to={`/news/${item.slug}`}>
+                        {item.tileImage && (
+                          <div>
+                            <div className={styles.tileImageContainer}>
+                              <GatsbyImage
+                                image={item.tileImage.gatsbyImageData}
+                                alt={item.tileImage.description}
+                                className={styles.tileImage}
+                                imgStyle={{ objectFit: "cover" }}
+                              ></GatsbyImage>
+                            </div>
+                            <p className={styles.tileText}>{item.title}</p>
+                          </div>
+                        )}
+                        {item.tileText && (
+                          <div className={styles.tileTextContainer}>
+                            <div
+                              className={styles.tileText}
+                              dangerouslySetInnerHTML={{
+                                __html: item.tileText.childMarkdownRemark.html,
+                              }}
+                            ></div>
+                          </div>
+                        )}
+                      </Link>
+                    )}
+                  </motion.div>
+                )
               } else {
                 return null
               }
@@ -112,11 +208,6 @@ export const query = graphql`
         title
         country
         city
-        objectives {
-          id
-          slug
-          title
-        }
         slug
       }
       writing_entry {
@@ -130,11 +221,32 @@ export const query = graphql`
           }
         }
         title
-        objectives {
-          id
-          slug
-          title
+      }
+      publication_entry {
+        pubId: id
+        title
+        tileImage {
+          description
+          gatsbyImageData
         }
+        slug
+      }
+      news_entry {
+        newsId: id
+        date
+        externalLink
+        linkOutFromTile
+        slug
+        tileImage {
+          description
+          gatsbyImageData
+        }
+        tileText {
+          childMarkdownRemark {
+            html
+          }
+        }
+        title
       }
     }
   }
