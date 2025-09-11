@@ -28,9 +28,9 @@ const Objective = ({ data }) => {
     return array
   }
 
-  const content = shuffleData(project.concat(writing_entry)).filter(
+  const content = project ? shuffleData(project.concat(writing_entry)).filter(
     item => item !== null
-  )
+  ) : writing_entry
 
   return (
     <div className="margined-section">

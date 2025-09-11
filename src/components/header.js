@@ -127,7 +127,7 @@ const Header = ({ location }) => {
                       <motion.div variants={itemVariants}>
                         <li>
                           <Link
-                            to="/objective/design-discovery"
+                            to="/objective/innovation"
                             onClick={() => setMenuOpen(false)}
                           >
                             Objectives
@@ -164,7 +164,7 @@ const Header = ({ location }) => {
                       <Link to="/writing">Writing</Link>
                     </li>
                     <li>
-                      <Link to="/objective/design-discovery">Objectives</Link>
+                      <Link to="/objective/innovation">Objectives</Link>
                     </li>
                     <li>
                       <Link to="/search">Search</Link>
