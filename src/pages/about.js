@@ -553,7 +553,7 @@ const About = ({ data }) => {
         <div>
           {isMobile ? (
             <div className={styles.featuredContainer}>
-              {featuredProjects.map(project => (
+              {featuredProjects2.map(project => (
                 <motion.figure
                   initial={{ opacity: 0 }}
                   transition={{ duration: 1 }}
@@ -574,7 +574,7 @@ const About = ({ data }) => {
               ))}
             </div>
           ) : (
-            <Slider images={featuredProjects} gallery={false}></Slider>
+            <Slider images={featuredProjects2} gallery={false}></Slider>
           )}
         </div>
       )}
