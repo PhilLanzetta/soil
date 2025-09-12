@@ -621,6 +621,57 @@ const Footer = ({ location }) => {
           </motion.div>
         )}
       </AnimatePresence>
+      <form
+        hidden
+        name="press-form"
+        method="POST"
+        data-netlify="true"
+        data-netlify-honeypot="bot-field"
+        onSubmit={handleSubmit}
+        className={styles.inquireForm}
+      >
+        <input type="hidden" name="form-name" value="inquire" />
+        <p hidden>
+          <label>
+            Don’t fill this out if you’re human:{" "}
+            <input name="bot-field" onChange={handleChange} />
+          </label>
+        </p>
+          <input
+            type="text"
+            name="first-name"
+            onChange={handleChange}
+            className={styles.inquireInput}
+            placeholder="First Name"
+          />
+          <input
+            type="text"
+            name="last-name"
+            onChange={handleChange}
+            className={styles.inquireInput}
+            placeholder="Last Name"
+          />
+          <input
+            type="email"
+            name="email"
+            onChange={handleChange}
+            required
+            className={styles.inquireEmailInput}
+            placeholder="Email Address"
+          />
+          <textarea
+            name="message"
+            id="message"
+            rows="8"
+            maxLength="300"
+            placeholder="Message"
+            onChange={handleChange}
+            className={styles.inquireArea}
+          ></textarea>
+        <button type="submit" className={styles.submit} id="inquire-submit">
+          Submit
+        </button>
+      </form>
     </>
   )
 }
