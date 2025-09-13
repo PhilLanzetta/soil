@@ -1,10 +1,15 @@
 import * as React from "react"
 import Seo from "../components/seo"
+import * as styles from "../components/notFound.module.css"
+import { Link } from "gatsby"
 
 const NotFoundPage = () => (
   <>
-    <h1>404: Not Found</h1>
-    <p>You just hit a route that doesn&#39;t exist... the sadness.</p>
+    <div className={styles.notFoundContainer}>
+      <h1>404: Not Found</h1>
+      <p>This URL is no longer active.</p>
+      <Link to="/" className={styles.returnBtn}>Return Home</Link>
+    </div>
   </>
 )
 
