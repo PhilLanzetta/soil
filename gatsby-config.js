@@ -16,8 +16,8 @@ module.exports = {
   siteMetadata: {
     title: `SO - IL`,
     description: `SO – IL is an internationally recognized architecture and design firm based in New York. We create structures that establish new cultures, institutions, and relationships.`,
-    author: `@soil-placeholder`,
-    siteUrl: `https://so-il.org/`,
+    author: `@solidobjectives`,
+    siteUrl: `https://solidobjectives.com/`,
   },
   plugins: [
     `gatsby-plugin-image`,

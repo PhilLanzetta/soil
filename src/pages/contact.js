@@ -62,20 +62,20 @@ const Contact = () => {
           <p>
             General
             <br />
-            <a href="mailto:office@so-il.org">office@so-il.org</a>
+            <a href="mailto:office@solidobjectives.com">office@solidobjectives.com</a>
           </p>
           <p>
             Press <br />
-            <a href="mailto:press@so-il.org">press@so-il.org</a>
+            <a href="mailto:press@solidobjectives.com">press@solidobjectives.com</a>
           </p>
           <p>
             New Business <br />
-            <a href="mailto:collaborate@so-il.org">collaborate@so-il.org</a>
+            <a href="mailto:collaborate@solidobjectives.com">collaborate@solidobjectives.com</a>
           </p>
           <p>
             Employment Inquiries
             <br />
-            <a href="mailto:work@so-il.org">work@so-il.org</a>
+            <a href="mailto:work@solidobjectives.com">work@solidobjectives.com</a>
           </p>
         </motion.div>
       </motion.div>
