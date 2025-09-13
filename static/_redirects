@@ -3,5 +3,4 @@ http://so-il.org/projects/solid-objectives-order-edge-aura https://solidobjectiv
 http://so-il.org/info https://solidobjectives.com/about 301!
 http://so-il.org/projects/publications https://solidobjectives.com/publications 301!
 http://so-il.org/info/news https://solidobjectives.com/news 301!
-https://so-il.org/* https://solidobjectives.com/:splat 301!
-http://so-il.org/* https://solidobjectives.com/:splat 301!
+http://so-il.org/* https://solidobjectives.com 301!
