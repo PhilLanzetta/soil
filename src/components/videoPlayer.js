@@ -75,15 +75,11 @@ const VideoPlayer = ({
   }
 
   const progressHandler = state => {
-    if (count > 20) {
+    if (count > 5) {
       controlRef.current.style.visibility = "hidden"
       fullScreenRef.current.style.visibility = "hidden" // toggling player control container
     } else {
       count += 1
-    }
-
-    if (!seeking) {
-      setVideoState({ ...videoState, ...state })
     }
   }
 
@@ -245,6 +241,7 @@ const VideoPlayer = ({
                 100,
             })
             setTimeElapsed(formatTime(videoPlayerRef.current.currentTime))
+            progressHandler()
           }}
           onEnded={() => {
             videoPlayerRef.current.currentTime = 0
