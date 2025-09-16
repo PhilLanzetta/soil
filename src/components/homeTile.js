@@ -91,12 +91,16 @@ const HomeTile = ({ tile, index }) => {
   }
   return (
     <motion.div ref={ref} className={styles.imageRow} style={rowStyle}>
-      <Link to={`/work/${tile.work.slug}`} className={styles.tileLink}>
-        <p>
-          {tile.work.title && `${tile.work.title}, `}
-          {tile.work.city && `${tile.work.city}, `}
-          {tile.work.country}
-        </p>
+      <Link
+        to={
+          tile.work
+            ? `/work/${tile.work.slug}`
+            : tile.nonProjectInternalLink
+            ? tile.nonProjectInternalLink
+            : "/"
+        }
+        className={styles.tileLink}
+      >
         {(tile.size === "Medium" || tile.size === "Small") && (
           <motion.div style={{ opacity }}>
             {tile.videoLink ? (
