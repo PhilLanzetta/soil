@@ -221,21 +221,32 @@ const Writing = ({ data }) => {
           >
             All
           </button>
-          {categories.map(category => (
-            <button
-              onClick={() => {
-                setWritingEntries(
-                  data.allContentfulWritingEntry.nodes.filter(entry =>
-                    entry.category?.includes(category)
-                  )
+          <button
+            onClick={() => {
+              setWritingEntries(
+                data.allContentfulWritingEntry.nodes.filter(entry =>
+                  entry.category?.includes("on SO-IL")
                 )
-                setFilter(category)
-              }}
-              className={filter === category ? styles.active : ""}
-            >
-              {category}
-            </button>
-          ))}
+              )
+              setFilter("on SO-IL")
+            }}
+            className={filter === "on SO-Il" ? styles.active : ""}
+          >
+            on SO–IL
+          </button>
+          <button
+            onClick={() => {
+              setWritingEntries(
+                data.allContentfulWritingEntry.nodes.filter(entry =>
+                  entry.category?.includes("by SO-IL")
+                )
+              )
+              setFilter("by SO-IL")
+            }}
+            className={filter === "by SO-Il" ? styles.active : ""}
+          >
+            by SO–IL
+          </button>
         </div>
         <div className={styles.viewContainer}>
           <button
