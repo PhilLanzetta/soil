@@ -56,7 +56,7 @@ const pagesQuery = `{
               id
               text {
                 childMarkdownRemark {
-                  excerpt(pruneLength: 1000)
+                  excerpt(pruneLength: 800)
                 }
               }
             }
