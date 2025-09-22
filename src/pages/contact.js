@@ -39,8 +39,6 @@ const Contact = () => {
           <p>
             Amsterdam
             <br />
-            <a href="tel:234 234 5698">234 234 5698</a>
-            <br />
             <a
               href="https://maps.app.goo.gl/TP6SZtRyZpz5zeN77"
               target="_blank"
