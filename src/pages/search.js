@@ -160,7 +160,7 @@ const Search = ({ data, location }) => {
   )
   const [filterOpen, setFilterOpen] = useState(false)
   const [searched, setSearched] = useState(location.search ? true : false)
-  const [view, setView] = useState("grid")
+  const [view, setView] = useState("list")
   const backgroundImages = shuffleData(data.allContentfulProject.nodes)
   const objectives = data.allContentfulObjective.nodes
   const querySuggestions = data.contentfulQuerySuggestions.queries
@@ -169,7 +169,7 @@ const Search = ({ data, location }) => {
     if (sessionStorage.getItem("searchView")) {
       setView(sessionStorage.getItem("searchView"))
     } else {
-      setView("grid")
+      setView("list")
     }
   }, [])
 

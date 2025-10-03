@@ -29,7 +29,7 @@ const Writing = ({ data }) => {
     if (sessionStorage.getItem("writingView")) {
       setView(sessionStorage.getItem("writingView"))
     } else {
-      setView("grid")
+      setView("list")
     }
   }, [])
 
