@@ -40,13 +40,13 @@ const Contact = () => {
             Amsterdam
             <br />
             <a
-              href="https://maps.app.goo.gl/TP6SZtRyZpz5zeN77"
+              href="https://maps.app.goo.gl/8Qjatmtfgkr77FaN6"
               target="_blank"
               rel="noreferrer"
             >
-              Anne Frankstraat
+              De Lairessestraat 121 3 L
               <br />
-              234 1018 BZ
+              1075HH Amsterdam
             </a>
           </p>
         </motion.div>
@@ -60,20 +60,28 @@ const Contact = () => {
           <p>
             General
             <br />
-            <a href="mailto:office@solidobjectives.com">office@solidobjectives.com</a>
+            <a href="mailto:office@solidobjectives.com">
+              office@solidobjectives.com
+            </a>
           </p>
           <p>
             Press <br />
-            <a href="mailto:press@solidobjectives.com">press@solidobjectives.com</a>
+            <a href="mailto:press@solidobjectives.com">
+              press@solidobjectives.com
+            </a>
           </p>
           <p>
             New Business <br />
-            <a href="mailto:collaborate@solidobjectives.com">collaborate@solidobjectives.com</a>
+            <a href="mailto:collaborate@solidobjectives.com">
+              collaborate@solidobjectives.com
+            </a>
           </p>
           <p>
             Employment Inquiries
             <br />
-            <a href="mailto:work@solidobjectives.com">work@solidobjectives.com</a>
+            <a href="mailto:work@solidobjectives.com">
+              work@solidobjectives.com
+            </a>
           </p>
         </motion.div>
       </motion.div>
