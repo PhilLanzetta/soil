@@ -44,16 +44,15 @@ const Work = ({ data, location }) => {
 
   const typologies = [
     "Adaptive Reuse",
-    "Art Galleries & Museums",
-    "Commercial Developments",
-    "Civic Spaces",
-    "Education & Research",
-    "Exhibitions & Installations",
-    "Objects",
-    "Performing Arts",
-    "Public realm & Masterplanning",
-    "Retail & Hospitality",
-    "Residential",
+    "Cultural",
+    "Commercial",
+    "Civic",
+    "Interiors",
+    "Installations",
+    "Retail",
+    "Housing",
+    "Homes",
+    "Masterplanning",
   ]
 
   const handleTypeFilter = type => {
