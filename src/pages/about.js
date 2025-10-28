@@ -403,8 +403,8 @@ const About = ({ data }) => {
                   key={index}
                 >
                   <GatsbyImage
-                    image={member.headshot.gatsbyImageData}
-                    alt={member.headshot.description}
+                    image={member.headshot?.gatsbyImageData}
+                    alt={member.headshot?.description}
                     className={styles.teamImage}
                   ></GatsbyImage>
                   <div>{member.name}</div>
