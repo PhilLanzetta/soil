@@ -31,9 +31,9 @@ const Contact = () => {
               target="_blank"
               rel="noreferrer"
             >
-              42 Adelphi St
+              320 Livingston St, 2nd Fl
               <br />
-              Brooklyn, NY 11205
+              Brooklyn, NY 11217
             </a>
           </p>
           <p>
