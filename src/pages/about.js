@@ -43,6 +43,7 @@ const About = ({ data }) => {
   const [isFixed, setIsFixed] = useState(false)
   const { width } = useWindowSize()
   const isMobile = width < 900
+  const jobPostings = jobs?.filter(job => job.title !== "Placeholder (do not delete)")
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -621,7 +622,7 @@ const About = ({ data }) => {
           >
             Careers
           </motion.p>
-          <div className={jobs ? styles.twoColumns : styles.threeColumnSpan}>
+          <div className={jobPostings?.length > 0 ? styles.twoColumns : styles.threeColumnSpan}>
             <motion.div
               initial={{ opacity: 0 }}
               transition={{ duration: 1 }}
@@ -631,7 +632,7 @@ const About = ({ data }) => {
                 __html: careers.childMarkdownRemark.html,
               }}
             ></motion.div>
-            {jobs && (
+            {jobPostings?.length > 0 && (
               <div>
                 <motion.p
                   initial={{ opacity: 0 }}
@@ -642,7 +643,7 @@ const About = ({ data }) => {
                   Open Roles:
                 </motion.p>
                 <ol>
-                  {jobs.map((job, index) => (
+                  {jobPostings.map((job, index) => (
                     <li key={index}>
                       <a
                         href={job.pdfFile?.file.url}
