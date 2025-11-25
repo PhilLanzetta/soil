@@ -1,6 +1,7 @@
 https://so-il.org/projects https://solidobjectives.com/work 301!
 https://so-il.org/projects/* https://solidobjectives.com/work/:splat 301!
 https://so-il.org/work/* https://solidobjectives.com/work/:splat 301!
+https://www.so-il.org/work/* https://solidobjectives.com/work/:splat 301!
 https://so-il.org/work https://solidobjectives.com/work 301!
 http://so-il.org/projects https://solidobjectives.com/work 301!
 https://so-il.org/projects/solid-objectives-order-edge-aura https://solidobjectives.com/publications/solid-objectives-order-edge-aura 301!
