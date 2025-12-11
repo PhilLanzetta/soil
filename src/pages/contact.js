@@ -24,7 +24,6 @@ const Contact = () => {
           <p>Solid Objectives Idenburg Liu</p>
           <p>
             New York
-            <br /> <a href="tel:17186246666">718 624 6666</a>
             <br />
             <a
               href="https://maps.app.goo.gl/5srGVMNrxpvagUTs5"
@@ -58,6 +57,11 @@ const Contact = () => {
           className={styles.column}
         >
           <p>
+            Telephone
+            <br />
+            <a href="tel:17186246666">718 624 6666</a>
+          </p>
+          <p>
             General
             <br />
             <a href="mailto:office@solidobjectives.com">
@@ -72,8 +76,8 @@ const Contact = () => {
           </p>
           <p>
             New Business <br />
-            <a href="mailto:collaborate@solidobjectives.com">
-              collaborate@solidobjectives.com
+            <a href="mailto:opportunities@solidobjectives.com">
+              opportunities@solidobjectives.com
             </a>
           </p>
           <p>
