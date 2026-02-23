@@ -48,7 +48,7 @@ const Hit = ({ hit }) => {
                     <div>
                       <div className={styles.tileImageContainer}>
                         <GatsbyImage
-                          image={tileImage.gatsbyImageData}
+                          image={tileImage?.localFile?.childImageSharp?.gatsbyImageData}
                           alt={tileImage.description}
                           className={styles.tileImage}
                           imgStyle={{ objectFit: "cover" }}
@@ -74,7 +74,7 @@ const Hit = ({ hit }) => {
                     <div>
                       <div className={styles.tileImageContainer}>
                         <GatsbyImage
-                          image={tileImage.gatsbyImageData}
+                          image={tileImage?.localFile?.childImageSharp?.gatsbyImageData}
                           alt={tileImage.description}
                           className={styles.tileImage}
                           imgStyle={{ objectFit: "cover" }}
@@ -136,7 +136,7 @@ const Hit = ({ hit }) => {
               <Link to={`/publications/${slug}`}>
                 <div className={styles.tileImageContainer}>
                   <GatsbyImage
-                    image={tileImage?.gatsbyImageData}
+                    image={tileImage?.localFile?.childImageSharp?.gatsbyImageData}
                     alt={tileImage?.description}
                     className={styles.tileImage}
                   ></GatsbyImage>

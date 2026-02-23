@@ -25,7 +25,7 @@ const HomeVideo = ({ videoLink, aspectRatio, image }) => {
               className={styles.coverImageContainer}
             >
               <GatsbyImage
-                image={image?.gatsbyImageData}
+                image={image?.localFile?.childImageSharp?.gatsbyImageData}
                 alt={image?.description}
                 className={styles.coverImage}
               ></GatsbyImage>

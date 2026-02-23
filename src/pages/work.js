@@ -619,7 +619,11 @@ export const query = graphql`
         status
         tileImage {
           description
-          gatsbyImageData(layout: FULL_WIDTH)
+          localFile {
+            childImageSharp {
+              gatsbyImageData(layout: FULL_WIDTH)
+            }
+          }
         }
         city
         country

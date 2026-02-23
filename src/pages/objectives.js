@@ -24,7 +24,7 @@ const Objectives = ({ data }) => {
         viewport={{ once: true }}
       >
         <GatsbyImage
-          image={objectiveImage.gatsbyImageData}
+          image={objectiveImage?.localFile?.childImageSharp?.gatsbyImageData}
           alt={objectiveImage.description}
         ></GatsbyImage>
       </motion.div>
@@ -37,7 +37,11 @@ export const query = graphql`
     contentfulObjectivesPage {
       objectiveImage {
         description
-        gatsbyImageData(layout: FULL_WIDTH)
+        localFile {
+          childImageSharp {
+            gatsbyImageData(layout: FULL_WIDTH)
+          }
+        }
       }
       introText {
         childMarkdownRemark {

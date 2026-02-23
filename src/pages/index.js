@@ -263,8 +263,11 @@ export const query = graphql`
         slug
         title
         image {
-          description
-          gatsbyImageData
+          localFile {
+            childImageSharp {
+              gatsbyImageData(layout: FULL_WIDTH)
+            }
+          }
         }
       }
     }
@@ -277,8 +280,11 @@ export const query = graphql`
       tiles {
         id
         image {
-          description
-          gatsbyImageData
+          localFile {
+            childImageSharp {
+              gatsbyImageData(layout: FULL_WIDTH)
+            }
+          }
         }
         videoAspectRatio
         videoLink

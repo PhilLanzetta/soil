@@ -110,7 +110,7 @@ const HomeTile = ({ tile, index }) => {
                 image={tile.image}
               ></HomeVideo>
             ) : (
-              <GatsbyImage image={tile.image.gatsbyImageData}></GatsbyImage>
+              <GatsbyImage image={tile.image?.localFile?.childImageSharp?.gatsbyImageData}></GatsbyImage>
             )}
           </motion.div>
         )}
@@ -123,7 +123,7 @@ const HomeTile = ({ tile, index }) => {
                 image={tile.image}
               ></HomeVideo>
             ) : (
-              <GatsbyImage image={tile.image.gatsbyImageData}></GatsbyImage>
+              <GatsbyImage image={tile.image?.localFile?.childImageSharp?.gatsbyImageData}></GatsbyImage>
             )}
           </motion.div>
         )}

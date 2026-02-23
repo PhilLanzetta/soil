@@ -224,7 +224,7 @@ const Publications = ({ data }) => {
                 <Link to={`/publications/${entry.slug}`}>
                   <div className={styles.tileImageContainer}>
                     <GatsbyImage
-                      image={entry.tileImage?.gatsbyImageData}
+                      image={entry.tileImage?.localFile?.childImageSharp?.gatsbyImageData}
                       alt={entry.tileImage?.description}
                       className={styles.tileImage}
                     ></GatsbyImage>
@@ -310,7 +310,11 @@ export const query = graphql`
         slug
         tileImage {
           description
-          gatsbyImageData(layout: FULL_WIDTH)
+          localFile {
+            childImageSharp {
+              gatsbyImageData(layout: FULL_WIDTH)
+            }
+          }
         }
         title
         date(locale: "America/New_York")

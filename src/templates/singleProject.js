@@ -36,7 +36,7 @@ const SingleProject = ({ data }) => {
         <div className={styles.bannerOneMedia}>
           {bannerMedia.imageId && (
             <GatsbyImage
-              image={bannerMedia.image.gatsbyImageData}
+              image={bannerMedia.image?.localFile?.childImageSharp?.gatsbyImageData}
               alt={bannerMedia.image.description}
               className={styles.bannerOneImage}
             ></GatsbyImage>
@@ -87,7 +87,7 @@ const SingleProject = ({ data }) => {
         >
           {banner2Media.imageId && (
             <GatsbyImage
-              image={banner2Media.image.gatsbyImageData}
+              image={banner2Media.image?.localFile?.childImageSharp?.gatsbyImageData}
               alt={banner2Media.image.description}
               className={styles.bannerOneImage}
             ></GatsbyImage>
@@ -183,7 +183,7 @@ const SingleProject = ({ data }) => {
                     key={item.imageId}
                   >
                     <GatsbyImage
-                      image={item.image.gatsbyImageData}
+                      image={item.image?.localFile?.childImageSharp?.gatsbyImageData}
                       alt={item.image.description}
                     ></GatsbyImage>
                     <figcaption>{item.caption}</figcaption>
@@ -219,7 +219,7 @@ const SingleProject = ({ data }) => {
                     {item.images.map((image, index) => (
                       <figure key={index}>
                         <GatsbyImage
-                          image={image.image.gatsbyImageData}
+                          image={image.image?.localFile?.childImageSharp?.gatsbyImageData}
                           alt={image.image.description}
                         ></GatsbyImage>
                         <figcaption>{image.caption}</figcaption>
@@ -409,7 +409,11 @@ export const query = graphql`
         caption
         image {
           description
-          gatsbyImageData(layout: FULL_WIDTH)
+          localFile {
+            childImageSharp {
+              gatsbyImageData(layout: FULL_WIDTH)
+            }
+          }
         }
       }
       bannerMedia {
@@ -418,7 +422,11 @@ export const query = graphql`
           caption
           image {
             description
-            gatsbyImageData(layout: FULL_WIDTH)
+            localFile {
+              childImageSharp {
+                gatsbyImageData(layout: FULL_WIDTH)
+              }
+            }
           }
         }
         ... on ContentfulVideoWrapper {
@@ -426,7 +434,11 @@ export const query = graphql`
           aspectRatio
           posterImage {
             description
-            gatsbyImageData(layout: FULL_WIDTH)
+            localFile {
+              childImageSharp {
+                gatsbyImageData(layout: FULL_WIDTH)
+              }
+            }
           }
           videoLink
         }
@@ -448,7 +460,11 @@ export const query = graphql`
           caption
           image {
             description
-            gatsbyImageData(layout: FULL_WIDTH)
+            localFile {
+              childImageSharp {
+                gatsbyImageData(layout: FULL_WIDTH)
+              }
+            }
           }
         }
         ... on ContentfulTwoColumnImage {
@@ -457,7 +473,11 @@ export const query = graphql`
             caption
             image {
               description
-              gatsbyImageData(layout: FULL_WIDTH)
+              localFile {
+                childImageSharp {
+                  gatsbyImageData(layout: FULL_WIDTH)
+                }
+              }
             }
           }
         }
@@ -466,7 +486,11 @@ export const query = graphql`
           aspectRatio
           posterImage {
             description
-            gatsbyImageData(layout: FULL_WIDTH)
+            localFile {
+              childImageSharp {
+                gatsbyImageData(layout: FULL_WIDTH)
+              }
+            }
           }
           videoLink
           caption
@@ -485,9 +509,15 @@ export const query = graphql`
           caption
           image {
             description
-            gatsbyImageData
-            height
-            width
+            localFile {
+              childImageSharp {
+                gatsbyImageData(layout: FULL_WIDTH)
+                original {
+                  height
+                  width
+                }
+              }
+            }
           }
         }
       }

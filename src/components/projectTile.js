@@ -17,7 +17,7 @@ const ProjectTile = ({ project, index }) => {
       <Link to={`/work/${project.slug}`}>
         <div className={styles.tileImageContainer}>
           <GatsbyImage
-            image={project.tileImage?.gatsbyImageData}
+            image={project.tileImage?.localFile?.childImageSharp?.gatsbyImageData}
             alt={project.tileImage?.description}
             className={styles.tileImage}
             imgStyle={{ objectFit: "cover" }}
