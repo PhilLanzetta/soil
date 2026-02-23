@@ -42,11 +42,8 @@ const pagesQuery = `{
             contentDigest
           }
           tileImage {
-            localFile {
-              childImageSharp {
-                gatsbyImageData(width: 600)
-          }
-        }
+            description
+            gatsbyImageData(width: 600)
           }
         }
         ... on ContentfulWritingEntry {
@@ -98,11 +95,8 @@ const pagesQuery = `{
             contentDigest
           }
           tileImage {
-            localFile {
-              childImageSharp {
-                gatsbyImageData(width: 600)
-          }
-        }
+            description
+            gatsbyImageData(width: 600)
           }
           tileText {
             childMarkdownRemark {
@@ -132,11 +126,8 @@ const pagesQuery = `{
             contentDigest
           }
           tileImage {
-            localFile {
-              childImageSharp {
-                gatsbyImageData(width: 600)
-          }
-        }
+            gatsbyImageData(width: 600)
+            description
           }
         }
       }

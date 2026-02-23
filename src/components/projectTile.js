@@ -4,7 +4,7 @@ import { Link } from "gatsby"
 import * as styles from "./projectGrid.module.css"
 import { motion } from "motion/react"
 
-const ProjectTile = ({ project, index }) => {
+const ProjectTile = ({ project, index, search }) => {
   const indexDelay = index % 4
   return (
     <motion.div
@@ -16,12 +16,25 @@ const ProjectTile = ({ project, index }) => {
     >
       <Link to={`/work/${project.slug}`}>
         <div className={styles.tileImageContainer}>
-          <GatsbyImage
-            image={project.tileImage?.localFile?.childImageSharp?.gatsbyImageData}
-            alt={project.tileImage?.description}
-            className={styles.tileImage}
-            imgStyle={{ objectFit: "cover" }}
-          ></GatsbyImage>
+          {search ? (
+            <GatsbyImage
+              image={
+                project.tileImage?.gatsbyImageData
+              }
+              alt={project.tileImage?.description}
+              className={styles.tileImage}
+              imgStyle={{ objectFit: "cover" }}
+            ></GatsbyImage>
+          ) : (
+            <GatsbyImage
+              image={
+                project.tileImage?.localFile?.childImageSharp?.gatsbyImageData
+              }
+              alt={project.tileImage?.description}
+              className={styles.tileImage}
+              imgStyle={{ objectFit: "cover" }}
+            ></GatsbyImage>
+          )}
         </div>
         <div className={styles.projectInfo}>
           {project.title && `${project.title}, `}
