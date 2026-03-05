@@ -35,7 +35,7 @@ const SingleWriting = ({ data }) => {
                   key={contentItem.imageId}
                 >
                   <GatsbyImage
-                    image={contentItem.image?.localFile?.childImageSharp?.gatsbyImageData}
+                    image={contentItem.image.gatsbyImageData}
                     alt={contentItem.image.description}
                   ></GatsbyImage>
                   <figcaption>{contentItem.caption}</figcaption>
@@ -72,7 +72,7 @@ const SingleWriting = ({ data }) => {
                   {contentItem.images.map((image, index) => (
                     <figure key={index}>
                       <GatsbyImage
-                        image={image.image?.localFile?.childImageSharp?.gatsbyImageData}
+                        image={image.image.gatsbyImageData}
                         alt={image.image.description}
                       ></GatsbyImage>
                       <figcaption>{image.caption}</figcaption>
@@ -137,11 +137,7 @@ export const query = graphql`
           caption
           image {
             description
-            localFile {
-              childImageSharp {
-                gatsbyImageData(layout: FULL_WIDTH)
-              }
-            }
+            gatsbyImageData(layout: FULL_WIDTH)
           }
         }
         ... on ContentfulTwoColumnImage {
@@ -150,11 +146,7 @@ export const query = graphql`
             caption
             image {
               description
-              localFile {
-                childImageSharp {
-                  gatsbyImageData(layout: FULL_WIDTH)
-                }
-              }
+              gatsbyImageData(layout: FULL_WIDTH)
             }
           }
         }
@@ -180,11 +172,7 @@ export const query = graphql`
         title
         tileImage {
           description
-          localFile {
-            childImageSharp {
-              gatsbyImageData(layout: FULL_WIDTH)
-            }
-          }
+          gatsbyImageData(layout: FULL_WIDTH)
         }
         country
       }

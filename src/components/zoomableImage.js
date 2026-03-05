@@ -60,7 +60,7 @@ const ZoomableImage = ({ images }) => {
             }}
           >
             <GatsbyImage
-              image={image.image?.localFile?.childImageSharp?.gatsbyImageData}
+              image={image.image.gatsbyImageData}
               alt={image.image.description}
               className={styles.imageBorder}
             ></GatsbyImage>
@@ -100,10 +100,7 @@ const ZoomableImage = ({ images }) => {
                             key={popUp}
                           >
                             <GatsbyImage
-                              image={
-                                images[popUp].image?.localFile?.childImageSharp
-                                  ?.gatsbyImageData
-                              }
+                              image={images[popUp].image?.gatsbyImageData}
                               alt={images[popUp].image?.description}
                               className={styles.popUpImageImg}
                               style={{
@@ -112,11 +109,8 @@ const ZoomableImage = ({ images }) => {
                                 width: isMobile
                                   ? "calc(100% - 30px)"
                                   : `${
-                                      (images[popUp].image?.localFile
-                                        ?.childImageSharp?.original?.width *
-                                        80) /
-                                      images[popUp].image?.localFile
-                                        ?.childImageSharp?.original?.height
+                                      (images[popUp].image?.width * 80) /
+                                      images[popUp].image?.height
                                     }vh`,
                               }}
                             ></GatsbyImage>

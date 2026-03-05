@@ -27,7 +27,7 @@ const Hit = ({ hit }) => {
       {searchCategory && (
         <div>
           {searchCategory === "Work" && (
-            <ProjectTile project={hit} search={true}></ProjectTile>
+            <ProjectTile project={hit}></ProjectTile>
           )}{" "}
           {searchCategory === "News" && (
             <motion.div
@@ -48,10 +48,7 @@ const Hit = ({ hit }) => {
                     <div>
                       <div className={styles.tileImageContainer}>
                         <GatsbyImage
-                          image={
-                            tileImage?.localFile?.childImageSharp
-                              ?.gatsbyImageData
-                          }
+                          image={tileImage.gatsbyImageData}
                           alt={tileImage.description}
                           className={styles.tileImage}
                           imgStyle={{ objectFit: "cover" }}
@@ -77,10 +74,7 @@ const Hit = ({ hit }) => {
                     <div>
                       <div className={styles.tileImageContainer}>
                         <GatsbyImage
-                          image={
-                            tileImage?.localFile?.childImageSharp
-                              ?.gatsbyImageData
-                          }
+                          image={tileImage.gatsbyImageData}
                           alt={tileImage.description}
                           className={styles.tileImage}
                           imgStyle={{ objectFit: "cover" }}
@@ -142,9 +136,7 @@ const Hit = ({ hit }) => {
               <Link to={`/publications/${slug}`}>
                 <div className={styles.tileImageContainer}>
                   <GatsbyImage
-                    image={
-                      tileImage?.localFile?.childImageSharp?.gatsbyImageData
-                    }
+                    image={tileImage?.gatsbyImageData}
                     alt={tileImage?.description}
                     className={styles.tileImage}
                   ></GatsbyImage>

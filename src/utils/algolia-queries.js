@@ -126,8 +126,8 @@ const pagesQuery = `{
             contentDigest
           }
           tileImage {
-            gatsbyImageData(width: 600)
             description
+            gatsbyImageData(width: 600)
           }
         }
       }

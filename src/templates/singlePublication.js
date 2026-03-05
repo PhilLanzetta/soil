@@ -28,7 +28,7 @@ const SinglePublication = ({ data }) => {
                   key={contentItem.imageId}
                 >
                   <GatsbyImage
-                    image={contentItem.image?.localFile?.childImageSharp?.gatsbyImageData}
+                    image={contentItem.image.gatsbyImageData}
                     alt={contentItem.image.description}
                   ></GatsbyImage>
                   <figcaption>{contentItem.caption}</figcaption>
@@ -65,7 +65,7 @@ const SinglePublication = ({ data }) => {
                   {contentItem.images.map((image, index) => (
                     <figure key={index}>
                       <GatsbyImage
-                        image={image.image?.localFile?.childImageSharp?.gatsbyImageData}
+                        image={image.image.gatsbyImageData}
                         alt={image.image.description}
                       ></GatsbyImage>
                       {image.caption && (
@@ -133,7 +133,7 @@ const SinglePublication = ({ data }) => {
                           <div>
                             <div className={styles.tileImageContainer}>
                               <GatsbyImage
-                                image={relatedItem.tileImage?.localFile?.childImageSharp?.gatsbyImageData}
+                                image={relatedItem.tileImage.gatsbyImageData}
                                 alt={relatedItem.tileImage.description}
                                 className={styles.tileImage}
                                 imgStyle={{ objectFit: "cover" }}
@@ -168,7 +168,7 @@ const SinglePublication = ({ data }) => {
                           <div>
                             <div className={styles.tileImageContainer}>
                               <GatsbyImage
-                                image={relatedItem.tileImage?.localFile?.childImageSharp?.gatsbyImageData}
+                                image={relatedItem.tileImage.gatsbyImageData}
                                 alt={relatedItem.tileImage.description}
                                 className={styles.tileImage}
                                 imgStyle={{ objectFit: "cover" }}
@@ -196,8 +196,7 @@ const SinglePublication = ({ data }) => {
                               className={styles.tileText}
                               dangerouslySetInnerHTML={{
                                 __html:
-                                  relatedItem.tileTextLong.childMarkdownRemark
-                                    .html,
+                                  relatedItem.tileTextLong.childMarkdownRemark.html,
                               }}
                             ></div>
                           </div>
@@ -237,11 +236,7 @@ export const query = graphql`
           caption
           image {
             description
-            localFile {
-              childImageSharp {
-                gatsbyImageData(layout: FULL_WIDTH)
-              }
-            }
+            gatsbyImageData(layout: FULL_WIDTH)
           }
         }
         ... on ContentfulTwoColumnImage {
@@ -250,11 +245,7 @@ export const query = graphql`
             caption
             image {
               description
-              localFile {
-                childImageSharp {
-                  gatsbyImageData(layout: FULL_WIDTH)
-                }
-              }
+              gatsbyImageData(layout: FULL_WIDTH)
             }
           }
         }
@@ -273,11 +264,7 @@ export const query = graphql`
           newsId: id
           tileImage {
             description
-            localFile {
-              childImageSharp {
-                gatsbyImageData(layout: FULL_WIDTH)
-              }
-            }
+            gatsbyImageData(layout: FULL_WIDTH)
           }
           tileText {
             childMarkdownRemark {
@@ -315,11 +302,7 @@ export const query = graphql`
           country
           tileImage {
             description
-            localFile {
-              childImageSharp {
-                gatsbyImageData(layout: FULL_WIDTH)
-              }
-            }
+            gatsbyImageData(layout: FULL_WIDTH)
           }
           objectives {
             id

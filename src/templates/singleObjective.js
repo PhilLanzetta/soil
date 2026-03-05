@@ -100,7 +100,7 @@ const Objective = ({ data }) => {
                     <Link to={`/publications/${item.slug}`}>
                       <div className={styles.tileImageContainer}>
                         <GatsbyImage
-                          image={item.tileImage?.localFile?.childImageSharp?.gatsbyImageData}
+                          image={item.tileImage?.gatsbyImageData}
                           alt={item.tileImage?.description}
                           className={styles.tileImage}
                         ></GatsbyImage>
@@ -129,7 +129,7 @@ const Objective = ({ data }) => {
                           <div>
                             <div className={styles.tileImageContainer}>
                               <GatsbyImage
-                                image={item.tileImage?.localFile?.childImageSharp?.gatsbyImageData}
+                                image={item.tileImage.gatsbyImageData}
                                 alt={item.tileImage.description}
                                 className={styles.tileImage}
                                 imgStyle={{ objectFit: "cover" }}
@@ -155,7 +155,7 @@ const Objective = ({ data }) => {
                           <div>
                             <div className={styles.tileImageContainer}>
                               <GatsbyImage
-                                image={item.tileImage?.localFile?.childImageSharp?.gatsbyImageData}
+                                image={item.tileImage.gatsbyImageData}
                                 alt={item.tileImage.description}
                                 className={styles.tileImage}
                                 imgStyle={{ objectFit: "cover" }}
@@ -203,11 +203,7 @@ export const query = graphql`
         projectId: id
         tileImage {
           description
-          localFile {
-            childImageSharp {
-              gatsbyImageData(layout: FULL_WIDTH)
-            }
-          }
+          gatsbyImageData
         }
         title
         country
@@ -231,11 +227,7 @@ export const query = graphql`
         title
         tileImage {
           description
-          localFile {
-            childImageSharp {
-              gatsbyImageData(layout: FULL_WIDTH)
-            }
-          }
+          gatsbyImageData
         }
         slug
       }
@@ -247,11 +239,7 @@ export const query = graphql`
         slug
         tileImage {
           description
-          localFile {
-            childImageSharp {
-              gatsbyImageData(layout: FULL_WIDTH)
-            }
-          }
+          gatsbyImageData
         }
         tileText {
           childMarkdownRemark {

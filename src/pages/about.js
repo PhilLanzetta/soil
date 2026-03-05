@@ -43,9 +43,7 @@ const About = ({ data }) => {
   const [isFixed, setIsFixed] = useState(false)
   const { width } = useWindowSize()
   const isMobile = width < 900
-  const jobPostings = jobs?.filter(
-    job => job.title !== "Placeholder (do not delete)"
-  )
+  const jobPostings = jobs?.filter(job => job.title !== "Placeholder (do not delete)")
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -261,7 +259,7 @@ const About = ({ data }) => {
             className={styles.banner}
           >
             <GatsbyImage
-              image={studioHeroImage.image?.localFile?.childImageSharp?.gatsbyImageData}
+              image={studioHeroImage.image.gatsbyImageData}
               alt={studioHeroImage.image.description}
               className={styles.bannerImage}
             ></GatsbyImage>
@@ -284,7 +282,7 @@ const About = ({ data }) => {
                       key={index}
                     >
                       <GatsbyImage
-                        image={item.image?.localFile?.childImageSharp?.gatsbyImageData}
+                        image={item.image.gatsbyImageData}
                         alt={item.image.description}
                         className={styles.galleryImage}
                         style={{
@@ -332,7 +330,7 @@ const About = ({ data }) => {
                 viewport={{ once: true }}
               >
                 <GatsbyImage
-                  image={jingLiuHeadshot?.localFile?.childImageSharp?.gatsbyImageData}
+                  image={jingLiuHeadshot.gatsbyImageData}
                   alt={jingLiuHeadshot.description}
                   className={styles.headshot}
                 ></GatsbyImage>
@@ -347,7 +345,7 @@ const About = ({ data }) => {
                 viewport={{ once: true }}
               >
                 <GatsbyImage
-                  image={florianIdenburgHeadshot?.localFile?.childImageSharp?.gatsbyImageData}
+                  image={florianIdenburgHeadshot.gatsbyImageData}
                   alt={florianIdenburgHeadshot.description}
                   className={styles.headshot}
                 ></GatsbyImage>
@@ -377,7 +375,7 @@ const About = ({ data }) => {
                 key={index}
               >
                 <GatsbyImage
-                  image={member.headshot?.localFile?.childImageSharp?.gatsbyImageData}
+                  image={member.headshot.gatsbyImageData}
                   alt={member.headshot.description}
                   className={styles.teamImage}
                 ></GatsbyImage>
@@ -406,7 +404,7 @@ const About = ({ data }) => {
                   key={index}
                 >
                   <GatsbyImage
-                    image={member.headshot?.localFile?.childImageSharp?.gatsbyImageData}
+                    image={member.headshot?.gatsbyImageData}
                     alt={member.headshot?.description}
                     className={styles.teamImage}
                   ></GatsbyImage>
@@ -483,7 +481,7 @@ const About = ({ data }) => {
                 >
                   <div className={styles.featuredTileImageContainer}>
                     <GatsbyImage
-                      image={project.image?.localFile?.childImageSharp?.gatsbyImageData}
+                      image={project.image.gatsbyImageData}
                       alt={project.image.description}
                       className={styles.featuredTile}
                     ></GatsbyImage>
@@ -567,7 +565,7 @@ const About = ({ data }) => {
                 >
                   <div className={styles.featuredTileImageContainer}>
                     <GatsbyImage
-                      image={project.image?.localFile?.childImageSharp?.gatsbyImageData}
+                      image={project.image.gatsbyImageData}
                       alt={project.image.description}
                       className={styles.featuredTile}
                     ></GatsbyImage>
@@ -624,13 +622,7 @@ const About = ({ data }) => {
           >
             Careers
           </motion.p>
-          <div
-            className={
-              jobPostings?.length > 0
-                ? styles.twoColumns
-                : styles.threeColumnSpan
-            }
-          >
+          <div className={jobPostings?.length > 0 ? styles.twoColumns : styles.threeColumnSpan}>
             <motion.div
               initial={{ opacity: 0 }}
               transition={{ duration: 1 }}
@@ -709,11 +701,8 @@ export const query = graphql`
         }
       }
       florianIdenburgHeadshot {
-        localFile {
-          childImageSharp {
-            gatsbyImageData(layout: FULL_WIDTH)
-          }
-        }
+        description
+        gatsbyImageData(layout: FULL_WIDTH)
       }
       jingLiuBio {
         childMarkdownRemark {
@@ -722,21 +711,13 @@ export const query = graphql`
       }
       jingLiuHeadshot {
         description
-        localFile {
-          childImageSharp {
-            gatsbyImageData(layout: FULL_WIDTH)
-          }
-        }
+        gatsbyImageData(layout: FULL_WIDTH)
       }
       teamMembers {
         id
         headshot {
           description
-          localFile {
-            childImageSharp {
-              gatsbyImageData(layout: FULL_WIDTH)
-            }
-          }
+          gatsbyImageData(layout: FULL_WIDTH)
         }
         name
         title
@@ -745,11 +726,7 @@ export const query = graphql`
         id
         headshot {
           description
-          localFile {
-            childImageSharp {
-              gatsbyImageData(layout: FULL_WIDTH)
-            }
-          }
+          gatsbyImageData(layout: FULL_WIDTH)
         }
         name
         title
@@ -764,15 +741,9 @@ export const query = graphql`
         caption
         image {
           description
-          localFile {
-            childImageSharp {
-              gatsbyImageData(layout: FULL_WIDTH)
-              original {
-                height
-                width
-              }
-            }
-          }
+          gatsbyImageData(layout: FULL_WIDTH)
+          height
+          width
         }
       }
       studioHeroImage {
@@ -780,11 +751,7 @@ export const query = graphql`
         caption
         image {
           description
-          localFile {
-            childImageSharp {
-              gatsbyImageData(layout: FULL_WIDTH)
-            }
-          }
+          gatsbyImageData(layout: FULL_WIDTH)
         }
       }
       contact {
@@ -816,15 +783,9 @@ export const query = graphql`
         caption
         image {
           description
-          localFile {
-            childImageSharp {
-              gatsbyImageData(width: 600)
-              original {
-                height
-                width
-              }
-            }
-          }
+          gatsbyImageData(width: 600)
+          height
+          width
         }
         id
       }
@@ -832,15 +793,9 @@ export const query = graphql`
         caption
         image {
           description
-          localFile {
-            childImageSharp {
-              gatsbyImageData(width: 600)
-              original {
-                height
-                width
-              }
-            }
-          }
+          gatsbyImageData(width: 600)
+          height
+          width
         }
         id
       }

@@ -15,9 +15,7 @@ const News = ({ data, location }) => {
         )
       : data.allContentfulNewsEntry.nodes
   )
-  const [filter, setFilter] = useState(
-    location.state && location.state.filter ? "Press" : "all"
-  )
+  const [filter, setFilter] = useState(location.state && location.state.filter ? "Press" : "all")
   const [view, setView] = useState()
   const [activeSort, setActiveSort] = useState("date")
   const [titleToggle, setTitleToggle] = useState(false)
@@ -274,7 +272,7 @@ const News = ({ data, location }) => {
                           }
                         >
                           <GatsbyImage
-                            image={entry.tileImage?.localFile?.childImageSharp?.gatsbyImageData}
+                            image={entry.tileImage.gatsbyImageData}
                             alt={entry.tileImage.description}
                             className={styles.tileImage}
                             imgStyle={{ objectFit: "cover" }}
@@ -306,7 +304,7 @@ const News = ({ data, location }) => {
                           }
                         >
                           <GatsbyImage
-                            image={entry.tileImage?.localFile?.childImageSharp?.gatsbyImageData}
+                            image={entry.tileImage.gatsbyImageData}
                             alt={entry.tileImage.description}
                             className={styles.tileImage}
                             imgStyle={{ objectFit: "cover" }}
@@ -405,11 +403,7 @@ export const query = graphql`
         slug
         tileImage {
           description
-          localFile {
-            childImageSharp {
-              gatsbyImageData(layout: FULL_WIDTH)
-            }
-          }
+          gatsbyImageData(layout: FULL_WIDTH)
         }
         tileText {
           childMarkdownRemark {

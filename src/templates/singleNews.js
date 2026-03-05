@@ -25,7 +25,7 @@ const SingleNews = ({ data }) => {
         <div className={styles.bannerOneMedia}>
           {bannerMedia.imageId && (
             <GatsbyImage
-              image={bannerMedia.image?.localFile?.childImageSharp?.gatsbyImageData}
+              image={bannerMedia.image.gatsbyImageData}
               alt={bannerMedia.image.description}
               className={styles.bannerOneImage}
             ></GatsbyImage>
@@ -46,7 +46,7 @@ const SingleNews = ({ data }) => {
                   key={contentItem.imageId}
                 >
                   <GatsbyImage
-                    image={contentItem.image?.localFile?.childImageSharp?.gatsbyImageData}
+                    image={contentItem.image.gatsbyImageData}
                     alt={contentItem.image.description}
                   ></GatsbyImage>
                   <figcaption>{contentItem.caption}</figcaption>
@@ -83,7 +83,7 @@ const SingleNews = ({ data }) => {
                   {contentItem.images.map((image, index) => (
                     <figure key={index}>
                       <GatsbyImage
-                        image={image.image?.localFile?.childImageSharp?.gatsbyImageData}
+                        image={image.image.gatsbyImageData}
                         alt={image.image.description}
                       ></GatsbyImage>
                       <figcaption>{image.caption}</figcaption>
@@ -96,9 +96,7 @@ const SingleNews = ({ data }) => {
                 <div
                   key={index}
                   className={`${styles.textModuleNews} ${
-                    contentItem.margin === "Full Width"
-                      ? ""
-                      : styles.wideMarginNews
+                    contentItem.margin === "Full Width" ? "" : styles.wideMarginNews
                   }`}
                   dangerouslySetInnerHTML={{
                     __html: contentItem.text.childMarkdownRemark.html,
@@ -162,7 +160,7 @@ const SingleNews = ({ data }) => {
                           <div>
                             <div className={styles.tileImageContainer}>
                               <GatsbyImage
-                                image={relatedItem.tileImage?.localFile?.childImageSharp?.gatsbyImageData}
+                                image={relatedItem.tileImage.gatsbyImageData}
                                 alt={relatedItem.tileImage.description}
                                 className={styles.tileImage}
                                 imgStyle={{ objectFit: "cover" }}
@@ -197,7 +195,7 @@ const SingleNews = ({ data }) => {
                           <div>
                             <div className={styles.tileImageContainer}>
                               <GatsbyImage
-                                image={relatedItem.tileImage?.localFile?.childImageSharp?.gatsbyImageData}
+                                image={relatedItem.tileImage.gatsbyImageData}
                                 alt={relatedItem.tileImage.description}
                                 className={styles.tileImage}
                                 imgStyle={{ objectFit: "cover" }}
@@ -240,11 +238,7 @@ export const query = graphql`
         imageId: id
         image {
           description
-          localFile {
-            childImageSharp {
-              gatsbyImageData(layout: FULL_WIDTH)
-            }
-          }
+          gatsbyImageData(layout: FULL_WIDTH)
         }
       }
       content {
@@ -269,11 +263,7 @@ export const query = graphql`
           newsId: id
           tileImage {
             description
-            localFile {
-              childImageSharp {
-                gatsbyImageData(layout: FULL_WIDTH)
-              }
-            }
+            gatsbyImageData(layout: FULL_WIDTH)
           }
           tileText {
             childMarkdownRemark {
@@ -296,11 +286,7 @@ export const query = graphql`
           country
           tileImage {
             description
-            localFile {
-              childImageSharp {
-                gatsbyImageData(layout: FULL_WIDTH)
-              }
-            }
+            gatsbyImageData(layout: FULL_WIDTH)
           }
           objectives {
             id

@@ -47,7 +47,7 @@ function NoResults({ backgroundImages, setSearched, querySuggestions }) {
       {backgroundImages.map((image, index) => (
         <div key={index} className={styles.backgroundContainer}>
           <GatsbyImage
-            image={image.tileImage?.localFile?.childImageSharp?.gatsbyImageData}
+            image={image.tileImage.gatsbyImageData}
             className={styles.backgroundImage}
           ></GatsbyImage>
         </div>
@@ -188,7 +188,7 @@ const Search = ({ data, location }) => {
           {backgroundImages.map((image, index) => (
             <div key={index} className={styles.backgroundContainer}>
               <GatsbyImage
-                image={image.tileImage?.localFile?.childImageSharp?.gatsbyImageData}
+                image={image.tileImage.gatsbyImageData}
                 className={styles.backgroundImage}
               ></GatsbyImage>
             </div>
@@ -342,12 +342,7 @@ export const query = graphql`
     allContentfulProject {
       nodes {
         tileImage {
-          description
-          localFile {
-            childImageSharp {
-              gatsbyImageData(width: 400)
-            }
-          }
+          gatsbyImageData(width: 400)
         }
       }
     }

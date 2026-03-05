@@ -59,7 +59,6 @@ module.exports = {
         spaceId: `6v3ra0uy9tu9`,
         accessToken: process.env.CONTENTFUL_API_KEY,
         enableTags: true,
-        downloadLocal: true,
       },
     },
     {
