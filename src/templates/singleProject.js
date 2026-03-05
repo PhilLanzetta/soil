@@ -330,69 +330,33 @@ const SingleProject = ({ data }) => {
               Related
             </motion.p>
             <ul className={styles.threeColumnList}>
-              {related.map(relatedProject => {
-                if (relatedProject.projectId) {
-                  return (
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      transition={{ duration: 1 }}
-                      whileInView={{ opacity: 1 }}
-                      viewport={{ once: true }}
-                      key={relatedProject.projectId}
-                      className={styles.relatedProject}
-                    >
-                      <Link
-                        key={relatedProject.projectId}
-                        to={`/work/${relatedProject.slug}`}
-                      >
-                        <h2 className={styles.relatedHeading}>
-                          {relatedProject.title}
-                        </h2>
-                        <div className={styles.locationContainer}>
-                          {relatedProject.city && (
-                            <span>{relatedProject.city}</span>
-                          )}
-                          {relatedProject.country && (
-                            <span>{relatedProject.country}</span>
-                          )}
-                        </div>
-                      </Link>
-                    </motion.div>
-                  )
-                } else {
-                  return (
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      transition={{ duration: 1 }}
-                      whileInView={{ opacity: 1 }}
-                      viewport={{ once: true }}
-                      key={relatedProject.newsId}
-                      className={styles.relatedProject}
-                    >
-                      {relatedProject.linkOutFromTile ? (
-                        <a
-                          href={relatedProject.externalLink}
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          <h2 className={styles.relatedHeading}>
-                            {relatedProject.title}
-                          </h2>
-                        </a>
-                      ) : (
-                        <Link
-                          key={relatedProject.id}
-                          to={`/news/${relatedProject.slug}`}
-                        >
-                          <h2 className={styles.relatedHeading}>
-                            {relatedProject.title}
-                          </h2>
-                        </Link>
+              {related.map(relatedProject => (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  transition={{ duration: 1 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  key={relatedProject.id}
+                  className={styles.relatedProject}
+                >
+                  <Link
+                    key={relatedProject.id}
+                    to={`/work/${relatedProject.slug}`}
+                  >
+                    <h2 className={styles.relatedHeading}>
+                      {relatedProject.title}
+                    </h2>
+                    <div className={styles.locationContainer}>
+                      {relatedProject.city && (
+                        <span>{relatedProject.city}</span>
                       )}
-                    </motion.div>
-                  )
-                }
-              })}
+                      {relatedProject.country && (
+                        <span>{relatedProject.country}</span>
+                      )}
+                    </div>
+                  </Link>
+                </motion.div>
+              ))}
             </ul>
           </div>
         )}
@@ -541,25 +505,16 @@ export const query = graphql`
         }
       }
       related {
-        ... on ContentfulProject {
-          city
-          projectId: id
-          objectives {
-            id
-            slug
-            title
-          }
+        city
+        id
+        objectives {
+          id
           slug
           title
-          country
         }
-        ... on ContentfulNewsEntry {
-          newsId: id
-          title
-          slug
-          linkOutFromTile
-          externalLink
-        }
+        slug
+        title
+        country
       }
     }
   }
