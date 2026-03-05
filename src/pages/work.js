@@ -619,7 +619,13 @@ export const query = graphql`
         status
         tileImage {
           description
-          gatsbyImageData(layout: FULL_WIDTH)
+          gatsbyImageData(
+            layout: FULL_WIDTH
+            width: 1200
+            placeholder: BLURRED
+            formats: [AUTO, WEBP, AVIF]
+            quality: 80
+          )
         }
         city
         country

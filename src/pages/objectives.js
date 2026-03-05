@@ -37,7 +37,13 @@ export const query = graphql`
     contentfulObjectivesPage {
       objectiveImage {
         description
-        gatsbyImageData(layout: FULL_WIDTH)
+        gatsbyImageData(
+          layout: FULL_WIDTH
+          width: 1200
+          placeholder: BLURRED
+          formats: [AUTO, WEBP, AVIF]
+          quality: 80
+        )
       }
       introText {
         childMarkdownRemark {

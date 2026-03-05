@@ -310,7 +310,13 @@ export const query = graphql`
         slug
         tileImage {
           description
-          gatsbyImageData(layout: FULL_WIDTH)
+          gatsbyImageData(
+            layout: FULL_WIDTH
+            width: 1200
+            placeholder: BLURRED
+            formats: [AUTO, WEBP, AVIF]
+            quality: 80
+          )
         }
         title
         date(locale: "America/New_York")

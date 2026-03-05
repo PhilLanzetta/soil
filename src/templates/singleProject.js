@@ -448,7 +448,13 @@ export const query = graphql`
           caption
           image {
             description
-            gatsbyImageData(layout: FULL_WIDTH)
+            gatsbyImageData(
+              layout: FULL_WIDTH
+              width: 1200
+              placeholder: BLURRED
+              formats: [AUTO, WEBP, AVIF]
+              quality: 80
+            )
           }
         }
         ... on ContentfulTwoColumnImage {
@@ -457,7 +463,13 @@ export const query = graphql`
             caption
             image {
               description
-              gatsbyImageData(layout: FULL_WIDTH)
+              gatsbyImageData(
+                layout: FULL_WIDTH
+                width: 1200
+                placeholder: BLURRED
+                formats: [AUTO, WEBP, AVIF]
+                quality: 80
+              )
             }
           }
         }
@@ -466,7 +478,13 @@ export const query = graphql`
           aspectRatio
           posterImage {
             description
-            gatsbyImageData(layout: FULL_WIDTH)
+            gatsbyImageData(
+              layout: FULL_WIDTH
+              width: 1200
+              placeholder: BLURRED
+              formats: [AUTO, WEBP, AVIF]
+              quality: 80
+            )
           }
           videoLink
           caption
@@ -485,7 +503,13 @@ export const query = graphql`
           caption
           image {
             description
-            gatsbyImageData
+            gatsbyImageData(
+              layout: FULL_WIDTH
+              width: 1200
+              placeholder: BLURRED
+              formats: [AUTO, WEBP, AVIF]
+              quality: 80
+            )
             height
             width
           }

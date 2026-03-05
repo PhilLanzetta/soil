@@ -702,7 +702,13 @@ export const query = graphql`
       }
       florianIdenburgHeadshot {
         description
-        gatsbyImageData(layout: FULL_WIDTH)
+        gatsbyImageData(
+          layout: FULL_WIDTH
+          width: 1200
+          placeholder: BLURRED
+          formats: [AUTO, WEBP, AVIF]
+          quality: 80
+        )
       }
       jingLiuBio {
         childMarkdownRemark {
@@ -711,13 +717,25 @@ export const query = graphql`
       }
       jingLiuHeadshot {
         description
-        gatsbyImageData(layout: FULL_WIDTH)
+        gatsbyImageData(
+          layout: FULL_WIDTH
+          width: 1200
+          placeholder: BLURRED
+          formats: [AUTO, WEBP, AVIF]
+          quality: 80
+        )
       }
       teamMembers {
         id
         headshot {
           description
-          gatsbyImageData(layout: FULL_WIDTH)
+          gatsbyImageData(
+            layout: FULL_WIDTH
+            width: 1200
+            placeholder: BLURRED
+            formats: [AUTO, WEBP, AVIF]
+            quality: 80
+          )
         }
         name
         title
@@ -726,7 +744,13 @@ export const query = graphql`
         id
         headshot {
           description
-          gatsbyImageData(layout: FULL_WIDTH)
+          gatsbyImageData(
+            layout: FULL_WIDTH
+            width: 1200
+            placeholder: BLURRED
+            formats: [AUTO, WEBP, AVIF]
+            quality: 80
+          )
         }
         name
         title
@@ -741,7 +765,13 @@ export const query = graphql`
         caption
         image {
           description
-          gatsbyImageData(layout: FULL_WIDTH)
+          gatsbyImageData(
+            layout: FULL_WIDTH
+            width: 1200
+            placeholder: BLURRED
+            formats: [AUTO, WEBP, AVIF]
+            quality: 80
+          )
           height
           width
         }
@@ -751,7 +781,13 @@ export const query = graphql`
         caption
         image {
           description
-          gatsbyImageData(layout: FULL_WIDTH)
+          gatsbyImageData(
+            layout: FULL_WIDTH
+            width: 1200
+            placeholder: BLURRED
+            formats: [AUTO, WEBP, AVIF]
+            quality: 80
+          )
         }
       }
       contact {
