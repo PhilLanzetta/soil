@@ -241,11 +241,6 @@ export const query = graphql`
           description
           gatsbyImageData
         }
-        tileText {
-          childMarkdownRemark {
-            html
-          }
-        }
         title
       }
     }
