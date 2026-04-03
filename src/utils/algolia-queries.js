@@ -98,11 +98,6 @@ const pagesQuery = `{
             description
             gatsbyImageData(width: 600)
           }
-          tileText {
-            childMarkdownRemark {
-              html
-            }
-          }
         }
         ... on ContentfulPublicationEntry {
           publication: id

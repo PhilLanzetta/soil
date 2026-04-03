@@ -284,11 +284,6 @@ export const query = graphql`
               quality: 80
             )
           }
-          tileText {
-            childMarkdownRemark {
-              html
-            }
-          }
           objectives {
             id
             slug
