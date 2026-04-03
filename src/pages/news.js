@@ -411,11 +411,6 @@ export const query = graphql`
             quality: 80
           )
         }
-        tileText {
-          childMarkdownRemark {
-            html
-          }
-        }
         title
         linkOutFromTile
         date(locale: "America/New_York")
